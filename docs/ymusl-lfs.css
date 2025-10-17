@@ -19,12 +19,12 @@ a:hover { color: #d30e08; }
 div.padbox {
   padding: .1em .1em;
   margin: .1em .1em;
-  text-align: center;
+
 }
 p.info {
   padding: .2em .2em;
   margin: .2em .2em;
-
+  text-align: center;
 }
 div.toc h4 li {
   margin: .6em 0 .2em 0;
