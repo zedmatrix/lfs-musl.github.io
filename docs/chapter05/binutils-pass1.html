@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>binutils-pass1 - 2.45</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>binutils-pass1 - 2.45</h3>
+
+    <div class="padbox">
+      <p class="info">The Binutils package contains a linker, an assembler, and other tools for handling object files.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://sourceware.org/pub/binutils/releases/binutils-2.45.tar.xz">https://sourceware.org/pub/binutils/releases/binutils-2.45.tar.xz</a><br>
+SHA256 Sum: <code>c50c0e7f9cb188980e2cc97e4537626b1672441815587f1eab69d2a1bfbef5d2</code><br>
+MD5 Sum: <code>dee5b4267e0305a99a3c9d6131f45759</code><br>
+<br>
+    </p>
+  </div>
+</div>
+<div class="section"><pre class="prepare">mkdir -v Ybuild && cd Ybuild &&
+../configure --prefix=$LFS/tools --with-sysroot=$LFS --target=$LFS_TGT \
+--disable-nls --enable-gprofng=no --disable-werror --enable-new-dtags \
+--enable-default-hash-style=gnu</pre></div>
+
+<div class="section"><pre class="build">cd Ybuild && make</pre></div>
+
+
+<div class="section"><pre class="install">cd Ybuild && make install</pre></div>
+
+</body></html>
