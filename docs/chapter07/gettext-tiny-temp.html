@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>7.7 - Gettext-tiny-temp - 0.3.2</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>7.7 - Gettext-tiny-temp - 0.3.2</h3>
+    <p class="info">The Gettext-tiny package contains utilities for internationalization and localization.
+    These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz">http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz</a><br>
+SHA256 Sum: <code>a9a72cfa21853f7d249592a3c6f6d36f5117028e24573d092f9184ab72bbe187</code><br>
+MD5 Sum: <code>9ddf4d35636fa3beacd3627cc02723ff</code><br>
+<br>
+    </p>
+  </div>
+</div>
+
+<div class="section"><pre class="build">make LIBINTL=MUSL prefix=/usr</pre></div>
+
+
+<div class="section"><pre class="install">cp -v {msgfmt,msgmerge,xgettext} /usr/bin</pre></div>
+
+</body></html>
