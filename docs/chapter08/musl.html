@@ -42,7 +42,8 @@ make</pre></div>
 
 <div class="section"><pre class="final">install -vm644 ${YSRC}/nsswitch.conf /etc/nsswitch.conf;
 install -vm644 ${YSRC}/ld-musl-x86_64.path /etc/ld-musl-x86_64.path;
-ln -sfv ../lib/ld-musl-x86_64.so.1 /usr/bin/ldd</pre></div>
+ln -sfv ../lib/ld-musl-x86_64.so.1 /usr/bin/ldd</pre>
+Add the ldd program as a symlink to libc.</div>
 
 <div class="section"><pre class="bash">cat &gt; ld-musl-x86_64.path &lt;&lt; "EOF"
 # Begin /etc/ld.so.conf
