@@ -3,12 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
-    <title>musl-temp 1.2.5 (rel 1)</title>
+    <title>5.5 - musl-temp - 1.2.5</title>
   </head>
   <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
 <div class="section">
   <h2>Linux From Scratch - musl - Version r1.0-1-sysv-mdev</h2>
-  <h3>musl-temp 1.2.5</h3>
+  <h3>5.5 - musl-temp - 1.2.5</h3>
   <div class="padbox">
     <p class="info"><a href="https://musl.libc.org/">musl.libc.org</a> is an implementation of the C standard library built on top of the Linux system call API,
 including interfaces defined in the base language standard, POSIX, and widely agreed-upon extensions.
@@ -22,17 +22,18 @@ musl is lightweight, fast, simple, free, and strives to be correct in the sense 
 Download URL: <a href="https://musl.libc.org/releases/musl-1.2.5.tar.gz">https://musl.libc.org/releases/musl-1.2.5.tar.gz</a><br>
 SHA256 Sum: <code>a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4</code><br>
 MD5 Sum: <code>ac5cfde7718d0547e224247ccfe59f18</code><br>
-<br>
+<br><p>Patch some vulnerabilities:</p>
 Download URL: <a href="../sources/musl-1.2.5-iconv-fix.patch">sources/musl-1.2.5-iconv-fix.patch</a><br>
 MD5 Sum: <code>952e83c12a192b35d3038bd76242119a</code><br>
-<br>
+<br><p>The malloc implementation used by Musl is slow. Apply the following patch to use rpmalloc as a faster alternative:</p>
 Download URL: <a href="../sources/musl-1.2.5-rpmalloc.patch">sources/musl-1.2.5-rpmalloc.patch</a><br>
 MD5 Sum: <code>57e25622ef642b5564952cd52194e501</code><br>
 <br>
     </p>
   </div>
 </div>
-<div class="section"><pre class="prepare">ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64;
+<div class="section"><p>First, create a symbolic link for LSB compliance. Additionally, for x86_64, create a compatibility symbolic link required for proper operation of the dynamic library loader.</p>
+<pre class="prepare">ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64;
 ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64/ld-lsb-x86-64.so.3;
 ./configure --prefix=/usr --target=$LFS_TGT --build=x86_64-pc-linux-gnu --with-malloc=rpmalloc</pre></div>
 
