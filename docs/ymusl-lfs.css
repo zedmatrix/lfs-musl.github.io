@@ -10,7 +10,7 @@ h1, h2, h3, h4 {
   color: #000;
   border-bottom: 1px solid #dbddec;
   padding-bottom: .2em;
-  text-align: center;
+
 }
 
 a { color: #22b; text-decoration: none; }
@@ -19,16 +19,28 @@ a:hover { color: #d30e08; }
 div.padbox {
   padding: .1em .1em;
   margin: .1em .1em;
+  text-align: center;
 }
 p.info {
   padding: .2em .2em;
   margin: .2em .2em;
 
 }
-div.toc h4 {
+div.toc h4 li {
   margin: .6em 0 .2em 0;
 }
-
+.header {
+  text-align: center;
+}
+div.sect1, div.chapter {
+  overflow:auto;
+  height: auto;
+  text-align: left;
+  left:1em;
+  right:1em;
+  bottom: 1em;
+  border-bottom: 1em solid #dbddec;
+}
 li.chapter h4 a {
   display: block;
   margin-bottom: .4em
@@ -139,4 +151,26 @@ pre.check::before {
   border-radius: 6px;
   padding: 1em;
   margin-bottom: 1em;
+}
+/* orderedlist */
+ol {
+  list-style: decimal;
+}
+
+ol ol {
+  list-style: lower-alpha;
+}
+
+ol ol ol {
+  list-style: lower-roman;
+}
+
+ol.compact li {
+  margin: 0em;
+  padding: 0em;
+}
+
+ol.compact li p {
+  padding: 0.3em;
+  margin: 0em;
 }
