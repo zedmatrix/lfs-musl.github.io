@@ -25,6 +25,14 @@ p.info {
   margin: .2em .2em;
 
 }
+div.toc h4 {
+  margin: .6em 0 .2em 0;
+}
+
+li.chapter h4 a {
+  display: block;
+  margin-bottom: .4em
+}
 
 pre {
   background: #e5e5e5;
