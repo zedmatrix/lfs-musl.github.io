@@ -23,10 +23,10 @@ musl is lightweight, fast, simple, free, and strives to be correct in the sense 
 Download URL: <a href="https://musl.libc.org/releases/musl-1.2.5.tar.gz">https://musl.libc.org/releases/musl-1.2.5.tar.gz</a><br>
 SHA256 Sum: <code>a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4</code><br>
 MD5 Sum: <code>ac5cfde7718d0547e224247ccfe59f18</code><br>
-<br>
+<br><p>Patch some vulnerabilities:</p>
 Download URL: <a href="../sources/musl-1.2.5-iconv-fix.patch">sources/musl-1.2.5-iconv-fix.patch</a><br>
 MD5 Sum: <code>952e83c12a192b35d3038bd76242119a</code><br>
-<br>
+<br><p>The malloc implementation used by Musl is slow. Apply the following patch to use rpmalloc as a faster alternative:</p>
 Download URL: <a href="../sources/musl-1.2.5-rpmalloc.patch">sources/musl-1.2.5-rpmalloc.patch</a><br>
 MD5 Sum: <code>57e25622ef642b5564952cd52194e501</code><br>
 <br>
@@ -34,11 +34,11 @@ MD5 Sum: <code>57e25622ef642b5564952cd52194e501</code><br>
   </div>
 </div>
 
-<div class="section"><pre class="build">./configure --prefix=/usr --with-malloc=rpmalloc &&
+<div class="section">Prepare and Build Musl for compilation:<pre class="build">./configure --prefix=/usr --with-malloc=rpmalloc &&
 make</pre></div>
 
 
-<div class="section"><pre class="install">make install</pre></div>
+<div class="section">Installation of Musl:<pre class="install">make install</pre></div>
 
 <div class="section"><pre class="final">install -vm644 ${YSRC}/nsswitch.conf /etc/nsswitch.conf;
 install -vm644 ${YSRC}/ld-musl-x86_64.path /etc/ld-musl-x86_64.path;

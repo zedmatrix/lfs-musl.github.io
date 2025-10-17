@@ -32,7 +32,7 @@ MD5 Sum: <code>57e25622ef642b5564952cd52194e501</code><br>
     </p>
   </div>
 </div>
-<div class="section"><p>First, create a symbolic link for LSB compliance. Additionally, for x86_64, create a compatibility symbolic link required for proper operation of the dynamic library loader.</p>
+<div class="section"><p>First, create a symbolic link for LSB compliance. Additionally, for x86_64, create a compatibility symbolic link required for proper operation of the dynamic library loader, and prepare Musl for compilation:</p>
 <pre class="prepare">ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64;
 ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64/ld-lsb-x86-64.so.3;
 ./configure --prefix=/usr --target=$LFS_TGT --build=x86_64-pc-linux-gnu --with-malloc=rpmalloc</pre></div>
