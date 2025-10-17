@@ -45,9 +45,13 @@ ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64/ld-lsb-x86-64.so.3;
 <div class="section"><pre class="build">make</pre></div>
 
 
-<div class="section"><pre class="install">make DESTDIR=$LFS install;
-ln -sfv ../lib/ld-musl-x86_64.so.1 /usr/bin/ldd</pre></div>
+<div class="section"><pre class="install">make DESTDIR=$LFS install</pre></div>
 
-<div class="section"><pre class="final">echo 'int main(){}' | $LFS_TGT-gcc -xc - ;
-readelf -l a.out | grep ld-musl</pre></div>
-</body></html>
+<div class="section">A simple test to perform a sanity check, run the following commands:<pre class="final">echo 'int main(){}' | $LFS_TGT-gcc -xc - ;
+readelf -l a.out | grep ld-musl</pre>
+If everything is working correctly, there should be no errors, and the output of the last command will be of the form:<br>
+<code>   [Requesting program interpreter: /lib/ld-musl-x86-64.so.1]</code></div>
+
+
+</body>
+</html>
