@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>10.3 - Linux - 6.6.111</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>10.3 - Linux - 6.6.111</h3>
+    <p class="info">The Linux package contains the Linux kernel.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.111.tar.xz">https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.111.tar.xz</a><br>
+SHA256 Sum: <code>04c470e130d659ef05217ac695422c28d817d19daa50643fe28b945e6ab646c7</code><br>
+MD5 Sum: <code>927898b7feb375d2af4d87192595f207</code><br>
+<br>
+    </p>
+  </div>
+</div>
+<div class="section"><pre class="prepare">make mrproper &amp;&amp;
+cp -v ${YSRC}/zbase-config-6.6.94 .config || exit 1 &amp;&amp;
+make olddefconfig</pre></div>
+
+<div class="section"><pre class="build">make</pre></div>
+
+<div class="section"><pre class="install">make modules_install &amp;&amp;
+cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.6.111-ylfs-musl &amp;&amp;
+cp -iv System.map /boot/System.map-6.6.111 &amp;&amp;
+cp -iv .config /boot/config-6.6.111</pre></div>
+
+</body></html>
