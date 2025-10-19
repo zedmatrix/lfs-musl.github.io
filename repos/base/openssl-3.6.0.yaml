@@ -1,0 +1,23 @@
+package:
+    name: openssl
+    version: 3.6.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/openssl/openssl/releases/download/openssl-3.6.0/openssl-3.6.0.tar.gz
+      md5: 77ab78417082f22a2ce809898bd44da0
+      sha256: b6a5f44b7eb69e3fa35dbf15524405b44837a481d43d81daddde3ff21fcbb8e9
+
+build: |
+    ./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic &&
+    make
+
+install: |
+    make MANSUFFIX=ssl install &&
+    mv -v /usr/share/doc/openssl /usr/share/doc/openssl-3.6.0 &&
+    cp -vfr doc/* /usr/share/doc/openssl-3.6.0
+
+required:
+    - automake

@@ -1,0 +1,19 @@
+package:
+    name: gettext-tiny
+    version: 0.3.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz
+      md5: 9ddf4d35636fa3beacd3627cc02723ff
+      sha256: a9a72cfa21853f7d249592a3c6f6d36f5117028e24573d092f9184ab72bbe187
+
+build: |
+    make LIBINTL=MUSL prefix=/usr
+
+install: |
+    make LIBINTL=MUSL prefix=/usr install
+
+description: "gettext-tiny provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices)."

@@ -1,0 +1,25 @@
+package:
+    name: sysvinit
+    version: 3.14
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/slicer69/sysvinit/releases/download/3.14/sysvinit-3.14.tar.xz
+      md5: bc6890b975d19dc9db42d0c7364dd092
+      sha256: c90874b8c054a35991fb8c4d30c443ed1e9b1815ff6165c7b483f558be4e4b53
+
+patches:
+    - url: https://www.linuxfromscratch.org/patches/downloads/sysvinit/sysvinit-3.14-consolidated-1.patch
+      md5: 3af8fd8e13cad481eeeaa48be4247445
+      sha256: a8d870f357aaae5f07478ea2953a76c245fc0b4d14cfbe1762ba5277308d4a89
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - sysklogd

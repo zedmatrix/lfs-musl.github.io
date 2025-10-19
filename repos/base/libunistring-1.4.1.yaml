@@ -1,0 +1,23 @@
+package:
+    name: libunistring
+    version: 1.4.1
+    rel: 1
+    archive: false
+    delete: true
+    default: "--enable-shared --enable-static"
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/libunistring/libunistring-1.4.1.tar.xz
+      md5: 7419fcbca7c0b29d3b218a09a15cbc76
+      sha256: 67d88430892527861903788868c77802a217b0959990f7449f2976126a307763
+
+build: |
+    ./configure --prefix=/usr --docdir=/usr/share/doc/${PKGDIR} &&
+    make
+
+install: |
+    make install
+
+optional:
+    - texlive
+    - install-tl-unx

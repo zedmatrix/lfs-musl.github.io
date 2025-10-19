@@ -1,0 +1,21 @@
+package:
+    name: mdevd
+    version: 0.1.7.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://skarnet.org/software/mdevd/mdevd-0.1.7.0.tar.gz
+      md5: 556fe61606ae038a043074de215b1609
+      sha256: ec966eec39879f33c785343373021c44f887c836a08fcaf1d63412e3bdbfca32
+
+build: |
+    ./configure --prefix=/usr &&
+    make
+
+install: |
+    make install
+
+required:
+    - skalibs

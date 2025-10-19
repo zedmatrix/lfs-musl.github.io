@@ -1,0 +1,24 @@
+package:
+    name: sysklogd
+    version: 2.7.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/troglobit/sysklogd/releases/download/v2.7.2/sysklogd-2.7.2.tar.gz
+      md5: af60786956a2dc84054fbf46652e515e
+      sha256: bc410ca64551a11fac6518b418fb6b8afbd888a70af2c5eb353334a706727bca
+
+prepare: |
+    ./configure --prefix=/usr --sysconfdir=/etc --runstatedir=/run --without-logger \
+        --disable-static --docdir=/usr/share/doc/sysklogd-2.7.2
+
+build: |
+    make
+
+install: |
+    make install
+
+required:
+    - e2fsprogs

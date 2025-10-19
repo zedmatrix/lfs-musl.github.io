@@ -1,0 +1,19 @@
+package:
+    name: linux-headers
+    version: 6.6.111
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-6.6.111.tar.xz
+      md5: 927898b7feb375d2af4d87192595f207
+      sha256: 04c470e130d659ef05217ac695422c28d817d19daa50643fe28b945e6ab646c7
+
+build: |
+    make mrproper &&
+    make headers
+
+install: |
+    find usr/include -type f ! -name '*.h' -delete &&
+    cp -rv usr/include $LFS/usr

@@ -1,0 +1,27 @@
+package:
+    name: arg-parse
+    version: 1.5.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: sources/arg-parse-1.5.0.tar.xz
+      md5: ea34a1306850b574cac3dff2ae3d470b
+      sha256: 4ab09d3baa63b8bef0319767c8c62e4b2af384531866c0afa543fe68776828ec
+
+prepare: |
+    autoreconf -vif
+    CFLAGS="-fPIC" ./configure --prefix=/usr
+
+build: |
+    make
+
+check: |
+    make check
+
+install: |
+    cp -v argp.h /usr/include/argp.h
+    cp -v libargp.a /usr/lib/libargp.a
+
+description: "This is a continuation of Niels Möller's work on an argp library for systems which don't provide one themselves (most non-GNU ones)."

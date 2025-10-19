@@ -1,0 +1,20 @@
+package:
+    name: findutils-temp
+    version: 4.10.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/findutils/findutils-4.10.0.tar.xz
+      md5: 870cfd71c07d37ebe56f9f4aaf4ad872
+      sha256: 1387e0b67ff247d2abde998f90dfbf70c1491391a59ddfecb8ae698789f0a4f5
+
+prepare: |
+    ./configure --prefix=/usr --localstatedir=/var/lib/locate --host=$LFS_TGT --build=$(build-aux/config.guess)
+
+build: |
+    make
+
+install: |
+    make DESTDIR=$LFS install

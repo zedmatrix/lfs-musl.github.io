@@ -1,0 +1,19 @@
+package:
+    name: grep
+    version: 3.12
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/grep/grep-3.12.tar.xz
+      md5: 5d9301ed9d209c4a88c8d3a6fd08b9ac
+      sha256: 2649b27c0e90e632eadcd757be06c6e9a4f48d941de51e7c0f83ff76408a07b9
+
+build: |
+    sed -i "s/echo/#echo/" src/egrep.sh &&
+    ./configure --prefix=/usr &&
+    make
+
+install: |
+    make install

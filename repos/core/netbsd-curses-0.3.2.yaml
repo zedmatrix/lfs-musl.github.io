@@ -1,0 +1,17 @@
+package:
+    name: netbsd-curses
+    version: 0.3.2
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz
+      md5: bff9cfda41ae25ea84bd8da6c674dcb7
+      sha256: d28358b833e6cabcf229fecef98c649e2e90c29858aa34220476faf0e5ce10a1
+
+build: |
+    make -E "CPPFLAGS=-DTERMINFO_COMPAT" PREFIX="/usr" all-dynamic
+
+install: |
+    make -E "CPPFLAGS=-DTERMINFO_COMPAT" PREFIX="/usr" install-dynamic

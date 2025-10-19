@@ -1,0 +1,21 @@
+package:
+    name: automake
+    version: 1.18.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/automake/automake-1.18.1.tar.xz
+      md5: cea31dbf1120f890cbf2a3032cfb9a68
+      sha256: 168aa363278351b89af56684448f525a5bce5079d0b6842bd910fdd3f1646887
+
+build: |
+    ./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.18.1 &&
+    make
+
+install: |
+    make install
+
+required:
+    - autoconf

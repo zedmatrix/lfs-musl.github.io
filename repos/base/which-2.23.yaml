@@ -1,0 +1,22 @@
+package:
+    name: which
+    version: 2.23
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/which/which-2.23.tar.gz
+      md5: 1963b85914132d78373f02a84cdb3c86
+      sha256: a2c558226fc4d9e4ce331bd2fd3c3f17f955115d2c00e447618a4ef9978a2a73
+
+patches:
+    - url: sources/which-musl-getopt.patch
+      md5: fc44ec42a5f5ed18ef805005ccaee020
+
+build: |
+    ./configure --prefix=/usr &&
+    make
+
+install: |
+    make install

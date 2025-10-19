@@ -1,0 +1,37 @@
+package:
+    name: tzcode
+    version: 2025a
+    rel: 0
+    archive: false
+    delete: true
+
+sources:
+    - url: https://data.iana.org/time-zones/releases/tzcode2025a.tar.gz
+      md5: c690058bd8c597041241e9edc870e127
+      sha256: 119679d59f76481eb5e03d3d2a47d7870d592f3999549af189dbd31f2ebf5061
+    - url: https://www.iana.org/time-zones/repository/releases/tzdata2025b.tar.gz
+      md5: ad65154c48c74a9b311fe84778c5434f
+      sha256: 11810413345fc7805017e27ea9fa4885fd74cd61b2911711ad038f5d28d71474
+
+prepare: |
+    tar xf ${YSRC}/tzdata2025b.tar.gz
+
+build: |
+    make CC=gcc zic zdump tzselect
+
+install: |
+    install -m755 zic /usr/bin
+    install -m755 zdump /usr/bin
+    install -m755 tzselect /usr/bin
+
+final: |
+    mkdir -pv /usr/share/zoneinfo/{posix,right} &&
+    for tz in etcetera southamerica northamerica europe africa antarctica  \
+          asia australasia backward; do
+    zic -L /dev/null   -d /usr/share/zoneinfo ${tz} &&
+    zic -L /dev/null   -d /usr/share/zoneinfo/posix ${tz} &&
+    zic -L leapseconds -d /usr/share/zoneinfo/right ${tz}
+    done &&
+    cp -v zone.tab zone1970.tab iso3166.tab /usr/share/zoneinfo &&
+    zic -d /usr/share/zoneinfo -p America/New_York;
+    ln -sfv /usr/share/zoneinfo/Canada/Pacific /etc/localtime

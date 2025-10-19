@@ -1,0 +1,42 @@
+package:
+    name: openssh
+    version: 10.2p1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-10.2p1.tar.gz
+      md5: 801b5ad6da38e0045de20dd5dd2f6a80
+      sha256: ccc42c0419937959263fa1dbd16dafc18c56b984c03562d2937ce56a60f798b2
+
+prepare: |
+    install -v -g sys -m700 -d /var/lib/sshd &&
+    groupadd -g 50 sshd &&
+    useradd -c 'sshd PrivSep' -d /var/lib/sshd -g sshd -s /bin/false -u 50 sshd
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc/ssh --with-privsep-path=/var/lib/sshd \
+    --with-default-path=/usr/bin --with-superuser-path=/usr/sbin:/usr/bin --with-pid-dir=/run &&
+    make
+
+install: |
+    make install
+
+final: |
+    install -v -m755 contrib/ssh-copy-id /usr/bin &&
+    install -v -m644 contrib/ssh-copy-id.1 /usr/share/man/man1 &&
+    install -v -m755 -d /usr/share/doc/openssh-10.2p1 &&
+    install -v -m644 INSTALL LICENCE OVERVIEW README* /usr/share/doc/openssh-10.2p1;
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
+
+required:
+    - which
+
+optional:
+    - gdb
+    - linux-pam
+    - shadow-pam
+    - mitkrb5
+    - net-tools
+    - sysstat

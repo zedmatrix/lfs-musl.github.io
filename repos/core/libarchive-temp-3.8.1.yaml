@@ -1,0 +1,28 @@
+package:
+    name: libarchive-temp
+    version: 3.8.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://github.com/libarchive/libarchive/releases/download/v3.8.1/libarchive-3.8.1.tar.xz
+      md5: 80fd1a7acc4da7c7d4a5f9f96df6e3ff
+      sha256: 19f917d42d530f98815ac824d90c7eaf648e9d9a50e4f309c812457ffa5496b5
+
+build: |
+    ./configure --prefix=/usr --host=$LFS_TGT \
+    --build=$(build/autoconf/config.guess) --without-xml2 &&
+    make
+
+install: |
+    make DESTDIR=$LFS install;
+    rm -v $LFS/usr/lib/libarchive.{a,la}
+
+final: |
+    ln -sv bsdtar  $LFS/bin/tar;
+    ln -sv bsdcpio $LFS/bin/cpio;
+    ln -sv bsdunzip $LFS/bin/unzip;
+    ln -sv bsdtar.1  $LFS/usr/share/man/man1/tar.1;
+    ln -sv bsdcpio.1 $LFS/usr/share/man/man1/cpio.1;
+    ln -sv bsdunzip.1 $LFS/usr/share/man/man1/unzip.1

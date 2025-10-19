@@ -1,0 +1,32 @@
+package:
+    name: musl-temp
+    version: 1.2.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://musl.libc.org/releases/musl-1.2.5.tar.gz
+      md5: ac5cfde7718d0547e224247ccfe59f18
+      sha256: a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4
+
+patches:
+    - url: sources/musl-1.2.5-iconv-fix.patch
+      md5: 952e83c12a192b35d3038bd76242119a
+    - url: sources/musl-1.2.5-rpmalloc.patch
+      md5: 57e25622ef642b5564952cd52194e501
+
+prepare: |
+    ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64;
+    ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64/ld-lsb-x86-64.so.3;
+    ./configure --prefix=/usr --target=$LFS_TGT --build=x86_64-pc-linux-gnu --with-malloc=rpmalloc
+
+build: |
+    make
+
+install: |
+    make DESTDIR=$LFS install
+
+final: |
+    echo 'int main(){}' | $LFS_TGT-gcc -xc - ;
+    readelf -l a.out | grep ld-musl

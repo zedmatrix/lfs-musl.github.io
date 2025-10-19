@@ -1,0 +1,18 @@
+package:
+    name: gdbm
+    version: 1.26
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/gdbm/gdbm-1.26.tar.gz
+      md5: aaa600665bc89e2febb3c7bd90679115
+      sha256: 6a24504a14de4a744103dcb936be976df6fbe88ccff26065e54c1c47946f4a5e
+
+build: |
+    ./configure --prefix=/usr --disable-static --enable-libgdbm-compat &&
+    make
+
+install: |
+    make install

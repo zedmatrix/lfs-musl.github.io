@@ -1,0 +1,30 @@
+package:
+    name: musl
+    version: 1.2.5
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://musl.libc.org/releases/musl-1.2.5.tar.gz
+      md5: ac5cfde7718d0547e224247ccfe59f18
+      sha256: a9a118bbe84d8764da0ea0d28b3ab3fae8477fc7e4085d90102b8596fc7c75e4
+
+patches:
+    - url: sources/musl-1.2.5-iconv-fix.patch
+      md5: 952e83c12a192b35d3038bd76242119a
+    - url: sources/musl-1.2.5-rpmalloc.patch
+      md5: 57e25622ef642b5564952cd52194e501
+
+
+build: |
+    ./configure --prefix=/usr --with-malloc=rpmalloc &&
+    make
+
+install: |
+    make install
+
+final: |
+    install -vm644 ${YSRC}/nsswitch.conf /etc/nsswitch.conf;
+    install -vm644 ${YSRC}/ld-musl-x86_64.path /etc/ld-musl-x86_64.path;
+    ln -sfv ../lib/ld-musl-x86_64.so.1 /usr/bin/ldd

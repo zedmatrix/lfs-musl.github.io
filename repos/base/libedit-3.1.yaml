@@ -1,0 +1,27 @@
+package:
+    name: libedit
+    version: 3.1
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://www.thrysoee.dk/editline/libedit-20250104-3.1.tar.gz
+      md5: 3b2c3c4ab30374bf975d69b5bcc220b6
+      sha256: 23792701694550a53720630cd1cd6167101b5773adddcb4104f7345b73a568ac
+
+build: |
+    ./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/libedit-3.1 &&
+    make
+
+install: |
+    make install
+
+final: |
+    ln -sfv libedit.a /usr/lib/libreadline.a;
+    ln -sfv libedit.so /usr/lib/libreadline.so;
+    mkdir -pv /usr/include/readline;
+    touch /usr/include/readline/history.h;
+    touch /usr/include/readline/tilde.h;
+    ln -sfv ../editline/readline.h /usr/include/readline/readline.h;
+    ln -sfv libedit.pc /usr/lib/pkgconfig/readline.pc

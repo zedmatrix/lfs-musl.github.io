@@ -1,0 +1,18 @@
+package:
+    name: sed-temp
+    version: 4.9
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/sed/sed-4.9.tar.xz
+      md5: 6aac9b2dbafcd5b7a67a8a9bcb8036c3
+      sha256: 6e226b732e1cd739464ad6862bd1a1aba42d7982922da7a53519631d24975181
+
+build: |
+    ./configure --prefix=/usr --host=$LFS_TGT --build=$(./build-aux/config.guess) &&
+    make
+
+install: |
+    make DESTDIR=$LFS install

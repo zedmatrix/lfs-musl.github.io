@@ -1,0 +1,32 @@
+package:
+    name: wget
+    version: 1.25.0
+    rel: 1
+    archive: false
+    delete: true
+
+sources:
+    - url: https://mirror.csclub.uwaterloo.ca/gnu/wget/wget-1.25.0.tar.gz
+      md5: c70ba58b36f944e8ba1d655ace552881
+      sha256: 766e48423e79359ea31e41db9e5c289675947a7fcf2efdcedb726ac9d0da3784
+
+build: |
+    ./configure --prefix=/usr --sysconfdir=/etc --with-ssl=openssl &&
+    make
+
+install: |
+    make install
+
+required:
+    - libpsl
+    - make-ca
+
+optional:
+    - gnutls
+    - libidn2
+    - libproxy
+    - valgrind
+    - http-daemon
+    - io-socket-ssl
+
+description: "The Wget package contains a utility useful for non-interactive downloading of files from the Web."
