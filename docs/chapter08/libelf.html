@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>8.50 - Libelf from Elfutils - 0.193</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>8.50 - Libelf from Elfutils - 0.193</h3>
+    <p class="info">Libelf is a library for handling ELF (Executable and Linkable Format) files. From Elfutils-0.193</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://sourceware.org/ftp/elfutils/0.193/elfutils-0.193.tar.bz2">https://sourceware.org/ftp/elfutils/0.193/elfutils-0.193.tar.bz2</a><br>
+SHA256 Sum: <code>7857f44b624f4d8d421df851aaae7b1402cfe6bcdd2d8049f15fc07d3dde7635</code><br>
+MD5 Sum: <code>ceefa052ded950a4c523688799193a44</code><br>
+<br>
+Download URL: <a href="../sources/elfutils-musl-macros.patch">sources/elfutils-musl-macros.patch</a><br>
+MD5 Sum: <code>8794c7c99fd617c21b5d3a3c4b308177</code><br>
+<br>
+    </p>
+  </div>
+</div>
+
+<div class="section"><pre class="build">./configure --prefix=/usr --disable-debuginfod --enable-libdebuginfod=dummy &amp;&amp;
+make</pre></div>
+
+
+<div class="section"><pre class="install">make -C libelf install &amp;&amp;
+install -vm644 config/libelf.pc /usr/lib/pkgconfig &amp;&amp;
+rm -v /usr/lib/libelf.a</pre></div>
+
+</body></html>
