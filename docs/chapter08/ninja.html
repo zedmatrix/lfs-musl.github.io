@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>60. Ninja - 1.13.1</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>60. Ninja - 1.13.1</h3>
+    <p class="info">Ninja is a small build system with a focus on speed.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://github.com/ninja-build/ninja/archive/v1.13.1/ninja-1.13.1.tar.gz">https://github.com/ninja-build/ninja/archive/v1.13.1/ninja-1.13.1.tar.gz</a><br>
+SHA256 Sum: <code>f0055ad0369bf2e372955ba55128d000cfcc21777057806015b45e4accbebf23</code><br>
+MD5 Sum: <code>c35f8f55f4cf60f1a916068d8f45a0f8</code><br>
+<br>
+Download URL: <a href="../sources/ninjajobs.patch">sources/ninjajobs.patch</a><br>
+MD5 Sum: <code>146e75f8756bbdaa2e52c531488deb15</code><br>
+<br>
+    </p>
+  </div>
+</div>
+
+<div class="section"><pre class="build">python3 configure.py --bootstrap --verbose</pre></div>
+
+
+<div class="section"><pre class="install">install -vm755 ninja /usr/bin/</pre></div>
+
+<div class="section"><pre class="final">install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja &&
+install -vDm644 misc/zsh-completion /usr/share/zsh/site-functions/_ninja</pre></div>
+</body></html>
