@@ -21,6 +21,9 @@ div.padbox {
   margin: .1em .1em;
 
 }
+tt, code, kbd, pre, .command {
+  font-family: monospace;
+}
 p.info {
   padding: .2em .2em;
   margin: .2em .2em;

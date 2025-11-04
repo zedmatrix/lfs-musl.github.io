@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>m4-temp - 1.4.20</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>m4-temp - 1.4.20</h3>
+    <p class="info">The M4 package contains a macro processor.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/m4/m4-1.4.20.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/m4/m4-1.4.20.tar.xz</a><br>
+SHA256 Sum: <code>e236ea3a1ccf5f6c270b1c4bb60726f371fa49459a8eaaebc90b216b328daf2b</code><br>
+MD5 Sum: <code>6eb2ebed5b24e74b6e890919331d2132</code><br>
+<br>
+    </p>
+  </div>
+</div>
+<div class="section"><pre class="prepare">./configure --prefix=/usr --host=$LFS_TGT --build=$(build-aux/config.guess)</pre></div>
+
+<div class="section"><pre class="build">make</pre></div>
+
+
+<div class="section"><pre class="install">make DESTDIR=$LFS install</pre></div>
+
+</body></html>

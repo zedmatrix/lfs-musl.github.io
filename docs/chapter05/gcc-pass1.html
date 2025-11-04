@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>gcc-pass1 - 15.2.0</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>gcc-pass1 - 15.2.0</h3>
+    <p class="info">The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz</a><br>
+SHA256 Sum: <code>438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e</code><br>
+MD5 Sum: <code>b861b092bf1af683c46a8aa2e689a6fd</code><br>
+<br>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz</a><br>
+SHA256 Sum: <code>a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898</code><br>
+MD5 Sum: <code>956dc04e864001a9c22429f761f2c283</code><br>
+<br>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz">https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz</a><br>
+SHA256 Sum: <code>ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8</code><br>
+MD5 Sum: <code>5c9bc658c9fd0f940e8e3e0f09530c62</code><br>
+<br>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz</a><br>
+SHA256 Sum: <code>b67ba0383ef7e8a8563734e2e889ef5ec3c3b898a01d00fa0a6869ad81c6ce01</code><br>
+MD5 Sum: <code>7c32c39b8b6e3ae85f25156228156061</code><br>
+<br>
+    </p>
+  </div>
+</div>
+<div class="section">GCC requires the GMP, MPFR and MPC packages.
+As these packages may not be included in your host distribution, they will be built with GCC.
+Unpack each package into the GCC source directory and rename the resulting directories so the GCC build procedures will automatically use them:
+<pre class="prepare">tar -xf ${YSRC}/gmp-6.3.0.tar.xz &amp;&amp; mv -v gmp-6.3.0 gmp &amp;&amp;
+tar -xf ${YSRC}/mpc-1.3.1.tar.gz &amp;&amp; mv -v mpc-1.3.1 mpc &amp;&amp;
+tar -xf ${YSRC}/mpfr-4.2.2.tar.xz &amp;&amp; mv -v mpfr-4.2.2 mpfr &amp;&amp;
+sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64</pre></div>
+
+<div class="section"><pre class="build">mkdir -v Ybuild &amp;&amp; cd Ybuild &amp;&amp;
+../configure --target=$LFS_TGT --prefix=$LFS/tools --with-glibc-version=2.42 \
+--with-sysroot=$LFS --with-newlib --without-headers --enable-default-pie \
+--enable-default-ssp --disable-nls --disable-shared --disable-multilib \
+--disable-threads --disable-libatomic --disable-libgomp --disable-libquadmath \
+--disable-libssp --disable-libvtv --disable-libstdcxx --enable-languages=c,c++ &amp;&amp;
+make</pre></div>
+
+
+<div class="section">Create a full version of the internal header using a command that is identical to what the GCC build system does in normal circumstances:<pre class="install">cd Ybuild &amp;&amp; make install &amp;&amp;
+cd .. &amp;&amp;
+cat gcc/limitx.h gcc/glimits.h gcc/limity.h > \
+`dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include/limits.h</pre></div>
+
+</body></html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
+    <title>Coreutils - 9.8</title>
+  </head>
+  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
+<div class="header">
+  <div class="section">
+    <h2>Linux From Scratch - musl</h2>
+        <h3>Version r1.0-1-sysv-mdev</h3>
+    <h3>Coreutils - 9.8</h3>
+    <p class="info">The Coreutils package contains the basic utility programs needed by every operating system.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="padbox">
+    <h4>Sources</h4>    <p>
+Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.8.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.8.tar.xz</a><br>
+SHA256 Sum: <code>e6d4fd2d852c9141a1c2a18a13d146a0cd7e45195f72293a4e4c044ec6ccca15</code><br>
+MD5 Sum: <code>b2e687b6e664b9dd76581836c5c3e782</code><br>
+<br>
+Download URL: <a href="https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.8-i18n-2.patch">https://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-9.8-i18n-2.patch</a><br>
+MD5 Sum: <code>c800540039fb0707954197486b1bde70</code><br>POSIX requires that programs from Coreutils recognize character boundaries correctly even in multibyte locales. This patch fixes this non-compliance and other internationalization-related bugs.
+<br>
+    </p>
+  </div>
+</div>
+<div class="section"><pre class="prepare">autoreconf -fv &amp;&amp;
+automake -af</pre></div>
+
+<div class="section"><pre class="build">FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr --enable-no-install-program=kill,uptime &amp;&amp;
+make</pre></div>
+
+
+<div class="section"><pre class="install">make install</pre></div>
+
+<div class="section"><pre class="final">mv -v /usr/bin/chroot /usr/sbin &amp;&amp;
+mv -v /usr/share/man/man1/chroot.1 /usr/share/man/man8/chroot.8 &amp;&amp;
+sed -i 's/"1"/"8"/' /usr/share/man/man8/chroot.8</pre></div>
+</body></html>
