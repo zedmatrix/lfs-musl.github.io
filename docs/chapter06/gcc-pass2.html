@@ -1,61 +1,265 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
-    <title>gcc-pass2 - 15.2.0</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      6.18.&nbsp;GCC-15.2.0 - Pass 2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
-<div class="header">
-  <div class="section">
-    <h2>Linux From Scratch - musl</h2>
-        <h3>Version r1.0-1-sysv-mdev</h3>
-    <h3>gcc-pass2 - 15.2.0</h3>
-    <p class="info">The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="padbox">
-    <h4>Sources</h4>    <p>
-Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz</a><br>
-SHA256 Sum: <code>438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e</code><br>
-MD5 Sum: <code>b861b092bf1af683c46a8aa2e689a6fd</code><br>
-<br>
-Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz</a><br>
-SHA256 Sum: <code>a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898</code><br>
-MD5 Sum: <code>956dc04e864001a9c22429f761f2c283</code><br>
-<br>
-Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz">https://mirror.csclub.uwaterloo.ca/gnu/mpc/mpc-1.3.1.tar.gz</a><br>
-SHA256 Sum: <code>ab642492f5cf882b74aa0cb730cd410a81edcdbec895183ce930e706c1c759b8</code><br>
-MD5 Sum: <code>5c9bc658c9fd0f940e8e3e0f09530c62</code><br>
-<br>
-Download URL: <a href="https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/mpfr/mpfr-4.2.2.tar.xz</a><br>
-SHA256 Sum: <code>b67ba0383ef7e8a8563734e2e889ef5ec3c3b898a01d00fa0a6869ad81c6ce01</code><br>
-MD5 Sum: <code>7c32c39b8b6e3ae85f25156228156061</code><br>
-<br>
-    </p>
-  </div>
-</div>
-<div class="section">GCC requires the GMP, MPFR and MPC packages.
-As these packages may not be included in your host distribution, they will be built with GCC.
-Unpack each package into the GCC source directory and rename the resulting directories so the GCC build procedures will automatically use them:
-<pre class="prepare">tar -xf ${YSRC}/gmp-6.3.0.tar.xz &amp;&amp; mv -v gmp-6.3.0 gmp &amp;&amp;
-tar -xf ${YSRC}/mpc-1.3.1.tar.gz &amp;&amp; mv -v mpc-1.3.1 mpc &amp;&amp;
-tar -xf ${YSRC}/mpfr-4.2.2.tar.xz &amp;&amp; mv -v mpfr-4.2.2 mpfr &amp;&amp;
-sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64 &amp;&amp;
-sed '/thread_header =/s/@.*@/gthr-posix.h/' -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in</pre></div>
-
-<div class="section"><pre class="build">mkdir -v Ybuild &amp;&amp; cd Ybuild &amp;&amp;
-../configure --build=$(../config.guess) --host=$LFS_TGT \
---target=$LFS_TGT --prefix=/usr --with-build-sysroot=$LFS --enable-default-pie --enable-default-ssp \
---disable-nls --disable-multilib --disable-libatomic --disable-libgomp --disable-libquadmath \
---disable-libsanitizer --disable-libssp --disable-libvtv --enable-languages=c,c++ \
-LDFLAGS_FOR_TARGET=-L$PWD/$LFS_TGT/libgcc &amp;&amp;
-make</pre></div>
-
-
-<div class="section"><pre class="install">cd Ybuild &amp;&amp; make DESTDIR=$LFS install &amp;&amp;
-ln -sv gcc $LFS/usr/bin/cc</pre></div>
-
-</body></html>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Cross Compiling Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils-pass2.html" title=
+          "Binutils-2.45 - Pass 2">Prev</a>
+          <p>
+            Binutils-2.45 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter07/chapter07.html" title=
+          "Entering Chroot and Building Additional Temporary Tools">Next</a>
+          <p>
+            Entering Chroot and Building Additional Temporary Tools
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-tools-gcc-pass2" name="ch-tools-gcc-pass2"></a>6.18.
+      GCC-15.2.0 - Pass 2
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The GCC package contains the GNU compiler collection, which
+          includes the C and C++ compilers.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">4.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">6.0 GB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.18.1. Installation of GCC
+        </h2>
+        <p>
+          As in the first build of GCC, the GMP, MPFR, and MPC packages are
+          required. Unpack the tarballs and move them into the required
+          directories:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar -xf ../mpfr-4.2.2.tar.xz
+mv -v mpfr-4.2.2 mpfr
+tar -xf ../gmp-6.3.0.tar.xz
+mv -v gmp-6.3.0 gmp
+tar -xf ../mpc-1.3.1.tar.gz
+mv -v mpc-1.3.1 mpc</kbd></pre>
+        <p>
+          If you are building on x86_64, change the default directory name
+          for 64-bit libraries to <span class="quote">“<span class=
+          "quote">lib</span>”</span>:
+        </p>
+        <pre class="userinput"><kbd class="command">case $(uname -m) in
+  x86_64)
+    sed -e '/m64=/s/lib64/lib/' \
+        -i.orig gcc/config/i386/t-linux64
+  ;;
+esac</kbd></pre>
+        <p>
+          Override the build rules of the libgcc and libstdc++ headers to
+          allow building these libraries with POSIX threads support:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed '/thread_header =/s/@.*@/gthr-posix.h/' \
+    -i libgcc/Makefile.in libstdc++-v3/include/Makefile.in</kbd></pre>
+        <p>
+          Create a separate build directory again:
+        </p>
+        <pre class="userinput"><kbd class="command">mkdir -v build
+cd       build</kbd></pre>
+        <p>
+          Before starting to build GCC, remember to unset any environment
+          variables that override the default optimization flags.
+        </p>
+        <p>
+          Now prepare GCC for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">../configure                   \
+    --build=$(../config.guess) \
+    --host=$LFS_TGT            \
+    --target=$LFS_TGT          \
+    --prefix=/usr              \
+    --with-build-sysroot=$LFS  \
+    --enable-default-pie       \
+    --enable-default-ssp       \
+    --disable-nls              \
+    --disable-multilib         \
+    --disable-libatomic        \
+    --disable-libgomp          \
+    --disable-libquadmath      \
+    --disable-libsanitizer     \
+    --disable-libssp           \
+    --disable-libvtv           \
+    --enable-languages=c,c++   \
+    LDFLAGS_FOR_TARGET=-L$PWD/$LFS_TGT/libgcc</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-build-sysroot=$LFS</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Normally, using <em class=
+                "parameter"><code>--host</code></em> ensures that a
+                cross-compiler is used for building GCC, and that compiler
+                knows that it has to look for headers and libraries in
+                <code class="filename">$LFS</code>. However, the build system
+                for GCC uses additional tools which are not aware of this
+                location. This switch is needed so those tools will find the
+                needed files in <code class="filename">$LFS</code>, and not
+                on the host.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--target=$LFS_TGT</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                We are cross-compiling GCC, so it's impossible to build
+                target libraries (<code class="filename">libgcc</code> and
+                <code class="filename">libstdc++</code>) with the GCC
+                binaries compiled in this pass—those binaries won't run on
+                the host. The GCC build system will attempt to use the host's
+                C and C++ compilers as a workaround by default. Building the
+                GCC target libraries with a different version of GCC is not
+                supported, so using the host's compilers may cause the build
+                to fail. This parameter ensures the libraries are built by
+                GCC pass 1.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>LDFLAGS_FOR_TARGET=...</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Allow <code class="filename">libstdc++</code> to use the
+                <code class="filename">libgcc</code> being built in this
+                pass, instead of the previous version built in <a class=
+                "xref" href="../chapter05/gcc-pass1.html" title=
+                "5.3.&nbsp;GCC-15.2.0 - Pass 1">gcc-pass1</a>. The previous
+                version cannot properly support C++ exception handling
+                because it was built without libc support.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-libsanitizer</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Disable GCC sanitizer runtime libraries. They are not needed
+                for the temporary installation. In <a class="xref" href=
+                "../chapter05/gcc-pass1.html" title=
+                "5.3.&nbsp;GCC-15.2.0 - Pass 1">gcc-pass1</a> it was implied
+                by <em class=
+                "parameter"><code>--disable-libstdcxx</code></em>, and now we
+                can explicitly pass it.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make DESTDIR=$LFS install</kbd></pre>
+        <p>
+          As a finishing touch, create a utility symlink. Many programs and
+          scripts run <span class="command"><strong>cc</strong></span>
+          instead of <span class="command"><strong>gcc</strong></span>, which
+          is used to keep programs generic and therefore usable on all kinds
+          of UNIX systems where the GNU C compiler is not always installed.
+          Running <span class="command"><strong>cc</strong></span> leaves the
+          system administrator free to decide which C compiler to install:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -sv gcc $LFS/usr/bin/cc</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter08/gcc.html#contents-gcc" title=
+          "8.31.2.&nbsp;Contents of GCC">Section&nbsp;8.31.2, “Contents of
+          GCC.”</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils-pass2.html" title=
+          "Binutils-2.45 - Pass 2">Prev</a>
+          <p>
+            Binutils-2.45 - Pass 2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter07/chapter07.html" title=
+          "Entering Chroot and Building Additional Temporary Tools">Next</a>
+          <p>
+            Entering Chroot and Building Additional Temporary Tools
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

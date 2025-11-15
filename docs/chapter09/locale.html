@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.7.&nbsp;Configuring the System Locale
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">Prev</a>
+          <p>
+            System V Bootscript Usage and Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating the /etc/inputrc File">Next</a>
+          <p>
+            Creating the /etc/inputrc File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-config-locale" name="ch-config-locale"></a>9.7. Configuring
+      the System Locale
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <p>
+        Musl has intentionally minimal locale support compared to glibc. By
+        design, musl only fully supports the C and C.UTF-8 locales. This
+        means:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li class="listitem">
+            <p>
+              No translated program messages (LC_MESSAGES)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              No locale-specific sorting/collation (LC_COLLATE uses byte
+              order only)
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              No locale-specific formatting for monetary, numeric, time, or
+              date values
+            </p>
+          </li>
+          <li class="listitem">
+            <p>
+              UTF-8 character encoding is supported for input/output
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        For most users, setting the locale to C.UTF-8 is sufficient:
+      </p>
+      <pre class="userinput"><kbd class=
+      "command">cat &gt; /etc/profile &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/profile
+
+export LANG=C.UTF-8
+export LC_COLLATE=C
+export LC_MESSAGES=C.UTF-8
+#export LANG=<em class=
+"replaceable"><code>&lt;ll&gt;_&lt;CC&gt;.&lt;charmap&gt;&lt;@modifiers&gt;</code></em>
+
+# End /etc/profile</code>
+EOF</kbd></pre>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          The Adelie Linux project maintains an extended locale
+          implementation for musl that provides additional locale support.
+          This requires CMake (available in BLFS) to build. For more
+          information, see: <a class="ulink" href=
+          "https://git.adelielinux.org/adelie/musl-locales/-/tree/main">https://git.adelielinux.org/adelie/musl-locales/-/tree/main</a>
+        </p>
+      </div>
+      <p>
+        If you need full locale support including translated messages and
+        locale-specific formatting, you may need to consider using
+        glibc-based distributions instead.
+      </p>
+      <p>
+        Various packages have installed message translations in <code class=
+        "filename">/usr/share/locale/</code>. Setting <code class=
+        "envar">LANG</code> or <code class="envar">LC_MESSAGES</code> to a
+        locale like <code class="literal">en_US.UTF-8</code> will enable
+        translated program messages where available. However, musl's locale
+        support is minimal - locale-specific sorting, number formatting, and
+        date/time formatting are not supported.
+      </p>
+      <p>
+        For most users, <code class="literal">C.UTF-8</code> provides UTF-8
+        support with predictable C locale behavior:
+      </p>
+      <pre class="userinput"><kbd class=
+      "command">export LANG=C.UTF-8</kbd></pre>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="usage.html" title=
+          "System V Bootscript Usage and Configuration">Prev</a>
+          <p>
+            System V Bootscript Usage and Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inputrc.html" title=
+          "Creating the /etc/inputrc File">Next</a>
+          <p>
+            Creating the /etc/inputrc File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

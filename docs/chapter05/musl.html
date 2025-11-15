@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.5.&nbsp;Musl-1.2.5
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Compiling a Cross-Toolchain
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-6.12.52 API Headers">Prev</a>
+          <p>
+            Linux-6.12.52 API Headers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-libstdc++.html" title=
+          "Libstdc++ from GCC-15.2.0">Next</a>
+          <p>
+            Libstdc++ from GCC-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Compiling a Cross-Toolchain">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-tools-glibc" name="ch-tools-glibc"></a>5.5. Musl-1.2.5
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Musl Package contains an alternative main C library. This
+          library provides the basic routines for allocating memory,
+          searching directories, opening and closing files, reading and
+          writing files, string handling, pattern matching, arithmetic, and
+          so on.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">1.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">870 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.5.1. Installation of Musl
+        </h2>
+        <p>
+          First, create a symbolic link for LSB compliance. Additionally, for
+          x86_64, create a compatibility symbolic link required for proper
+          operation of the dynamic library loader.
+        </p>
+        <pre class="userinput"><kbd class="command">case $(uname -m) in
+    i?86)   ln -sfv ld-musl.so.1 $LFS/lib/ld-lsb.so.3
+    ;;
+    x86_64) ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64
+            ln -sfv ../lib/ld-musl-x86_64.so.1 $LFS/lib64/ld-lsb-x86-64.so.3
+    ;;
+esac</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The above command is correct. The <span class=
+            "command"><strong>ln</strong></span> command has several
+            syntactic versions, so be sure to check <span class=
+            "command"><strong>info coreutils ln</strong></span> and <a class=
+            "ulink" href="https://man.archlinux.org/man/ln.1">ln(1)</a>
+            before reporting what may appear to be an error.
+          </p>
+        </div>
+        <p>
+          The <span class="command"><strong>malloc</strong></span>
+          implementation used by Musl is slow. Apply the following patch to
+          use <span class="command"><strong>rpmalloc</strong></span> as a
+          faster alternative:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../musl-1.2.5-rpmalloc.patch</kbd></pre>
+        <p>
+          Patch some vulnerabilities:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../musl-1.2.5-iconv-fix.patch</kbd></pre>
+        <p>
+          Prepare Musl for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
+    --host=$LFS_TGT             \
+    --build=x86_64-pc-linux-gnu \
+    --with-malloc=rpmalloc</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class="parameter"><code>--host=$LFS_TGT,
+              --build=x86_64-pc-linux-gnu</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The combined effect of these switches is that Musl's build
+                system configures itself to be cross-compiled, using the
+                cross-linker and cross-compiler in <code class=
+                "filename">$LFS/tools</code>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-malloc=rpmalloc</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This makes Musl use the just-patched <span class=
+                "command"><strong>rpmalloc</strong></span> implementation
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            If <code class="envar">LFS</code> is not properly set, and
+            despite the recommendations, you are building as <code class=
+            "systemitem">root</code>, the next command will install the newly
+            built Musl to your host system, which will almost certainly
+            render it unusable. So double-check that the environment is
+            correctly set, and that you are not <code class=
+            "systemitem">root</code>, before running the following command.
+          </p>
+        </div>
+        <pre class="userinput"><kbd class=
+        "command">make DESTDIR=$LFS install</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the <span class="command"><strong>make
+            install</strong></span> option:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>DESTDIR=$LFS</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The <code class="envar">DESTDIR</code> make variable is used
+                by almost all packages to define the location where the
+                package should be installed. If it is not set, it defaults to
+                the root (<code class="filename">/</code>) directory. Here we
+                specify that the package is installed in <code class=
+                "filename">$LFS</code>, which will become the root directory
+                in Section 7.4 - Entering the Chroot Environment.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Now that our cross toolchain is in place, it is important to ensure
+          that compiling and linking will work as expected. We do this by
+          performing some sanity checks:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">echo 'int main(){}' | $LFS_TGT-gcc -xc -
+readelf -l a.out | grep ld-musl</kbd></pre>
+        <p>
+          There should be no errors, and the output of the last command will
+          be (allowing for platform-specific differences in the dynamic
+          linker name):
+        </p>
+        <pre class="screen"><code class=
+        "computeroutput">[Requesting program interpreter: /lib/ld-musl-x86-64.so.1]</code></pre>
+        <p>
+          Note that for 32-bit machines, the interpreter name will be
+          /lib/ld-musl.so.1. If the output is not as shown above, or there is
+          no output at all, then something is wrong. Investigate and retrace
+          the steps to find out where the problem is and correct it. This
+          issue must be resolved before continuing.
+        </p>
+        <pre class="userinput"><kbd class="command">rm -v a.out</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Building the packages in the next chapter will serve as an
+            additional check that the toolchain has been built properly. If
+            some package, especially Binutils-pass2 or GCC-pass2, fails to
+            build, it is an indication that something has gone wrong with the
+            preceding Binutils, GCC, or Musl installations.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-6.12.52 API Headers">Prev</a>
+          <p>
+            Linux-6.12.52 API Headers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc-libstdc++.html" title=
+          "Libstdc++ from GCC-15.2.0">Next</a>
+          <p>
+            Libstdc++ from GCC-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Compiling a Cross-Toolchain">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

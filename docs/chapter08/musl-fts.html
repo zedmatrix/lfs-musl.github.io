@@ -1,36 +1,121 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="../ymusl-lfs.css" />
-    <title>50. Musl-fts - 1.2.7</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      8.52.&nbsp;Musl-fts-1.2.7
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="ylfs" id="lfs-r1.0-1-musl-sysv-mdev">
-<div class="header">
-  <div class="section">
-    <h2>Linux From Scratch - musl</h2>
-        <h3>Version r1.0-1-sysv-mdev</h3>
-    <h3>50. Musl-fts - 1.2.7</h3>
-    <p class="info">The musl-fts package implements the fts(3) functions fts_open, fts_read, fts_children, fts_set and fts_close, which are missing in musl libc.</p>
-  </div>
-</div>
-
-<div class="section">
-  <div class="padbox">
-    <h4>Sources</h4>    <p>
-Download URL: <a href="../sources/musl-fts-v1.2.7.tar.gz">sources/musl-fts-v1.2.7.tar.gz</a><br>
-SHA256 Sum: <code>49ae567a96dbab22823d045ffebe0d6b14b9b799925e9ca9274d47d26ff482a6</code><br>
-MD5 Sum: <code>bce0b5de0cf2519a74fbfacead60369d</code><br>
-<br>
-    </p>
-  </div>
-</div>
-<div class="section"><pre class="prepare">./bootstrap.sh</pre></div>
-
-<div class="section"><pre class="build">./configure --prefix=/usr &&
-make</pre></div>
-
-
-<div class="section"><pre class="install">make install</pre></div>
-
-</body></html>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="argp-standalone.html" title=
+          "Argp-Standalone-1.5.0">Prev</a>
+          <p>
+            Argp-Standalone-1.5.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="musl-obstack.html" title=
+          "Musl-obstack-1.2.3">Next</a>
+          <p>
+            Musl-obstack-1.2.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-musl-fts" name="ch-system-musl-fts"></a>8.52.
+      Musl-fts-1.2.7
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The musl-fts package implements the fts(3) functions fts_open,
+          fts_read, fts_children, fts_set and fts_close, which are missing in
+          musl libc.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">3.8 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.52.1. Installation of Musl-fts
+        </h2>
+        <p>
+          Prepare musl-fts for compilation:
+        </p>
+        <pre class="userinput"><kbd class="command">./bootstrap.sh
+./configure --prefix=/usr</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a testsuite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="argp-standalone.html" title=
+          "Argp-Standalone-1.5.0">Prev</a>
+          <p>
+            Argp-Standalone-1.5.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="musl-obstack.html" title=
+          "Musl-obstack-1.2.3">Next</a>
+          <p>
+            Musl-obstack-1.2.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

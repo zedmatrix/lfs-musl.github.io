@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      8.6.&nbsp;tzcode-2025b and tzdata-2025b
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl.html" title="Musl-1.2.5">Prev</a>
+          <p>
+            Musl-1.2.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib.html" title="Zlib-1.3.1">Next</a>
+          <p>
+            Zlib-1.3.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-timezone" name="ch-system-timezone"></a>8.6.
+      tzcode-2025b and tzdata-2025b
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Time Zone Database (often called tz or zoneinfo) contains code
+          and data that represent the history of local time for many
+          representative locations around the globe. It is updated
+          periodically to reflect changes made by political bodies to time
+          zone boundaries, UTC offsets, and daylight-saving rules.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">Less than 1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">Less than 1 MB</span>
+            </div>
+          </div>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">Less than 1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">Less than 1 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.6.1. Preparation of Timezone Data
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Both of these packages are to be built and configured together as
+            they do not extract to a dedicated path name, so you need to
+            create a directory first before extracting.
+          </p>
+        </div>
+        <p>
+          Prepare Timezone Diectory:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir -v timezone &amp;&amp;
+cd timezone
+
+tar -xf ../tzcode2025b.tar.gz
+tar -xf ../tzdata2025b.tar.gz
+        </kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make CC=gcc zic zdump tzselect</kbd></pre>
+        <p>
+          This package does not come with a testsuite:
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">install -m755 zic /usr/bin &amp;&amp;
+install -m755 zdump /usr/bin &amp;&amp;
+install -m755 tzselect /usr/bin</kbd></pre>
+        <div class="sect3">
+          <h3 class="sect3">
+            8.6.1.1. Adding Time Zone Data
+          </h3>
+          <p>
+            Install and set up the time zone data with the following:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">ZONEINFO=/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+
+for tz in etcetera southamerica northamerica europe africa antarctica  \
+asia australasia backward; do
+zic -L /dev/null   -d $ZONEINFO       ${tz}
+zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+zic -L leapseconds -d $ZONEINFO/right ${tz}
+done
+
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/New_York
+unset ZONEINFO tz</kbd></pre>
+          <div class="variablelist">
+            <p class="title">
+              <strong>The meaning of the zic commands:</strong>
+            </p>
+            <dl class="variablelist">
+              <dt>
+                <span class="term"><em class="parameter"><code>zic -L
+                /dev/null ...</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  This creates posix time zones without any leap seconds. It
+                  is conventional to put these in both <code class=
+                  "filename">zoneinfo</code> and <code class=
+                  "filename">zoneinfo/posix</code>. It is necessary to put
+                  the POSIX time zones in <code class=
+                  "filename">zoneinfo</code>, otherwise various test suites
+                  will report errors. On an embedded system, where space is
+                  tight and you do not intend to ever update the time zones,
+                  you could save 1.9 MB by not using the <code class=
+                  "filename">posix</code> directory, but some applications or
+                  test suites might produce some failures.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class="parameter"><code>zic -L
+                leapseconds ...</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  This creates right time zones, including leap seconds. On
+                  an embedded system, where space is tight and you do not
+                  intend to ever update the time zones, or care about the
+                  correct time, you could save 1.9MB by omitting the
+                  <code class="filename">right</code> directory.
+                </p>
+              </dd>
+              <dt>
+                <span class="term"><em class="parameter"><code>zic ... -p
+                ...</code></em></span>
+              </dt>
+              <dd>
+                <p>
+                  This creates the <code class="filename">posixrules</code>
+                  file. We use New York because POSIX requires the daylight
+                  saving time rules to be in accordance with US rules.
+                </p>
+              </dd>
+            </dl>
+          </div>
+          <p>
+            One way to determine the local time zone is to run the following
+            script:
+          </p>
+          <pre class="userinput"><kbd class="command">tzselect</kbd></pre>
+          <p>
+            After answering a few questions about the location, the script
+            will output the name of the time zone (e.g., <span class=
+            "emphasis"><em>America/Edmonton</em></span>). There are also some
+            other possible time zones listed in <code class=
+            "filename">/usr/share/zoneinfo</code> such as <span class=
+            "emphasis"><em>Canada/Eastern</em></span> or <span class=
+            "emphasis"><em>EST5EDT</em></span> that are not identified by the
+            script but can be used.
+          </p>
+          <p>
+            Then create the <code class="filename">/etc/localtime</code> file
+            by running:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">ln -sfv /usr/share/zoneinfo/<em class=
+          "replaceable"><code>&lt;xxx&gt;</code></em> /etc/localtime</kbd></pre>
+          <p>
+            Replace <em class="replaceable"><code>&lt;xxx&gt;</code></em>
+            with the name of the time zone selected (e.g., Canada/Pacific).
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl.html" title="Musl-1.2.5">Prev</a>
+          <p>
+            Musl-1.2.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib.html" title="Zlib-1.3.1">Next</a>
+          <p>
+            Zlib-1.3.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

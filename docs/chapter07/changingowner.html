@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      7.2.&nbsp;Changing Ownership
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional
+        Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kernfs.html" title=
+          "Preparing Virtual Kernel File Systems">Next</a>
+          <p>
+            Preparing Virtual Kernel File Systems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-tools-changingowner" name="ch-tools-changingowner"></a>7.2.
+      Changing Ownership
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          The commands in the remainder of this book must be performed while
+          logged in as user <code class="systemitem">root</code> and no
+          longer as user <code class="systemitem">lfs</code>. Also, double
+          check that <code class="envar">$LFS</code> is set in <code class=
+          "systemitem">root</code>'s environment.
+        </p>
+      </div>
+      <p>
+        Currently, the whole directory hierarchy in <code class=
+        "filename">$LFS</code> is owned by the user <code class=
+        "systemitem">lfs</code>, a user that exists only on the host system.
+        If the directories and files under <code class="filename">$LFS</code>
+        are kept as they are, they will be owned by a user ID without a
+        corresponding account. This is dangerous because a user account
+        created later could get this same user ID and would own all the files
+        under <code class="filename">$LFS</code>, thus exposing these files
+        to possible malicious manipulation.
+      </p>
+      <p>
+        To address this issue, change the ownership of the <code class=
+        "filename">$LFS/*</code> directories to user <code class=
+        "systemitem">root</code> by running the following command:
+      </p>
+      <pre class="userinput"><kbd class="command">chown --from <kbd class=
+      "command">lfs</kbd> -R root:root $LFS/{usr,var,etc,tools}
+case $(uname -m) in
+  x86_64) chown --from <kbd class=
+"command">lfs</kbd> -R root:root $LFS/lib64 ;;
+esac</kbd></pre>
+      <p>
+        The following is a helper script to enter and exit the chroot
+        environment, aids in mounting and un-mounting the virtual
+        filesystems.
+      </p>
+      <pre class="userinput"><kbd class=
+      "command">cat &gt; $LFS/sbin/musl-lfs-chroot &lt;&lt; "EOF"
+<code class="literal">#!/bin/bash
+zprint() { echo -e "\033[1;32m *** $1 *** \033[0m"; }
+stars() { printf '%.0s*' {1..100}; printf '\n'; }
+
+LFS=${LFS:-/mnt/lfs}
+LFS_TGT=${LFS_TGT:-$(uname -m)-lfs-linux-musl}
+LC_ALL=POSIX
+
+chroot_pre() {
+  stars
+  zprint " === Mounting Virtual Kernel Filesystems === "
+  mkdir -pv $LFS/{dev,proc,sys,run}
+  mount -v --bind /dev $LFS/dev
+  mount -vt devpts devpts -o gid=5,mode=0620 $LFS/dev/pts
+  mount -vt proc proc $LFS/proc
+  mount -vt sysfs sysfs $LFS/sys
+  mount -vt tmpfs tmpfs $LFS/run
+  if [ -h $LFS/dev/shm ]; then
+    install -v -d -m 1777 $LFS$(realpath /dev/shm)
+  else
+    mount -vt tmpfs -o nosuid,nodev tmpfs $LFS/dev/shm
+  fi
+  if [ ! -f $LFS/etc/resolv.conf ]; then
+    printf "nameserver 1.1.1.1\nnameserver 8.8.8.8\n" &gt; $LFS/etc/resolv.conf
+  fi
+  stars
+}
+
+chroot_exec() {
+  stars
+  zprint " === Entering Chroot $LFS === "
+  /usr/sbin/chroot "$LFS" \
+  /usr/bin/env -i HOME=/root TERM="$TERM" \
+  PS1='($?) (LFS chroot) \u:\w\$ ' \
+  PATH=/usr/bin:/usr/sbin \
+  MAKEFLAGS="-j$(nproc)" \
+  TESTSUITEFLAGS="-j$(nproc)" \
+  /bin/bash --login
+  zprint " === Welcome Back === "
+  stars
+}
+
+check_unmount() { mountpoint -q "$1" &amp;&amp; umount -v "$1"; }
+
+chroot_post() {
+  stars
+  zprint " === Un-Mounting Virtual Kernel Filesystems === "
+  check_unmount $LFS/sys/firmware/efi/efivars
+  check_unmount $LFS/dev/pts
+  check_unmount $LFS/dev/shm
+  check_unmount $LFS/dev
+  check_unmount $LFS/run
+  check_unmount $LFS/proc
+  check_unmount $LFS/sys
+  stars
+}
+stars
+
+# checks if directory exists
+[ ! -d $LFS ] &amp;&amp; { zprint "Error $LFS is not a mountpoint"; exit 1; }
+
+# mounts virtual kernel filesystems
+chroot_pre
+
+# enters the new root environment
+chroot_exec
+
+# cleans up the virtual kernel filesystems
+chroot_post
+
+stars</code>
+EOF
+
+chmod -v +x $LFS/sbin/musl-lfs-chroot
+    </kbd></pre>
+      <p>
+        The last command will make it executabnle and allow you to enter and
+        exit your new <span class="command"><strong>lfs</strong></span>
+        environment with ease. By <span class=
+        "command"><strong>$LFS/sbin/musl-lfs-chroot</strong></span>.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="introduction.html" title=
+          "Introduction">Prev</a>
+          <p>
+            Introduction
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kernfs.html" title=
+          "Preparing Virtual Kernel File Systems">Next</a>
+          <p>
+            Preparing Virtual Kernel File Systems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
