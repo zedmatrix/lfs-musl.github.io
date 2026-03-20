@@ -1,0 +1,27 @@
+package:
+  name: coreutils-temp
+  version: 9.10
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/coreutils/coreutils-9.10.tar.xz
+    sha256: 16535a9adf0b10037364e2d612aad3d9f4eca3a344949ced74d12faf4bd51d25
+    md5: b0482ebec42fd48e95cb9187d566b9e4
+
+prepare: |
+  ./configure --prefix=/usr --host=$LFS_TGT --build=$(build-aux/config.guess) \
+    --enable-install-program=hostname --enable-no-install-program=kill,uptime
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$LFS install
+
+final: |
+  mv -v $LFS/usr/bin/chroot $LFS/usr/sbin;
+  mkdir -pv $LFS/usr/share/man/man8 &&
+  mv -v $LFS/usr/share/man/man1/chroot.1 $LFS/usr/share/man/man8/chroot.8;
+  sed -i 's/"1"/"8"/' $LFS/usr/share/man/man8/chroot.8

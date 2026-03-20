@@ -1,0 +1,31 @@
+package:
+  name: ncurses-temp
+  version: 6.6
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://invisible-mirror.net/archives/ncurses/current/ncurses-6.6.tar.gz
+    sha256: 355b4cbbed880b0381a04c46617b7656e362585d52e9cf84a67e2009b749ff11
+    md5: dd45bf6854430af403452a7a6a40652c
+
+prepare: |
+  mkdir build && cd build &&
+  ../configure --prefix=$LFS/tools AWK=gawk &&
+  make -C include &&
+  make -C progs tic &&
+  install progs/tic $LFS/tools/bin
+
+build: |
+  ./configure --prefix=/usr --host=$LFS_TGT --build=$(./config.guess) --mandir=/usr/share/man \
+    --with-manpage-format=normal --with-shared --without-normal --with-cxx-shared \
+    --without-debug --without-ada --disable-stripping AWK=gawk &&
+  make
+
+install: |
+  make DESTDIR=$LFS install
+
+final: |
+  ln -sv libncursesw.so $LFS/usr/lib/libncurses.so &&
+  sed -e 's/^#if.*XOPEN.*$/#if 1/' -i $LFS/usr/include/curses.h

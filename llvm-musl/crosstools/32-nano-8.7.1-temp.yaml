@@ -1,0 +1,21 @@
+package:
+  name: nano-temp
+  version: 8.7.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.nano-editor.org/dist/v8/nano-8.7.1.tar.xz
+    sha256: 76f0dcb248f2e2f1251d4ecd20fd30fb400a360a3a37c6c340e0a52c2d1cdedf
+    md5: d873085c342e3670d108c08a0c3ebe2f
+
+prepare: |
+  ./configure --prefix=/usr --sysconfdir=/etc \
+    --enable-utf8 --docdir=/usr/share/doc/nano-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make install

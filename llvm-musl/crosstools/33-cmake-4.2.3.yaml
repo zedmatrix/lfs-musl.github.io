@@ -1,0 +1,22 @@
+package:
+  name: cmake
+  version: 4.2.3
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://cmake.org/files/v4.2/cmake-4.2.3.tar.gz
+    sha256: 7efaccde8c5a6b2968bad6ce0fe60e19b6e10701a12fce948c2bf79bac8a11e9
+    md5: 803a1720ec822a8660118a38ca51fc1b
+
+prepare: |
+  sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+  ./bootstrap --prefix=/usr --no-system-libs --mandir=/share/man \
+  --docdir=/share/doc/cmake-${PKGVER} -- -DCMAKE_USE_OPENSSL=OFF
+
+build: |
+  make
+
+install: |
+  make install
