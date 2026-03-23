@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      8.53.&nbsp;Musl-obstack-1.2.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-2.0-musl-systemd">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 2.0-musl-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;8.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl-fts.html" title=
+          "Musl-fts-1.2.7">Prev</a>
+          <p>
+            Musl-fts-1.2.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libelf.html" title=
+          "Libelf from Elfutils-0.194">Next</a>
+          <p>
+            Libelf from Elfutils-0.194
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 2.0-musl-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-system-musl-obstack" name="ch-system-musl-obstack"></a>8.53.
+      Musl-obstack-1.2.3
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The musl-obstack package is a copy + paste of the obstack functions
+          and macros found in GNU gcc libiberty library for use with musl
+          libc.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">3.7 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.53.1. Installation of Musl-obstack
+        </h2>
+        <p>
+          Prepare musl-obstack for compilation:
+        </p>
+        <pre class="userinput"><kbd class="command">./bootstrap.sh
+./configure --prefix=/usr</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a testsuite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl-fts.html" title=
+          "Musl-fts-1.2.7">Prev</a>
+          <p>
+            Musl-fts-1.2.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libelf.html" title=
+          "Libelf from Elfutils-0.194">Next</a>
+          <p>
+            Libelf from Elfutils-0.194
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 2.0-musl-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

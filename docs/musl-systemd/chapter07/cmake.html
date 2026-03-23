@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      7.14.&nbsp;CMake-4.2.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="lfs" id="lfs-2.0-musl-systemd">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 2.0-musl-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional
+        Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="nano.html" title="Nano-8.7.1">Prev</a>
+          <p>
+            Nano-8.7.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ninja.html" title="Ninja-1.13.2">Next</a>
+          <p>
+            Ninja-1.13.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 2.0-musl-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-tools-cmake" name="ch-tools-cmake"></a>7.14. CMake-4.2.3
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.14.1. Introduction to CMake
+        </h2>
+        <p>
+          The <span class="application">CMake</span> package contains a
+          modern toolset used for generating Makefiles. It is a successor of
+          the auto-generated <span class=
+          "command"><strong>configure</strong></span> script and aims to be
+          platform- and compiler-independent. A significant user of
+          <span class="application">CMake</span> is <span class=
+          "application">KDE</span> since version 4.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">2.2 SBU (add 4.3 SBU for tests, both
+              using parallelism=4)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">610 MB (add 1.6 GB for tests)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.14.2. Installation of CMake
+        </h2>
+        <p>
+          Prepare <span class="application">CMake</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+
+./bootstrap --prefix=/usr        \
+            --system-libs        \
+            --mandir=/share/man  \
+            --no-system-libs     \
+            --docdir=/share/doc/cmake-4.2.3
+            -- -DCMAKE_USE_OPENSSL=OFF</kbd></pre>
+        <p>
+          Now Compile <span class="application">CMake</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now, Install the package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.14.3. Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>sed ...
+          Modules/GNUInstallDirs.cmake</strong></span>: This command disables
+          applications using cmake from attempting to install files in
+          /usr/lib64/.
+        </p>
+        <p>
+          <em class="parameter"><code>--no-system-libs</code></em>: This
+          switch tells the build system to install all needed libraries.
+        </p>
+        <p>
+          <code class="option">-DCMAKE_USE_OPENSSL=OFF</code>: This switch
+          disables the use of OpenSSL as its not installed yet and not needed
+          in this stage.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.14.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">ccmake, cmake, cmake-gui (optional),
+              cpack, and ctest</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/share/cmake-4.2 and
+              /usr/share/doc/cmake-4.2.3</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ccmake" name="ccmake"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ccmake</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a curses based interactive frontend to <span class=
+                    "command"><strong>cmake</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cmake-prog" name="cmake-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cmake</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the makefile generator
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cpack" name="cpack"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cpack</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">CMake</span> packaging
+                    program
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ctest" name="ctest"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ctest</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a testing utility for cmake-generated build trees
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="nano.html" title="Nano-8.7.1">Prev</a>
+          <p>
+            Nano-8.7.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ninja.html" title="Ninja-1.13.2">Next</a>
+          <p>
+            Ninja-1.13.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 2.0-musl-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
