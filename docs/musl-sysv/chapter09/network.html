@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      9.5.&nbsp;General Network Configuration
+      9.6.&nbsp;General Network Configuration
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;9.&nbsp;System Configuration
@@ -41,18 +41,18 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-config-network" name="ch-config-network"></a>9.5. General
+      <a id="ch-config-network" name="ch-config-network"></a>9.6. General
       Network Configuration
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.5.1. Creating Network Interface Configuration Files
+          9.6.1. Creating Network Interface Configuration Files
         </h2>
         <p>
           The files in <code class="filename">/etc/sysconfig/</code> usually
@@ -84,12 +84,13 @@
             The interface names depend on the implementation and
             configuration of the udev daemon running on the system. The udev
             daemon for LFS (installed in <a class="xref" href=
-            "../chapter08/eudev.html" title=
-            "8.82.&nbsp;Eudev-3.2.14">Section&nbsp;8.82, “Eudev-3.2.14”</a>)
-            will not run until the LFS system is booted. So the interface
-            names in the LFS system cannot always be determined by running
-            those commands on the host distro, <span class=
-            "emphasis"><em>even in the chroot environment</em></span>.
+            "../chapter08/udev.html" title=
+            "8.83.&nbsp;Udev from Systemd-259.5">Section&nbsp;8.83, “Udev
+            from Systemd-259.5”</a>) will not run until the LFS system is
+            booted. So the interface names in the LFS system cannot always be
+            determined by running those commands on the host distro,
+            <span class="emphasis"><em>even in the chroot
+            environment</em></span>.
           </p>
         </div>
         <p>
@@ -159,7 +160,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="resolv.conf" name="resolv.conf"></a>9.5.2. Creating the
+          <a id="resolv.conf" name="resolv.conf"></a>9.6.2. Creating the
           /etc/resolv.conf File
         </h2>
         <p>
@@ -208,7 +209,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-hostname" name="ch-config-hostname"></a>9.5.3.
+          <a id="ch-config-hostname" name="ch-config-hostname"></a>9.6.3.
           Configuring the System Hostname
         </h2>
         <p>
@@ -231,7 +232,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-hosts" name="ch-config-hosts"></a>9.5.4.
+          <a id="ch-config-hosts" name="ch-config-hosts"></a>9.6.4.
           Customizing the /etc/hosts File
         </h2>
         <p>
@@ -345,7 +346,7 @@ EOF</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

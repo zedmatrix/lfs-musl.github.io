@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      9.4.&nbsp;Managing Devices
+      9.5.&nbsp;Managing Devices
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;9.&nbsp;System Configuration
@@ -41,18 +41,18 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-config-symlinks" name="ch-config-symlinks"></a>9.4. Managing
+      <a id="ch-config-symlinks" name="ch-config-symlinks"></a>9.5. Managing
       Devices
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.4.1. Network Devices
+          9.5.1. Network Devices
         </h2>
         <p>
           Udev, by default, names network devices according to Firmware/BIOS
@@ -73,7 +73,7 @@
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            9.4.1.1. Disabling Persistent Naming on the Kernel Command Line
+            9.5.1.1. Disabling Persistent Naming on the Kernel Command Line
           </h3>
           <p>
             The traditional naming scheme using eth0, eth1, etc. can be
@@ -91,7 +91,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.4.1.2. Creating Custom Udev Rules
+            9.5.1.2. Creating Custom Udev Rules
           </h3>
           <p>
             The naming scheme can be customized by creating custom udev
@@ -212,7 +212,7 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.4.2. CD-ROM Symlinks
+          9.5.2. CD-ROM Symlinks
         </h2>
         <p>
           Some software that you may want to install later (e.g., various
@@ -323,11 +323,11 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.4.3. Dealing with Duplicate Devices
+          9.5.3. Dealing with Duplicate Devices
         </h2>
         <p>
           As explained in <a class="xref" href="udev.html" title=
-          "9.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;9.3,
+          "9.4.&nbsp;Overview of Device and Module Handling">Section&nbsp;9.4,
           “Overview of Device and Module Handling,”</a> the order in which
           devices with the same function appear in <code class=
           "filename">/dev</code> is essentially random. E.g., if you have a
@@ -338,7 +338,7 @@
           except sound cards and network cards, this is fixable by creating
           udev rules to create persistent symlinks. The case of network cards
           is covered separately in <a class="xref" href="network.html" title=
-          "9.5.&nbsp;General Network Configuration">Section&nbsp;9.5,
+          "9.6.&nbsp;General Network Configuration">Section&nbsp;9.6,
           “General Network Configuration,”</a> and sound card configuration
           can be found in <a class="ulink" href=
           "https://www.linuxfromscratch.org/blfs/view/svn/postlfs/devices.html">
@@ -401,7 +401,7 @@ EOF</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

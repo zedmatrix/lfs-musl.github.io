@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      D.17.&nbsp;/etc/rc.d/init.d/sendsignals
+      D.17.&nbsp;/etc/rc.d/init.d/sysklogd
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,140 +12,143 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
-        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827
+        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds16.html" title=
-          "/etc/rc.d/init.d/network">Prev</a>
+          "/etc/rc.d/init.d/sysctl">Prev</a>
           <p>
-            /etc/rc.d/init.d/network
+            /etc/rc.d/init.d/sysctl
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds18.html" title=
-          "/etc/rc.d/init.d/reboot">Next</a>
+          "/etc/rc.d/init.d/network">Next</a>
           <p>
-            /etc/rc.d/init.d/reboot
+            /etc/rc.d/init.d/network
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="sendsignals" name="sendsignals"></a>D.17.
-      /etc/rc.d/init.d/sendsignals
+      <a id="sysklogd" name="sysklogd"></a>D.17. /etc/rc.d/init.d/sysklogd
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <pre class="screen">#!/bin/sh
 ########################################################################
-# Begin sendsignals
+# Begin sysklogd
 #
-# Description : Sendsignals Script
+# Description : Sysklogd loader
 #
 # Authors     : Gerard Beekmans - gerard@linuxfromscratch.org
 #               DJ Lucas - dj@linuxfromscratch.org
 # Update      : Bruce Dubbs - bdubbs@linuxfromscratch.org
+# Update      : Bruce Dubbs - bdubbs@linuxfromscratch.org LFS12.1
+#               Remove kernel log daemon.  The functionality has been
+#               merged with syslogd.                
 #
 # Version     : LFS 7.0
 #
 ########################################################################
 
 ### BEGIN INIT INFO
-# Provides:            sendsignals
-# Required-Start:
+# Provides:            $syslog
+# Required-Start:      $first localnet
 # Should-Start:
-# Required-Stop:       $local_fs swap localnet
-# Should-Stop:
-# Default-Start:
-# Default-Stop:        0 6
-# Short-Description:   Attempts to kill remaining processes.
-# Description:         Attempts to kill remaining processes.
+# Required-Stop:       $local_fs
+# Should-Stop:         sendsignals
+# Default-Start:       2 3 4 5
+# Default-Stop:        0 1 6
+# Short-Description:   Starts system log daemon.
+# Description:         Starts system log daemon.
+#                      /etc/fstab.
 # X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
 . /lib/lsb/init-functions
 
 case "${1}" in
+   start)
+      log_info_msg "Starting system log daemon..."
+      parms=${SYSKLOGD_PARMS-'-m 0'}
+      start_daemon /sbin/syslogd $parms
+      evaluate_retval
+      ;;
+
    stop)
-      omit=$(pidof mdmon)
-      [ -n "$omit" ] &amp;&amp; omit="-o $omit"
+      log_info_msg "Stopping system log daemon..."
+      killproc /sbin/syslogd
+      evaluate_retval
+      ;;
 
-      log_info_msg "Sending all processes the TERM signal..."
-      killall5 -15 $omit
-      error_value=${?}
+   reload)
+      log_info_msg "Reloading system log daemon config file..."
+      pid=`pidofproc syslogd`
+      kill -HUP "${pid}"
+      evaluate_retval
+      ;;
 
-      sleep ${KILLDELAY}
+   restart)
+      ${0} stop
+      sleep 1
+      ${0} start
+      ;;
 
-      if [ "${error_value}" = 0 -o "${error_value}" = 2 ]; then
-         log_success_msg
-      else
-         log_failure_msg
-      fi
-
-      log_info_msg "Sending all processes the KILL signal..."
-      killall5 -9 $omit
-      error_value=${?}
-
-      sleep ${KILLDELAY}
-
-      if [ "${error_value}" = 0 -o "${error_value}" = 2 ]; then
-         log_success_msg
-      else
-         log_failure_msg
-      fi
+   status)
+      statusproc /sbin/syslogd
       ;;
 
    *)
-      echo "Usage: ${0} {stop}"
+      echo "Usage: ${0} {start|stop|reload|restart|status}"
       exit 1
       ;;
-
 esac
 
 exit 0
 
-# End sendsignals
+# End sysklogd
 </pre>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds16.html" title=
-          "/etc/rc.d/init.d/network">Prev</a>
+          "/etc/rc.d/init.d/sysctl">Prev</a>
           <p>
-            /etc/rc.d/init.d/network
+            /etc/rc.d/init.d/sysctl
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds18.html" title=
-          "/etc/rc.d/init.d/reboot">Next</a>
+          "/etc/rc.d/init.d/network">Next</a>
           <p>
-            /etc/rc.d/init.d/reboot
+            /etc/rc.d/init.d/network
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

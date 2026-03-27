@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      D.6.&nbsp;/etc/rc.d/init.d/swap
+      D.6.&nbsp;/etc/rc.d/init.d/gen-ifconfig
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,13 +12,13 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
-        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827
+        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401
       </h3>
       <ul>
         <li class="prev">
@@ -30,89 +30,61 @@
         </li>
         <li class="next">
           <a accesskey="n" href="apds07.html" title=
-          "/etc/rc.d/init.d/setclock">Next</a>
+          "/etc/rc.d/init.d/sshd">Next</a>
           <p>
-            /etc/rc.d/init.d/setclock
+            /etc/rc.d/init.d/sshd
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="swap" name="swap"></a>D.6. /etc/rc.d/init.d/swap
+      <a id="gen-ifconfig" name="gen-ifconfig"></a>D.6.
+      /etc/rc.d/init.d/gen-ifconfig
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
-      <pre class="screen">#!/bin/sh
-########################################################################
-# Begin swap
-#
-# Description : Swap Control Script
-#
-# Authors     : Gerard Beekmans - gerard@linuxfromscratch.org
-#               DJ Lucas - dj@linuxfromscratch.org
-# Update      : Bruce Dubbs - bdubbs@linuxfromscratch.org
-#
-# Version     : LFS 7.0
-#
-########################################################################
-
+      <pre class="screen">#/bin/bash
 ### BEGIN INIT INFO
-# Provides:            swap
-# Required-Start:      udev
-# Should-Start:        modules
-# Required-Stop:       localnet
-# Should-Stop:         $local_fs
+# Provides:            gen-ifconfig
+# Required-Start:      $local_fs $network
+# Required-Stop:       $network
 # Default-Start:       S
-# Default-Stop:        0 6
-# Short-Description:   Activates and deactivates swap partitions.
-# Description:         Activates and deactivates swap partitions defined in
-#                      /etc/fstab.
-# X-LFS-Provided-By:   LFS
+# Default-Stop:
+# Short-Description:   generates dyanmic ifconfig
+# Description:         generates dynamic ifconfig on load from iface
 ### END INIT INFO
 
 . /lib/lsb/init-functions
 
-case "${1}" in
-   start)
-      log_info_msg "Activating all swap files/partitions..."
-      swapon -a
-      evaluate_retval
-      ;;
+CONFIG_DIR="/etc/sysconfig"
 
-   stop)
-      log_info_msg "Deactivating all swap files/partitions..."
-      swapoff -a
-      evaluate_retval
-      ;;
+log_info_msg "Generating dyanmic interface config..."
 
-   restart)
-      ${0} stop
-      sleep 1
-      ${0} start
-      ;;
-
-   status)
-      log_success_msg "Retrieving swap status."
-      swapon -s
-      ;;
-
-   *)
-      echo "Usage: ${0} {start|stop|restart|status}"
-      exit 1
-      ;;
-esac
+for iface in $(ls /sys/class/net); do
+    [ "$iface" = "lo" ] &amp;&amp; continue
+    FILE="$CONFIG_DIR/ifconfig.$iface"
+    if [ ! -f "$FILE" ]; then
+        log_success_msg "Creating $FILE"
+        cat &gt; "$FILE" &lt;&lt;EOF
+ONBOOT="yes"
+IFACE="$iface"
+SERVICE="dhcpcd"
+DHCP_START="-b -q -h $HOSTNAME"
+DHCP_STOP="-k"
+EOF
+    fi
+done
 
 exit 0
-
-# End swap
+# End of gen-ifconfig
 </pre>
     </div>
     <div class="navfooter">
@@ -126,19 +98,19 @@ exit 0
         </li>
         <li class="next">
           <a accesskey="n" href="apds07.html" title=
-          "/etc/rc.d/init.d/setclock">Next</a>
+          "/etc/rc.d/init.d/sshd">Next</a>
           <p>
-            /etc/rc.d/init.d/setclock
+            /etc/rc.d/init.d/sshd
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

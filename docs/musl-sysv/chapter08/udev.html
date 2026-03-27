@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.81.&nbsp;Udev from Systemd-257.8
+      8.83.&nbsp;Udev from Systemd-259.5
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;8.&nbsp;Installing Basic System Software
@@ -39,13 +39,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-udev" name="ch-system-udev"></a>8.81. Udev from
-      Systemd-257.8
+      <a id="ch-system-udev" name="ch-system-udev"></a>8.83. Udev from
+      Systemd-259.5
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -68,11 +68,11 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          8.81.1. Installation of Udev
+          8.83.1. Installation of Udev
         </h2>
         <p>
-          Udev is part of the systemd-257.8 package. Use the
-          systemd-257.8.tar.xz file as the source tarball.
+          Udev is part of the systemd-259.5 package. Use the
+          systemd-259.5.tar.xz file as the source tarball.
         </p>
         <p>
           Remove two unneeded groups, <code class="systemitem">render</code>
@@ -96,6 +96,20 @@
         "command">sed -e '/NETWORK_DIRS/s/systemd/udev/' \
     -i src/libsystemd/sd-network/network-util.h</kbd></pre>
         <p>
+          For some reason systemd under musl wants <code class=
+          "filename">/etc/os-release</code>, so create one now:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/os-release &lt;&lt; "EOF"
+NAME="Zirconium Linux From Scratch"
+VERSION="2.0-musl"
+ID=lfs
+PRETTY_NAME="Linux From Scratch 2.0-musl"
+VERSION_CODENAME="Zirconium"
+HOME_URL="https://zedmatrix.github.io/lfs-musl.github.io/"
+RELEASE_TYPE="development"
+EOF</kbd></pre>
+        <p>
           Prepare Udev for compilation:
         </p>
         <pre class="userinput"><kbd class="command">mkdir -p build
@@ -104,11 +118,36 @@ cd       build
 meson setup ..                  \
       --prefix=/usr             \
       --buildtype=release       \
+      -D libc=musl              \
       -D mode=release           \
       -D dev-kvm-mode=0660      \
       -D link-udev-shared=false \
       -D logind=false           \
-      -D vconsole=false</kbd></pre>
+      -D vconsole=false         \
+      -D gshadow=false          \
+      -D idn=false              \
+      -D bpf-compiler=gcc       \
+      -D bpf-framework=disabled \
+      -D localed=false          \
+      -D machined=false         \
+      -D networkd=false         \
+      -D nss-myhostname=false   \
+      -D nss-mymachines=disabled \
+      -D nss-resolve=disabled   \
+      -D nss-systemd=false      \
+      -D libcryptsetup=disabled \
+      -D resolve=false          \
+      -D rfkill=false           \
+      -D hostnamed=false        \
+      -D timedated=false        \
+      -D timesyncd=false</kbd></pre>
+        <p>
+          If you wish to boot using systemd-boot add the following options:
+        </p>
+        <pre class="userinput"><kbd class="command">      -D efi=true
+      -D bootloader=enabled \
+      -D sbat-distro="lfs"  \
+      -D sbat-distro-url="https://www.linuxfromscratch.org/"</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the meson options:</strong>
@@ -189,6 +228,12 @@ meson setup ..                  \
       $(realpath libudev.so --relative-to .)                         \
       $udev_helpers</kbd></pre>
         <p>
+          If you prepared the optional components for systemd-boot now
+          prepare those files:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja bootctl src/boot/{systemd-bootx64.efi,linuxx64.efi.stub,addonx64.efi.stub}</kbd></pre>
+        <p>
           Install the package:
         </p>
         <pre class="userinput"><kbd class=
@@ -209,6 +254,14 @@ install -vm644 hwdb.d/*  ../hwdb.d/{*.hwdb,README} /usr/lib/udev/hwdb.d/
 install -vm755 $udev_helpers                       /usr/lib/udev
 install -vm644 ../network/99-default.link          /usr/lib/udev/network</kbd></pre>
         <p>
+          If you built the optional components for systemd-boot now install
+          those files:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir -vp /usr/lib/systemd/boot/efi
+find src/boot/ -name 'systemd*.efi' -o -name '*x64.efi.stub' -exec install -vDm 644 {} -t "/usr/lib/systemd/boot/efi" \;
+install -vm755 src/shared/libsystemd-shared-259.so /usr/lib</kbd></pre>
+        <p>
           Install some custom rules and support files useful in an LFS
           environment:
         </p>
@@ -219,7 +272,7 @@ make -f udev-lfs-20230818/Makefile.lfs install</kbd></pre>
           Install the man pages:
         </p>
         <pre class="userinput"><kbd class=
-        "command">tar -xf ../../systemd-man-pages-257.8.tar.xz                            \
+        "command">tar -xf ../../systemd-man-pages-259.5.tar.xz                            \
     --no-same-owner --strip-components=1                              \
     -C /usr/share/man --wildcards '*/udev*' '*/libudev*'              \
                                   '*/systemd.link.5'                  \
@@ -246,7 +299,7 @@ rm /usr/share/man/man*/systemd*</kbd></pre>
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-udev" name="conf-udev"></a>8.81.2. Configuring Udev
+          <a id="conf-udev" name="conf-udev"></a>8.83.2. Configuring Udev
         </h2>
         <p>
           Information about hardware devices is maintained in the
@@ -265,7 +318,7 @@ rm /usr/share/man/man*/systemd*</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-udev" name="contents-udev"></a>8.81.3. Contents of
+          <a id="contents-udev" name="contents-udev"></a>8.83.3. Contents of
           Udev
         </h2>
         <div class="segmentedlist">
@@ -394,7 +447,7 @@ rm /usr/share/man/man*/systemd*</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

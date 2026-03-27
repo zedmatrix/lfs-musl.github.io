@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      D.7.&nbsp;/etc/rc.d/init.d/setclock
+      D.7.&nbsp;/etc/rc.d/init.d/sshd
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,133 +12,138 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
-        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827
+        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds06.html" title=
-          "/etc/rc.d/init.d/swap">Prev</a>
+          "/etc/rc.d/init.d/gen-ifconfig">Prev</a>
           <p>
-            /etc/rc.d/init.d/swap
+            /etc/rc.d/init.d/gen-ifconfig
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds08.html" title=
-          "/etc/rc.d/init.d/checkfs">Next</a>
+          "/etc/rc.d/init.d/swap">Next</a>
           <p>
-            /etc/rc.d/init.d/checkfs
+            /etc/rc.d/init.d/swap
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="setclock" name="setclock"></a>D.7. /etc/rc.d/init.d/setclock
+      <a id="sshd" name="sshd"></a>D.7. /etc/rc.d/init.d/sshd
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <pre class="screen">#!/bin/sh
 ########################################################################
-# Begin setclock
+# Begin sshd
 #
-# Description : Setting Linux Clock
-#
-# Authors     : Gerard Beekmans - gerard@linuxfromscratch.org
-#               DJ Lucas - dj@linuxfromscratch.org
-# Update      : Bruce Dubbs - bdubbs@linuxfromscratch.org
-#
-# Version     : LFS 7.0
-#
+# Description : Start sshd daemon
 ########################################################################
 
 ### BEGIN INIT INFO
-# Provides:
-# Required-Start:
-# Should-Start:        modules
-# Required-Stop:
-# Should-Stop:         $syslog
-# Default-Start:       S
-# Default-Stop:
-# Short-Description:   Stores and restores time from the hardware clock
-# Description:         On boot, system time is obtained from hwclock.  The
-#                      hardware clock can also be set on shutdown.
-# X-LFS-Provided-By:   LFS
+# Provides:            sshd
+# Required-Start:      $network
+# Should-Start:
+# Required-Stop:       $network
+# Should-Stop:
+# Default-Start:       2 3 4 5
+# Default-Stop:        0 1 6
+# Short-Description:   Starts sshd daemon.
+# Description:         Starts sshd daemon.
+# X-LFS-Provided-By:   musl-LFS
 ### END INIT INFO
 
 . /lib/lsb/init-functions
 
-[ -r /etc/sysconfig/clock ] &amp;&amp; . /etc/sysconfig/clock
+case "$1" in
+    start)
+        log_info_msg "Starting SSH Server..."
+        start_daemon -f /usr/sbin/sshd
+        evaluate_retval
+        # Also prevent ssh from being killed by out of memory conditions
+        sleep 1
+        pid=`cat /run/sshd.pid 2&gt;/dev/null`
+        # echo "-16" &gt;/proc/${pid}/oom_score_adj
+        ;;
 
+    stop)
+        log_info_msg "Stopping SSH Server..."
+        killproc -p "/run/sshd.pid" /usr/sbin/sshd
+        evaluate_retval
+        ;;
 
-case "${UTC}" in
-   yes|true|1)
-      CLOCKPARAMS="${CLOCKPARAMS} --utc"
-      ;;
+    reload)
+        log_info_msg "Reloading SSH Server..."
+        pid=`cat /run/sshd.pid 2&gt;/dev/null`
 
-   no|false|0)
-      CLOCKPARAMS="${CLOCKPARAMS} --localtime"
-      ;;
+        if [ -n "${pid}" ]; then
+           kill -HUP "${pid}"
+        else
+           (exit 1)
+        fi
 
+        evaluate_retval
+        ;;
+
+    restart)
+        $0 stop
+        sleep 1
+        $0 start
+        ;;
+
+    status)
+        statusproc /usr/sbin/sshd
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|reload|restart|status}"
+        exit 1
+        ;;
 esac
-
-case ${1} in
-   start)
-      hwclock --hctosys ${CLOCKPARAMS} &gt;/dev/null
-      ;;
-
-   stop)
-      log_info_msg "Setting hardware clock..."
-      hwclock --systohc ${CLOCKPARAMS} &gt;/dev/null
-      evaluate_retval
-      ;;
-
-   *)
-      echo "Usage: ${0} {start|stop}"
-      exit 1
-      ;;
-
-esac
-
-exit 0
+# End sshd bootscript
 </pre>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds06.html" title=
-          "/etc/rc.d/init.d/swap">Prev</a>
+          "/etc/rc.d/init.d/gen-ifconfig">Prev</a>
           <p>
-            /etc/rc.d/init.d/swap
+            /etc/rc.d/init.d/gen-ifconfig
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds08.html" title=
-          "/etc/rc.d/init.d/checkfs">Next</a>
+          "/etc/rc.d/init.d/swap">Next</a>
           <p>
-            /etc/rc.d/init.d/checkfs
+            /etc/rc.d/init.d/swap
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

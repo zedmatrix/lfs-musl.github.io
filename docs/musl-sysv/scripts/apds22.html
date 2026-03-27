@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      D.22.&nbsp;/etc/sysconfig/createfiles
+      D.22.&nbsp;/etc/rc.d/init.d/template
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,103 +12,139 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
-        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827
+        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds21.html" title=
-          "/etc/sysconfig/modules">Prev</a>
+          "/etc/rc.d/init.d/halt">Prev</a>
           <p>
-            /etc/sysconfig/modules
+            /etc/rc.d/init.d/halt
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds23.html" title=
-          "/etc/sysconfig/udev-retry">Next</a>
+          "/etc/sysconfig/modules">Next</a>
           <p>
-            /etc/sysconfig/udev-retry
+            /etc/sysconfig/modules
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="createfiles" name="createfiles"></a>D.22.
-      /etc/sysconfig/createfiles
+      <a id="template" name="template"></a>D.22. /etc/rc.d/init.d/template
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
-      <pre class=
-      "screen">########################################################################
-# Begin /etc/sysconfig/createfiles
+      <pre class="screen">#!/bin/sh
+########################################################################
+# Begin scriptname
 #
-# Description : Createfiles script config file
+# Description :
 #
 # Authors     :
 #
-# Version     : 00.00
+# Version     : LFS x.x
 #
-# Notes       : The syntax of this file is as follows:
-#               if type is equal to "file" or "dir"
-#                &lt;filename&gt; &lt;type&gt; &lt;permissions&gt; &lt;user&gt; &lt;group&gt;
-#               if type is equal to "dev"
-#                &lt;filename&gt; &lt;type&gt; &lt;permissions&gt; &lt;user&gt; &lt;group&gt; &lt;devtype&gt;
-#             &lt;major&gt; &lt;minor&gt;
+# Notes       :
 #
-#               &lt;filename&gt; is the name of the file which is to be created
-#               &lt;type&gt; is either file, dir, or dev.
-#                       file creates a new file
-#                       dir creates a new directory
-#                       dev creates a new device
-#               &lt;devtype&gt; is either block, char or pipe
-#                       block creates a block device
-#                       char creates a character device
-#                       pipe creates a pipe, this will ignore the &lt;major&gt; and
-#           &lt;minor&gt; fields
-#               &lt;major&gt; and &lt;minor&gt; are the major and minor numbers used for
-#     the device.
 ########################################################################
 
-# End /etc/sysconfig/createfiles
+### BEGIN INIT INFO
+# Provides:            template
+# Required-Start:
+# Should-Start:
+# Required-Stop:
+# Should-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description:
+# Description:
+# X-LFS-Provided-By:
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+case "${1}" in
+   start)
+      log_info_msg "Starting..."
+    # if it is possible to use start_daemon
+      start_daemon fully_qualified_path
+    # if it is not possible to use start_daemon
+    # (command to start the daemon is not simple enough)
+      if ! pidofproc daemon_name_as_reported_by_ps &gt;/dev/null; then
+         command_to_start_the_service
+      fi
+      evaluate_retval
+      ;;
+
+   stop)
+      log_info_msg "Stopping..."
+    # if it is possible to use killproc
+      killproc fully_qualified_path
+    # if it is not possible to use killproc
+    # (the daemon shouldn't be stopped by killing it)
+      if pidofproc daemon_name_as_reported_by_ps &gt;/dev/null; then
+         command_to_stop_the_service
+      fi
+      evaluate_retval
+      ;;
+
+   restart)
+      ${0} stop
+      sleep 1
+      ${0} start
+      ;;
+
+   *)
+      echo "Usage: ${0} {start|stop|restart}"
+      exit 1
+      ;;
+esac
+
+exit 0
+
+# End scriptname
 </pre>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds21.html" title=
-          "/etc/sysconfig/modules">Prev</a>
+          "/etc/rc.d/init.d/halt">Prev</a>
           <p>
-            /etc/sysconfig/modules
+            /etc/rc.d/init.d/halt
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds23.html" title=
-          "/etc/sysconfig/udev-retry">Next</a>
+          "/etc/sysconfig/modules">Next</a>
           <p>
-            /etc/sysconfig/udev-retry
+            /etc/sysconfig/modules
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

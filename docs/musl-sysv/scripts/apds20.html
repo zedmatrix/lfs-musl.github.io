@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      D.20.&nbsp;/etc/rc.d/init.d/template
+      D.20.&nbsp;/etc/rc.d/init.d/reboot
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,139 +12,118 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
-        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827
+        Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401
       </h3>
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds19.html" title=
-          "/etc/rc.d/init.d/halt">Prev</a>
+          "/etc/rc.d/init.d/sendsignals">Prev</a>
           <p>
-            /etc/rc.d/init.d/halt
+            /etc/rc.d/init.d/sendsignals
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds21.html" title=
-          "/etc/sysconfig/modules">Next</a>
+          "/etc/rc.d/init.d/halt">Next</a>
           <p>
-            /etc/sysconfig/modules
+            /etc/rc.d/init.d/halt
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="template" name="template"></a>D.20. /etc/rc.d/init.d/template
+      <a id="rebootscript" name="rebootscript"></a>D.20.
+      /etc/rc.d/init.d/reboot
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <pre class="screen">#!/bin/sh
 ########################################################################
-# Begin scriptname
+# Begin reboot
 #
-# Description :
+# Description : Reboot Scripts
 #
-# Authors     :
+# Authors     : Gerard Beekmans - gerard@linuxfromscratch.org
+#               DJ Lucas - dj@linuxfromscratch.org
+# Updates     : Bruce Dubbs - bdubbs@linuxfromscratch.org
+#             : Pierre Labastie - pierre@linuxfromscratch.org
 #
-# Version     : LFS x.x
+# Version     : LFS 7.0
 #
-# Notes       :
+# Notes       : Update March 24th, 2022: change "stop" to "start".
+#               Add the $last facility to Required-start
 #
 ########################################################################
 
 ### BEGIN INIT INFO
-# Provides:            template
-# Required-Start:
+# Provides:            reboot
+# Required-Start:      $last
 # Should-Start:
 # Required-Stop:
 # Should-Stop:
-# Default-Start:
+# Default-Start:       6
 # Default-Stop:
-# Short-Description:
-# Description:
-# X-LFS-Provided-By:
+# Short-Description:   Reboots the system.
+# Description:         Reboots the System.
+# X-LFS-Provided-By:   LFS
 ### END INIT INFO
 
 . /lib/lsb/init-functions
 
 case "${1}" in
    start)
-      log_info_msg "Starting..."
-    # if it is possible to use start_daemon
-      start_daemon fully_qualified_path
-    # if it is not possible to use start_daemon
-    # (command to start the daemon is not simple enough)
-      if ! pidofproc daemon_name_as_reported_by_ps &gt;/dev/null; then
-         command_to_start_the_service
-      fi
-      evaluate_retval
-      ;;
-
-   stop)
-      log_info_msg "Stopping..."
-    # if it is possible to use killproc
-      killproc fully_qualified_path
-    # if it is not possible to use killproc
-    # (the daemon shouldn't be stopped by killing it)
-      if pidofproc daemon_name_as_reported_by_ps &gt;/dev/null; then
-         command_to_stop_the_service
-      fi
-      evaluate_retval
-      ;;
-
-   restart)
-      ${0} stop
-      sleep 1
-      ${0} start
+      log_info_msg "Restarting system..."
+      reboot -d -f -i
       ;;
 
    *)
-      echo "Usage: ${0} {start|stop|restart}"
+      echo "Usage: ${0} {start}"
       exit 1
       ;;
+
 esac
 
-exit 0
-
-# End scriptname
+# End reboot
 </pre>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
           <a accesskey="p" href="apds19.html" title=
-          "/etc/rc.d/init.d/halt">Prev</a>
+          "/etc/rc.d/init.d/sendsignals">Prev</a>
           <p>
-            /etc/rc.d/init.d/halt
+            /etc/rc.d/init.d/sendsignals
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="apds21.html" title=
-          "/etc/sysconfig/modules">Next</a>
+          "/etc/rc.d/init.d/halt">Next</a>
           <p>
-            /etc/sysconfig/modules
+            /etc/rc.d/init.d/halt
           </p>
         </li>
         <li class="up">
           <a accesskey="u" href="scripts.html" title=
-          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20250827">
+          "Appendix&nbsp;D.&nbsp;Boot and sysconfig scripts version-20260401">
           Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

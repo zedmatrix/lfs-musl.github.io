@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      7.13.&nbsp;Cleaning up and Saving the Temporary System
+      7.16.&nbsp;Cleaning up and Saving the Temporary System
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional
@@ -23,10 +23,9 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="util-linux.html" title=
-          "Util-linux-2.41.1">Prev</a>
+          <a accesskey="p" href="ninja.html" title="Ninja-1.13.2">Prev</a>
           <p>
-            Util-linux-2.41.1
+            Ninja-1.13.2
           </p>
         </li>
         <li class="next">
@@ -43,18 +42,18 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-cleanup" name="ch-tools-cleanup"></a>7.13. Cleaning up
+      <a id="ch-tools-cleanup" name="ch-tools-cleanup"></a>7.16. Cleaning up
       and Saving the Temporary System
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.13.1. Cleaning
+          7.16.1. Cleaning
         </h2>
         <p>
           First, remove the currently installed documentation files to
@@ -80,7 +79,7 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.13.2. Backup
+          7.16.2. Backup
         </h2>
         <p>
           At this point the essential programs and libraries have been
@@ -180,7 +179,7 @@ umount $LFS/{sys,proc,run,dev}</kbd></pre>
           </p>
         </div>
         <pre class="userinput"><kbd class="command">cd $LFS
-tar -cJpf $HOME/lfs-temp-tools-1.0-musl.tar.xz .</kbd></pre>
+tar -cJpf $HOME/lfs-temp-tools-2.0-musl.tar.xz .</kbd></pre>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
@@ -195,7 +194,7 @@ tar -cJpf $HOME/lfs-temp-tools-1.0-musl.tar.xz .</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          7.13.3. Restore
+          7.16.3. Restore
         </h2>
         <p>
           In case some mistakes have been made and you need to start over,
@@ -223,7 +222,7 @@ tar -cJpf $HOME/lfs-temp-tools-1.0-musl.tar.xz .</kbd></pre>
         </div>
         <pre class="screen"><code class="literal">cd $LFS
 rm -rf ./*
-tar -xpf $HOME/lfs-temp-tools-1.0-musl.tar.xz</code></pre>
+tar -xpf $HOME/lfs-temp-tools-2.0-musl.tar.xz</code></pre>
         <p>
           Again, double check that the environment has been set up properly
           and continue building the rest of the system.
@@ -251,10 +250,9 @@ tar -xpf $HOME/lfs-temp-tools-1.0-musl.tar.xz</code></pre>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="util-linux.html" title=
-          "Util-linux-2.41.1">Prev</a>
+          <a accesskey="p" href="ninja.html" title="Ninja-1.13.2">Prev</a>
           <p>
-            Util-linux-2.41.1
+            Ninja-1.13.2
           </p>
         </li>
         <li class="next">
@@ -271,7 +269,7 @@ tar -xpf $HOME/lfs-temp-tools-1.0-musl.tar.xz</code></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

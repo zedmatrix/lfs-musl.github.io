@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.6.&nbsp;tzcode-2025b and tzdata-2025b
+      8.6.&nbsp;Time Zone-musl-2026a
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;8.&nbsp;Installing Basic System Software
@@ -39,13 +39,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-timezone" name="ch-system-timezone"></a>8.6.
-      tzcode-2025b and tzdata-2025b
+      <a id="ch-system-timezone" name="ch-system-timezone"></a>8.6. Time
+      Zone-musl-2026a
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -60,23 +60,11 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">Less than 1 SBU</span>
+              <span class="segbody">0.4 SBU</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">Less than 1 MB</span>
-            </div>
-          </div>
-        </div>
-        <div class="segmentedlist">
-          <div class="seglistitem">
-            <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">Less than 1 SBU</span>
-            </div>
-            <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">Less than 1 MB</span>
+              <span class="segbody">160 MB</span>
             </div>
           </div>
         </div>
@@ -91,21 +79,14 @@
             Note
           </h3>
           <p>
-            Both of these packages are to be built and configured together as
-            they do not extract to a dedicated path name, so you need to
-            create a directory first before extracting.
+            The archive is created by the editor to include both the
+            <code class="filename">tzcode 2026a</code> and <code class=
+            "filename">tzdata 2026a</code> into a single package.
           </p>
         </div>
         <p>
           Prepare Timezone Diectory:
         </p>
-        <pre class="userinput"><kbd class=
-        "command">mkdir -v timezone &amp;&amp;
-cd timezone
-
-tar -xf ../tzcode2025b.tar.gz
-tar -xf ../tzdata2025b.tar.gz
-        </kbd></pre>
         <p>
           Compile the package:
         </p>
@@ -241,7 +222,7 @@ unset ZONEINFO tz</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

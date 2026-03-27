@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      9.6.&nbsp;System V Bootscript Usage and Configuration
+      9.7.&nbsp;System V Bootscript Usage and Configuration
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;9.&nbsp;System Configuration
@@ -41,18 +41,18 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-config-usage" name="ch-config-usage"></a>9.6. System V
+      <a id="ch-config-usage" name="ch-config-usage"></a>9.7. System V
       Bootscript Usage and Configuration
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.6.1. How Do the System V Bootscripts Work?
+          9.7.1. How Do the System V Bootscripts Work?
         </h2>
         <p>
           This version of LFS uses a special booting facility named SysVinit,
@@ -115,7 +115,7 @@
       </div>
       <div class="configuration" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="conf-sysvinit" name="conf-sysvinit"></a>9.6.2. Configuring
+          <a id="conf-sysvinit" name="conf-sysvinit"></a>9.7.2. Configuring
           SysVinit
         </h2>
         <p>
@@ -198,7 +198,7 @@ EOF</kbd></pre>
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            <a id="init-levels" name="init-levels"></a>9.6.2.1. Changing Run
+            <a id="init-levels" name="init-levels"></a>9.7.2.1. Changing Run
             Levels
           </h3>
           <p>
@@ -309,7 +309,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.6.3. Udev Bootscripts
+          9.7.3. Udev Bootscripts
         </h2>
         <p>
           The <code class="filename">/etc/rc.d/init.d/udev</code> initscript
@@ -343,13 +343,13 @@ EOF</kbd></pre>
         <p>
           For information on kernel module loading and udev, see <a class=
           "xref" href="udev.html#module-loading" title=
-          "9.3.2.3.&nbsp;Module Loading">Section&nbsp;9.3.2.3, “Module
+          "9.4.2.3.&nbsp;Module Loading">Section&nbsp;9.4.2.3, “Module
           Loading.”</a>
         </p>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-clock" name="ch-config-clock"></a>9.6.4.
+          <a id="ch-config-clock" name="ch-config-clock"></a>9.7.4.
           Configuring the System Clock
         </h2>
         <p>
@@ -427,7 +427,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-console" name="ch-config-console"></a>9.6.5.
+          <a id="ch-config-console" name="ch-config-console"></a>9.7.5.
           Configuring the Linux Console
         </h2>
         <p>
@@ -570,7 +570,7 @@ EOF</kbd></pre>
                 We'll use <code class="literal">C.UTF-8</code> as the locale
                 for interactive sessions in the Linux console in <a class=
                 "xref" href="locale.html" title=
-                "9.7.&nbsp;Configuring the System Locale">Section&nbsp;9.7,
+                "9.8.&nbsp;Configuring the System Locale">Section&nbsp;9.8,
                 “Configuring the System Locale,”</a> so we should set
                 <code class="literal">UNICODE</code> to <code class=
                 "literal">1</code>. And the console fonts shipped by the
@@ -693,7 +693,7 @@ EOF</kbd></pre>
                 character by themselves, but put an accent on the character
                 produced by the next key) or define composition rules (such
                 as: <span class="quote">“<span class="quote">press Ctrl+. A E
-                to get Æ</span>”</span> in the default keymap). Linux-6.12.52
+                to get Æ</span>”</span> in the default keymap). Linux-6.6.129
                 interprets dead keys and composition rules in the keymap
                 correctly only when the source characters to be composed
                 together are not multibyte. This deficiency doesn't affect
@@ -737,7 +737,7 @@ EOF</kbd></pre>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
           <a id="ch-config-createfiles" name=
-          "ch-config-createfiles"></a>9.6.6. Creating Files at Boot
+          "ch-config-createfiles"></a>9.7.6. Creating Files at Boot
         </h2>
         <p>
           At times, it is desirable to create files at boot time. For
@@ -750,7 +750,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-sysklogd" name="ch-config-sysklogd"></a>9.6.7.
+          <a id="ch-config-sysklogd" name="ch-config-sysklogd"></a>9.7.7.
           Configuring the Sysklogd Script
         </h2>
         <p>
@@ -773,7 +773,7 @@ EOF</kbd></pre>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="ch-config-site" name="ch-config-site"></a>9.6.8. The rc.site
+          <a id="ch-config-site" name="ch-config-site"></a>9.7.8. The rc.site
           File
         </h2>
         <p>
@@ -889,7 +889,7 @@ EOF</kbd></pre>
 </pre>
         <div class="sect3">
           <h3 class="sect3">
-            9.6.8.1. Customizing the Boot and Shutdown Scripts
+            9.7.8.1. Customizing the Boot and Shutdown Scripts
           </h3>
           <p>
             The LFS boot scripts boot and shut down a system in a fairly
@@ -1013,7 +1013,7 @@ EOF</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

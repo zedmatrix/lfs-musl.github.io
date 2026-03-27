@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      10.3.&nbsp;Linux-6.12.52
+      10.3.&nbsp;Linux-6.6.129
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;10.&nbsp;Making the LFS System Bootable
@@ -41,13 +41,13 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
       <a id="ch-bootable-kernel" name="ch-bootable-kernel"></a>10.3.
-      Linux-6.12.52
+      Linux-6.6.129
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -508,7 +508,7 @@
           If desired, skip kernel configuration by copying the kernel config
           file, <code class="filename">.config</code>, from the host system
           (assuming it is available) to the unpacked <code class=
-          "filename">linux-6.12.52</code> directory. However, we do not
+          "filename">linux-6.6.129</code> directory. However, we do not
           recommend this option. It is often better to explore all the
           configuration menus and create the kernel configuration from
           scratch.
@@ -522,10 +522,10 @@
           "filename">/etc/modprobe.d</code> may be required. Information
           pertaining to modules and kernel configuration is located in
           <a class="xref" href="../chapter09/udev.html" title=
-          "9.3.&nbsp;Overview of Device and Module Handling">Section&nbsp;9.3,
+          "9.4.&nbsp;Overview of Device and Module Handling">Section&nbsp;9.4,
           “Overview of Device and Module Handling”</a> and in the kernel
           documentation in the <code class=
-          "filename">linux-6.12.52/Documentation</code> directory. Also,
+          "filename">linux-6.6.129/Documentation</code> directory. Also,
           <a class="ulink" href=
           "https://man.archlinux.org/man/modprobe.d.5">modprobe.d(5)</a> may
           be of interest.
@@ -574,7 +574,7 @@
           The following command assumes an x86 architecture:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.12.52-lfs-1.0-musl</kbd></pre>
+        "command">cp -iv arch/x86/boot/bzImage /boot/vmlinuz-6.6.129-lfs-2.0-musl</kbd></pre>
         <p>
           <code class="filename">System.map</code> is a symbol file for the
           kernel. It maps the function entry points of every function in the
@@ -584,7 +584,7 @@
           file:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cp -iv System.map /boot/System.map-6.12.52</kbd></pre>
+        "command">cp -iv System.map /boot/System.map-6.6.129</kbd></pre>
         <p>
           The kernel configuration file <code class="filename">.config</code>
           produced by the <span class="command"><strong>make
@@ -593,12 +593,12 @@
           is a good idea to keep this file for future reference:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cp -iv .config /boot/config-6.12.52</kbd></pre>
+        "command">cp -iv .config /boot/config-6.6.129</kbd></pre>
         <p>
           Install the documentation for the Linux kernel:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cp -r Documentation -T /usr/share/doc/linux-6.12.52</kbd></pre>
+        "command">cp -r Documentation -T /usr/share/doc/linux-6.6.129</kbd></pre>
         <p>
           It is important to note that the files in the kernel source
           directory are not owned by <span class=
@@ -627,7 +627,7 @@
           <p>
             If the kernel source tree is going to be retained, run
             <span class="command"><strong>chown -R 0:0</strong></span> on the
-            <code class="filename">linux-6.12.52</code> directory to ensure
+            <code class="filename">linux-6.6.129</code> directory to ensure
             all files are owned by user <span class=
             "emphasis"><em>root</em></span>.
           </p>
@@ -711,13 +711,13 @@ EOF</kbd></pre>
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed files:</strong> <span class=
-              "segbody">config-6.12.52, vmlinuz-6.12.52-lfs-1.0-musl, and
-              System.map-6.12.52</span>
+              "segbody">config-6.6.129, vmlinuz-6.6.129-lfs-2.0-musl, and
+              System.map-6.6.129</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed directories:</strong>
               <span class="segbody">/lib/modules,
-              /usr/share/doc/linux-6.12.52</span>
+              /usr/share/doc/linux-6.6.129</span>
             </div>
           </div>
         </div>
@@ -736,7 +736,7 @@ EOF</kbd></pre>
                   <p>
                     <a id="config" name="config"></a><span class=
                     "term"><code class=
-                    "filename">config-6.12.52</code></span>
+                    "filename">config-6.6.129</code></span>
                   </p>
                 </td>
                 <td>
@@ -750,7 +750,7 @@ EOF</kbd></pre>
                   <p>
                     <a id="lfskernel" name="lfskernel"></a><span class=
                     "term"><code class=
-                    "filename">vmlinuz-6.12.52-lfs-1.0-musl</code></span>
+                    "filename">vmlinuz-6.6.129-lfs-2.0-musl</code></span>
                   </p>
                 </td>
                 <td>
@@ -771,7 +771,7 @@ EOF</kbd></pre>
                   <p>
                     <a id="System.map" name="System.map"></a><span class=
                     "term"><code class=
-                    "filename">System.map-6.12.52</code></span>
+                    "filename">System.map-6.6.129</code></span>
                   </p>
                 </td>
                 <td>
@@ -809,7 +809,7 @@ EOF</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>

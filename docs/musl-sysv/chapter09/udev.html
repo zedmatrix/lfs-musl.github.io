@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      9.3.&nbsp;Overview of Device and Module Handling
+      9.4.&nbsp;Overview of Device and Module Handling
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,20 +12,20 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-1.0-musl">
+  <body class="lfs" id="lfs-2.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 1.0-musl
+        Musl Linux From Scratch - Version 2.0-musl
       </h4>
       <h3>
         Chapter&nbsp;9.&nbsp;System Configuration
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bootscripts.html" title=
-          "LFS-Bootscripts-20250827">Prev</a>
+          <a accesskey="p" href="zlfs-scripts.html" title=
+          "zlfs-scripts-03112026">Prev</a>
           <p>
-            LFS-Bootscripts-20250827
+            zlfs-scripts-03112026
           </p>
         </li>
         <li class="next">
@@ -41,12 +41,12 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-config-udev" name="ch-config-udev"></a>9.3. Overview of
+      <a id="ch-config-udev" name="ch-config-udev"></a>9.4. Overview of
       Device and Module Handling
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
@@ -79,7 +79,7 @@
       </p>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.3.1. History
+          9.4.1. History
         </h2>
         <p>
           In February 2000, a new filesystem called <code class=
@@ -116,11 +116,11 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.3.2. Udev Implementation
+          9.4.2. Udev Implementation
         </h2>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.2.1. Sysfs
+            9.4.2.1. Sysfs
           </h3>
           <p>
             The <code class="systemitem">sysfs</code> filesystem was
@@ -141,7 +141,7 @@
         <div class="sect3">
           <h3 class="sect3">
             <a id="ch-config-udev-device-node-creation" name=
-            "ch-config-udev-device-node-creation"></a>9.3.2.2. Device Node
+            "ch-config-udev-device-node-creation"></a>9.4.2.2. Device Node
             Creation
           </h3>
           <p>
@@ -178,7 +178,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            <a id="module-loading" name="module-loading"></a>9.3.2.3. Module
+            <a id="module-loading" name="module-loading"></a>9.4.2.3. Module
             Loading
           </h3>
           <p>
@@ -220,7 +220,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.2.4. Handling Hotpluggable/Dynamic Devices
+            9.4.2.4. Handling Hotpluggable/Dynamic Devices
           </h3>
           <p>
             When you plug in a device, such as a Universal Serial Bus (USB)
@@ -233,7 +233,7 @@
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.3.3. Problems with Loading Modules and Creating Devices
+          9.4.3. Problems with Loading Modules and Creating Devices
         </h2>
         <p>
           There are a few possible problems when it comes to automatically
@@ -241,13 +241,13 @@
         </p>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.1. A Kernel Module Is Not Loaded Automatically
+            9.4.3.1. A Kernel Module Is Not Loaded Automatically
           </h3>
           <p>
             Udev will only load a module if it has a bus-specific alias and
             the bus driver properly exports the necessary aliases to
             <code class="systemitem">sysfs</code>. In other cases, one should
-            arrange module loading by other means. With Linux-6.12.52, udev
+            arrange module loading by other means. With Linux-6.6.129, udev
             is known to load properly-written drivers for INPUT, IDE, PCI,
             USB, SCSI, SERIO, and FireWire devices.
           </p>
@@ -270,7 +270,7 @@
             If there is no <code class="filename">modalias</code> file in the
             relevant directory under <code class="filename">/sys/bus</code>,
             this means that the kernel developers have not yet added modalias
-            support to this bus type. With Linux-6.12.52, this is the case
+            support to this bus type. With Linux-6.6.129, this is the case
             with ISA busses. Expect this issue to be fixed in later kernel
             versions.
           </p>
@@ -283,7 +283,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.2. A Kernel Module Is Not Loaded Automatically, and Udev Is
+            9.4.3.2. A Kernel Module Is Not Loaded Automatically, and Udev Is
             Not Intended to Load It
           </h3>
           <p>
@@ -327,7 +327,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.3. Udev Loads Some Unwanted Module
+            9.4.3.3. Udev Loads Some Unwanted Module
           </h3>
           <p>
             Either don't build the module, or blacklist it in a <code class=
@@ -345,7 +345,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.4. Udev Creates a Device Incorrectly, or Makes the Wrong
+            9.4.3.4. Udev Creates a Device Incorrectly, or Makes the Wrong
             Symlink
           </h3>
           <p>
@@ -359,7 +359,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.5. Udev Rule Works Unreliably
+            9.4.3.5. Udev Rule Works Unreliably
           </h3>
           <p>
             This may be another manifestation of the previous problem. If
@@ -375,7 +375,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.6. Udev Does Not Create a Device
+            9.4.3.6. Udev Does Not Create a Device
           </h3>
           <p>
             First, be certain that the driver is built into the kernel or
@@ -399,7 +399,7 @@
         </div>
         <div class="sect3">
           <h3 class="sect3">
-            9.3.3.7. Device Naming Order Changes Randomly After Rebooting
+            9.4.3.7. Device Naming Order Changes Randomly After Rebooting
           </h3>
           <p>
             This is due to the fact that udev, by design, handles uevents and
@@ -411,16 +411,16 @@
             of the device, such as a serial number or the output of various
             *_id utilities installed by udev. See <a class="xref" href=
             "symlinks.html" title=
-            "9.4.&nbsp;Managing Devices">Section&nbsp;9.4, “Managing
+            "9.5.&nbsp;Managing Devices">Section&nbsp;9.5, “Managing
             Devices”</a> and <a class="xref" href="network.html" title=
-            "9.5.&nbsp;General Network Configuration">Section&nbsp;9.5,
+            "9.6.&nbsp;General Network Configuration">Section&nbsp;9.6,
             “General Network Configuration”</a> for examples.
           </p>
         </div>
       </div>
       <div class="sect2" lang="en" xml:lang="en">
         <h2 class="sect2">
-          9.3.4. Useful Reading
+          9.4.4. Useful Reading
         </h2>
         <p>
           Additional helpful documentation is available at the following
@@ -451,10 +451,10 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="bootscripts.html" title=
-          "LFS-Bootscripts-20250827">Prev</a>
+          <a accesskey="p" href="zlfs-scripts.html" title=
+          "zlfs-scripts-03112026">Prev</a>
           <p>
-            LFS-Bootscripts-20250827
+            zlfs-scripts-03112026
           </p>
         </li>
         <li class="next">
@@ -470,7 +470,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
         </li>
       </ul>
     </div>
