@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>2.2. Gcc-pass1-15.2.0</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Chapter 2. Compiling a Cross-Toolchain</h3><ul><li class="prev"><a accesskey="p" href="binutils-pass1.html" title="Binutils-pass1-2.46.0">Prev</a><p>Binutils-pass1-2.46.0</p></li><li class="next"><a accesskey="n" href="linux-headers.html" title="Linux-headers-7.0">Next</a><p>Linux-headers-7.0</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="sect1"><a id="gcc-pass1" name="gcc-pass1"></a>2.2. Gcc-pass1-15.2.0</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>Download HTTP: <a class="ulink" href="https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz</a></p></li><li class="listitem"><p>Download SHA256 Sum: 438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e</p></li><li class="listitem"><p>Download Size: 98,688 KB</p></li><li class="listitem"><p>Estimated Disk Space: 3.3G</p></li><li class="listitem"><p>Estimated Build Time: 16.14 SBU</p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">2.2.1. Installation of Gcc-pass1</h2><p>Prepare Gcc-pass1 for compilation:</p><pre class="userinput"><kbd class="command">tar -xf ${YSRC}/gmp-6.3.0.tar.xz &amp;&amp;
+mv -v gmp-6.3.0 gmp &amp;&amp;
+
+tar -xf ${YSRC}/mpc-1.4.0.tar.xz &amp;&amp;
+mv -v mpc-1.4.0 mpc &amp;&amp;
+
+tar -xf ${YSRC}/mpfr-4.2.2.tar.xz &amp;&amp;
+mv -v mpfr-4.2.2 mpfr &amp;&amp;
+
+sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64</kbd></pre><p>To Compile the Package, issue:</p><pre class="userinput"><kbd class="command">mkdir -v build &amp;&amp;
+cd build &amp;&amp;
+../configure --target=$LFS_TGT \
+      --prefix=$LFS/tools \
+      --with-sysroot=$LFS \
+      --with-newlib \
+      --without-headers \
+      --enable-default-pie \
+      --enable-default-ssp \
+      --disable-nls \
+      --disable-shared \
+      --disable-multilib \
+      --disable-threads \
+      --disable-libatomic \
+      --disable-libgomp \
+      --disable-libquadmath \
+      --disable-libssp \
+      --disable-libvtv \
+      --disable-libstdcxx \
+      --enable-languages=c,c++</kbd></pre><pre class="userinput"><kbd class="command">make</kbd></pre><p>Now Install the Package, as the root user:</p><pre class="userinput"><kbd class="command">make install</kbd></pre><pre class="userinput"><kbd class="command">cat gcc/limitx.h gcc/glimits.h gcc/limity.h &gt; \
+  `dirname $($LFS_TGT-gcc -print-libgcc-file-name)`/include/limits.h
+</kbd></pre></div><div class="content" lang="en" xml:lang="en"><p>Details on this package are located in</p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="binutils-pass1.html" title="Binutils-pass1-2.46.0">Prev</a><p>Binutils-pass1-2.46.0</p></li><li class="next"><a accesskey="n" href="linux-headers.html" title="Linux-headers-7.0">Next</a><p>Linux-headers-7.0</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
