@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      3.16.&nbsp;Binutils-pass2-2.46.0
+      4.11.&nbsp;Less-692
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,26 +18,28 @@
         Musl Linux From Scratch - Version 1.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools
+        Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional
+        Temporary Tools
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libarchive-temp.html" title=
-          "Libarchive-temp-3.8.7">Prev</a>
+          <a accesskey="p" href="nano-temp.html" title=
+          "Nano-temp-9.0">Prev</a>
           <p>
-            Libarchive-temp-3.8.7
+            Nano-temp-9.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gcc-pass2.html" title=
-          "Gcc-pass2-15.2.0">Next</a>
+          <a accesskey="n" href="cleanup.html" title=
+          "Cleaning up and Saving the Temporary System">Next</a>
           <p>
-            Gcc-pass2-15.2.0
+            Cleaning up and Saving the Temporary System
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -46,14 +48,12 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="binutils-pass2" name="binutils-pass2"></a>3.16.
-      Binutils-pass2-2.46.0
+      <a id="less" name="less"></a>4.11. Less-692
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Binutils package contains a linker, an assembler, and other
-          tools for handling object files.
+          The Less package contains a text file viewer.
         </p>
         <h3>
           Package Information
@@ -63,29 +63,28 @@
             <li class="listitem">
               <p>
                 Download HTTP: <a class="ulink" href=
-                "https://sourceware.org/pub/binutils/releases/binutils-2.46.0.tar.xz">
-                https://sourceware.org/pub/binutils/releases/binutils-2.46.0.tar.xz</a>
+                "https://www.greenwoodsoftware.com/less/less-692.tar.gz">https://www.greenwoodsoftware.com/less/less-692.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                d75a94f4d73e7a4086f7513e67e439e8fcdcbb726ffe63f4661744e6256b2cf2
+                61300f603798ecf1d7786570789f0ff3f5a1acf075a6fb9f756837d166e37d14
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download Size: 27,880 KB
+                Download Size: 964 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated Disk Space: 422.1M
+                Estimated Disk Space: 15.1M
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated Build Time: 1.51 SBU
+                Estimated Build Time: less than 0.5 SBU
               </p>
             </li>
           </ul>
@@ -93,57 +92,41 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          3.16.1. Installation of Binutils-pass2
+          4.11.1. Installation of Less
         </h2>
         <p>
-          Prepare Binutils-pass2 for compilation:
+          Prepare Less for compilation:
         </p>
         <pre class="userinput"><kbd class=
-        "command">sed '6031s/$add_dir//' -i ltmain.sh
-mkdir -v build
-cd build</kbd></pre>
-        <pre class="userinput"><kbd class=
-        "command">../configure --prefix=/usr     \
-            --build=$(../config.guess) \
-            --host=$LFS_TGT     \
-            --disable-nls       \
-            --enable-shared     \
-            --enable-gprofng=no \
-            --disable-werror    \
-            --enable-64-bit-bfd \
-            --enable-new-dtags  \
-            --enable-default-hash-style=gnu</kbd></pre>
+        "command">./configure --prefix=/usr --sysconfdir=/etc</kbd></pre>
         <p>
           To Compile the Package, issue:
         </p>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">make CPPFLAGS="-DTPARM_VARARGS" LIBS="-lterminfo -lcurses"
+</kbd></pre>
         <p>
-          Now Install the Package, as the <code class="systemitem">lfs</code>
-          user:
+          Now Install the Package, as the root user:
         </p>
-        <pre class="userinput"><kbd class="command">make DESTDIR=$LFS install
-rm -v $LFS/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes,sframe}.{a,la}</kbd></pre>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          3.16.2. Contents of
+          4.11.2. Contents of
         </h2>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed programs:</strong>
-              <span class="segbody">size, objdump, ar, as, gprof, ld, ld.bfd,
-              strings, ranlib, objcopy, addr2line, readelf, elfedit, nm,
-              strip, and c++flit</span>
+              <span class="segbody">less, lesskey, and lessecho</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed libraries:</strong>
-              <span class="segbody">libsframe.so.3.0.0,
-              libbfd-2.46.0.20260210.so, libopcodes-2.46.0.20260210.so,
-              libctf.so.0.0.0, libctf-nobfd.so.0.0.0, libdep.so</span>
+              <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">None</span>
             </div>
           </div>
         </div>
@@ -152,22 +135,23 @@ rm -v $LFS/usr/lib/lib{bfd,ctf,ctf-nobfd,opcodes,sframe}.{a,la}</kbd></pre>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="libarchive-temp.html" title=
-          "Libarchive-temp-3.8.7">Prev</a>
+          <a accesskey="p" href="nano-temp.html" title=
+          "Nano-temp-9.0">Prev</a>
           <p>
-            Libarchive-temp-3.8.7
+            Nano-temp-9.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="gcc-pass2.html" title=
-          "Gcc-pass2-15.2.0">Next</a>
+          <a accesskey="n" href="cleanup.html" title=
+          "Cleaning up and Saving the Temporary System">Next</a>
           <p>
-            Gcc-pass2-15.2.0
+            Cleaning up and Saving the Temporary System
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="chapter06.html" title=
-          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

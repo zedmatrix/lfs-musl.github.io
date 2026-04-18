@@ -1,1 +1,131 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>Chapter 4. Entering Chroot and Building Additional Temporary Tools</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Part II. Building the LFS Cross Toolchain and Temporary Tools</h3><ul><li class="prev"><a accesskey="p" href="../chapter06/gcc-pass2.html" title="Gcc-pass2-15.2.0">Prev</a><p>Gcc-pass2-15.2.0</p></li><li class="next"><a accesskey="n" href="changingowner.html" title="Changing Ownership">Next</a><p>Changing Ownership</p></li><li class="up"><a accesskey="u" href="../part3.html" title="Part II. Building the LFS Cross Toolchain and Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="chapter"><a id="chapter-chroot-temporary-tools" name="chapter-chroot-temporary-tools"></a>4. Entering Chroot and Building Additional Temporary Tools</h1><div class="chapter" lang="en" xml:lang="en"><div class="toc"><h3>Table of Contents</h3><ul><li class="sect1"><a href="changingowner.html">Changing Ownership</a></li><li class="sect1"><a href="creatingdirs.html">Creating Directories</a></li><li class="sect1"><a href="createfiles.html">Creating Essential Files and Symlinks</a></li><li class="sect1"><a href="gettext-tiny-temp.html">Gettext-tiny-temp-0.3.2</a></li><li class="sect1"><a href="bison-temp.html">Bison-temp-3.8.2</a></li><li class="sect1"><a href="perl-temp.html">Perl-temp-5.42.2</a></li><li class="sect1"><a href="python-temp.html">Python-temp-3.14.3</a></li><li class="sect1"><a href="texinfo-temp.html">Texinfo-temp-7.3</a></li><li class="sect1"><a href="nano-temp.html">Nano-temp-9.0</a></li><li class="sect1"><a href="util-linux-temp.html">Util-linux-temp-2.41.3</a></li><li class="sect1"><a href="cleanup.html">Cleaning up and Saving the Temporary System</a></li></ul></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="../chapter06/gcc-pass2.html" title="Gcc-pass2-15.2.0">Prev</a><p>Gcc-pass2-15.2.0</p></li><li class="next"><a accesskey="n" href="changingowner.html" title="Changing Ownership">Next</a><p>Changing Ownership</p></li><li class="up"><a accesskey="u" href="../part3.html" title="Part II. Building the LFS Cross Toolchain and Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional Temporary
+      Tools
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Part&nbsp;II.&nbsp;Building the LFS Cross Toolchain and Temporary
+        Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter06/gcc-pass2.html" title=
+          "Gcc-pass2-15.2.0">Prev</a>
+          <p>
+            Gcc-pass2-15.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part3.html" title=
+          "Part&nbsp;II.&nbsp;Building the LFS Cross Toolchain and Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="chapter">
+      <a id="chapter-chroot-temporary-tools" name=
+      "chapter-chroot-temporary-tools"></a>4. Entering Chroot and Building
+      Additional Temporary Tools
+    </h1>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="sect1">
+            <a href="changingowner.html">Changing Ownership</a>
+          </li>
+          <li class="sect1">
+            <a href="creatingdirs.html">Creating Directories</a>
+          </li>
+          <li class="sect1">
+            <a href="createfiles.html">Creating Essential Files and
+            Symlinks</a>
+          </li>
+          <li class="sect1">
+            <a href="gettext-tiny-temp.html">Gettext-tiny-temp-0.3.2</a>
+          </li>
+          <li class="sect1">
+            <a href="bison-temp.html">Bison-temp-3.8.2</a>
+          </li>
+          <li class="sect1">
+            <a href="perl-temp.html">Perl-temp-5.42.2</a>
+          </li>
+          <li class="sect1">
+            <a href="python-temp.html">Python-temp-3.14.3</a>
+          </li>
+          <li class="sect1">
+            <a href="texinfo-temp.html">Texinfo-temp-7.3</a>
+          </li>
+          <li class="sect1">
+            <a href="util-linux-temp.html">Util-linux-temp-2.41.3</a>
+          </li>
+          <li class="sect1">
+            <a href="nano-temp.html">Nano-temp-9.0</a>
+          </li>
+          <li class="sect1">
+            <a href="less.html">Less-692</a>
+          </li>
+          <li class="sect1">
+            <a href="cleanup.html">Cleaning up and Saving the Temporary
+            System</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../chapter06/gcc-pass2.html" title=
+          "Gcc-pass2-15.2.0">Prev</a>
+          <p>
+            Gcc-pass2-15.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="changingowner.html" title=
+          "Changing Ownership">Next</a>
+          <p>
+            Changing Ownership
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="../part3.html" title=
+          "Part&nbsp;II.&nbsp;Building the LFS Cross Toolchain and Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

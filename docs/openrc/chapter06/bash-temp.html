@@ -1,5 +1,165 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>3.3. Bash-temp-5.3</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Chapter 3. Cross Compiling Temporary Tools</h3><ul><li class="prev"><a accesskey="p" href="netbsd-curses-temp.html" title="Netbsd-curses-temp-0.3.2">Prev</a><p>Netbsd-curses-temp-0.3.2</p></li><li class="next"><a accesskey="n" href="coreutils-temp.html" title="Coreutils-temp-9.10">Next</a><p>Coreutils-temp-9.10</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 3. Cross Compiling Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="sect1"><a id="bash-temp" name="bash-temp"></a>3.3. Bash-temp-5.3</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The Bash package contains the Bourne-Again Shell.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>Download HTTP: <a class="ulink" href="https://mirror.csclub.uwaterloo.ca/gnu/bash/bash-5.3.tar.gz">https://mirror.csclub.uwaterloo.ca/gnu/bash/bash-5.3.tar.gz</a></p></li><li class="listitem"><p>Download SHA256 Sum: 0d5cd86965f869a26cf64f4b71be7b96f90a3ba8b3d74e27e8e9d9d5550f31ba</p></li><li class="listitem"><p>Download Size: 11,090 KB</p></li><li class="listitem"><p>Estimated Disk Space: 52.9M</p></li><li class="listitem"><p>Estimated Build Time: less than 0.5 SBU</p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">3.3.1. Installation of Bash-temp</h2><p>Prepare Bash-temp for compilation:</p><pre class="userinput"><kbd class="command">./configure --prefix=/usr \
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      3.3.&nbsp;Bash-temp-5.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="netbsd-curses-temp.html" title=
+          "Netbsd-curses-temp-0.3.2">Prev</a>
+          <p>
+            Netbsd-curses-temp-0.3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils-temp.html" title=
+          "Coreutils-temp-9.10">Next</a>
+          <p>
+            Coreutils-temp-9.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="bash-temp" name="bash-temp"></a>3.3. Bash-temp-5.3
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Bash package contains the Bourne-Again Shell.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://mirror.csclub.uwaterloo.ca/gnu/bash/bash-5.3.tar.gz">
+                https://mirror.csclub.uwaterloo.ca/gnu/bash/bash-5.3.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                0d5cd86965f869a26cf64f4b71be7b96f90a3ba8b3d74e27e8e9d9d5550f31ba
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 11,090 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 52.9M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          3.3.1. Installation of Bash-temp
+        </h2>
+        <p>
+          Prepare Bash-temp for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
         --build=$(sh support/config.guess) \
         --host=$LFS_TGT \
-        --without-bash-malloc</kbd></pre><p>To Compile the Package, issue:</p><pre class="userinput"><kbd class="command">make</kbd></pre><p>Now Install the Package, as the root user:</p><pre class="userinput"><kbd class="command">make DESTDIR=$LFS install &amp;&amp;
-ln -sv bash $LFS/bin/sh</kbd></pre></div><div class="content" lang="en" xml:lang="en"><p>Details on this package are located in</p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="netbsd-curses-temp.html" title="Netbsd-curses-temp-0.3.2">Prev</a><p>Netbsd-curses-temp-0.3.2</p></li><li class="next"><a accesskey="n" href="coreutils-temp.html" title="Coreutils-temp-9.10">Next</a><p>Coreutils-temp-9.10</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 3. Cross Compiling Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
+        --without-bash-malloc</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the <code class="systemitem">lfs</code>
+          user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make DESTDIR=$LFS install &amp;&amp;
+ln -sv bash $LFS/bin/sh</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          3.3.2. Contents of Bash-temp
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">bash, bashbug</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">$LFS/usr/include/bash/{include,builtins}
+              ,$LFS/usr/lib/bash</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="netbsd-curses-temp.html" title=
+          "Netbsd-curses-temp-0.3.2">Prev</a>
+          <p>
+            Netbsd-curses-temp-0.3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils-temp.html" title=
+          "Coreutils-temp-9.10">Next</a>
+          <p>
+            Coreutils-temp-9.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

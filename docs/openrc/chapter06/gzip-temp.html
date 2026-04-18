@@ -1,2 +1,161 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>3.10. Gzip-temp-1.14</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Chapter 3. Cross Compiling Temporary Tools</h3><ul><li class="prev"><a accesskey="p" href="grep-temp.html" title="Grep-temp-3.12">Prev</a><p>Grep-temp-3.12</p></li><li class="next"><a accesskey="n" href="make-temp.html" title="Make-temp-4.4.1">Next</a><p>Make-temp-4.4.1</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 3. Cross Compiling Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="sect1"><a id="gzip-temp" name="gzip-temp"></a>3.10. Gzip-temp-1.14</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The Gzip package contains programs for compressing and decompressing files.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>Download HTTP: <a class="ulink" href="https://mirror.csclub.uwaterloo.ca/gnu/gzip/gzip-1.14.tar.xz">https://mirror.csclub.uwaterloo.ca/gnu/gzip/gzip-1.14.tar.xz</a></p></li><li class="listitem"><p>Download SHA256 Sum: 01a7b881bd220bfdf615f97b8718f80bdfd3f6add385b993dcf6efd14e8c0ac6</p></li><li class="listitem"><p>Download Size: 865 KB</p></li><li class="listitem"><p>Estimated Disk Space: 9.7M</p></li><li class="listitem"><p>Estimated Build Time: less than 0.5 SBU</p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">3.10.1. Installation of Gzip-temp</h2><p>Prepare Gzip-temp for compilation:</p><pre class="userinput"><kbd class="command">./configure --prefix=/usr \
-        --host=$LFS_TGT</kbd></pre><p>To Compile the Package, issue:</p><pre class="userinput"><kbd class="command">make</kbd></pre><p>Now Install the Package, as the root user:</p><pre class="userinput"><kbd class="command">make DESTDIR=$LFS install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><p>Details on this package are located in</p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="grep-temp.html" title="Grep-temp-3.12">Prev</a><p>Grep-temp-3.12</p></li><li class="next"><a accesskey="n" href="make-temp.html" title="Make-temp-4.4.1">Next</a><p>Make-temp-4.4.1</p></li><li class="up"><a accesskey="u" href="chapter06.html" title="Chapter 3. Cross Compiling Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      3.10.&nbsp;Gzip-temp-1.14
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grep-temp.html" title=
+          "Grep-temp-3.12">Prev</a>
+          <p>
+            Grep-temp-3.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="make-temp.html" title=
+          "Make-temp-4.4.1">Next</a>
+          <p>
+            Make-temp-4.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="gzip-temp" name="gzip-temp"></a>3.10. Gzip-temp-1.14
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Gzip package contains programs for compressing and
+          decompressing files.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://mirror.csclub.uwaterloo.ca/gnu/gzip/gzip-1.14.tar.xz">
+                https://mirror.csclub.uwaterloo.ca/gnu/gzip/gzip-1.14.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                01a7b881bd220bfdf615f97b8718f80bdfd3f6add385b993dcf6efd14e8c0ac6
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 865 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 9.7M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          3.10.1. Installation of Gzip-temp
+        </h2>
+        <p>
+          Prepare Gzip-temp for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --host=$LFS_TGT</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the <code class="systemitem">lfs</code>
+          user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make DESTDIR=$LFS install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          3.10.2. Contents of Gzip-temp
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">gzip, gunzip, gzexe, zcat, zcmp, zdiff,
+              zegrep, zfgrep, zforce, zgrep, zless, zmore, and znew</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="grep-temp.html" title=
+          "Grep-temp-3.12">Prev</a>
+          <p>
+            Grep-temp-3.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="make-temp.html" title=
+          "Make-temp-4.4.1">Next</a>
+          <p>
+            Make-temp-4.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;3.&nbsp;Cross Compiling Temporary Tools">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

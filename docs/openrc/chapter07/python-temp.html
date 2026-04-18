@@ -1,6 +1,169 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>4.7. Python-temp-3.14.3</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Chapter 4. Entering Chroot and Building Additional Temporary Tools</h3><ul><li class="prev"><a accesskey="p" href="perl-temp.html" title="Perl-temp-5.42.2">Prev</a><p>Perl-temp-5.42.2</p></li><li class="next"><a accesskey="n" href="texinfo-temp.html" title="Texinfo-temp-7.3">Next</a><p>Texinfo-temp-7.3</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 4. Entering Chroot and Building Additional Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="sect1"><a id="python-temp" name="python-temp"></a>4.7. Python-temp-3.14.3</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The Python 3 package contains the Python development environment.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>Download HTTP: <a class="ulink" href="https://www.python.org/ftp/python/3.14.3/Python-3.14.3.tar.xz">https://www.python.org/ftp/python/3.14.3/Python-3.14.3.tar.xz</a></p></li><li class="listitem"><p>Download SHA256 Sum: a97d5549e9ad81fe17159ed02c68774ad5d266c72f8d9a0b5a9c371fe85d902b</p></li><li class="listitem"><p>Download Size: 23,221 KB</p></li><li class="listitem"><p>Estimated Disk Space: 327.1M</p></li><li class="listitem"><p>Estimated Build Time: 1.70 SBU</p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">4.7.1. Installation of Python-temp</h2><p>Prepare Python-temp for compilation:</p><pre class="userinput"><kbd class="command">./configure --prefix=/usr \
-        --enable-shared \
-        --without-ensurepip \
-        --without-static-libpython \
-        --enable-optimizations \
-        --disable-test-modules</kbd></pre><p>To Compile the Package, issue:</p><pre class="userinput"><kbd class="command">make</kbd></pre><p>Now Install the Package, as the root user:</p><pre class="userinput"><kbd class="command">make install</kbd></pre></div><div class="content" lang="en" xml:lang="en"><p>Details on this package are located in</p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="perl-temp.html" title="Perl-temp-5.42.2">Prev</a><p>Perl-temp-5.42.2</p></li><li class="next"><a accesskey="n" href="texinfo-temp.html" title="Texinfo-temp-7.3">Next</a><p>Texinfo-temp-7.3</p></li><li class="up"><a accesskey="u" href="chapter07.html" title="Chapter 4. Entering Chroot and Building Additional Temporary Tools">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      4.7.&nbsp;Python-temp-3.14.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional
+        Temporary Tools
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="perl-temp.html" title=
+          "Perl-temp-5.42.2">Prev</a>
+          <p>
+            Perl-temp-5.42.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="texinfo-temp.html" title=
+          "Texinfo-temp-7.3">Next</a>
+          <p>
+            Texinfo-temp-7.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="python-temp" name="python-temp"></a>4.7. Python-temp-3.14.3
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Python 3 package contains the Python development environment.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://www.python.org/ftp/python/3.14.3/Python-3.14.3.tar.xz">
+                https://www.python.org/ftp/python/3.14.3/Python-3.14.3.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                a97d5549e9ad81fe17159ed02c68774ad5d266c72f8d9a0b5a9c371fe85d902b
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 23,221 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 327.1M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: 1.70 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          4.7.1. Installation of Python-temp
+        </h2>
+        <p>
+          Prepare Python-temp for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr   \
+            --enable-shared     \
+            --without-ensurepip \
+            --enable-optimizations     \
+            --without-static-libpython \
+            --disable-test-modules</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          4.7.2. Contents of
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">idle3, pydoc3, python3, and
+              python3-config</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libpython3.14.so and libpython3.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/python3.14,
+              /usr/lib/python3, and /usr/share/doc/python-3.14.3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="perl-temp.html" title=
+          "Perl-temp-5.42.2">Prev</a>
+          <p>
+            Perl-temp-5.42.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="texinfo-temp.html" title=
+          "Texinfo-temp-7.3">Next</a>
+          <p>
+            Texinfo-temp-7.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;4.&nbsp;Entering Chroot and Building Additional Temporary Tools">
+          Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

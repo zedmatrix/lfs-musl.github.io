@@ -1,6 +1,248 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" /><title>2.4. Musl-temp-1.2.6</title><link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="stylesheet" href="../stylesheets/lfs-print.css" type="text/css" media="print" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /></head><body class="lfs" id="lfs-1.0-musl"><div class="navheader"><h4>Musl Linux From Scratch - Version 1.0-musl</h4><h3>Chapter 2. Compiling a Cross-Toolchain</h3><ul><li class="prev"><a accesskey="p" href="linux-headers.html" title="Linux-headers-7.0">Prev</a><p>Linux-headers-7.0</p></li><li class="next"><a accesskey="n" href="libstdcpp.html" title="Libstdcpp-15.2.0">Next</a><p>Libstdcpp-15.2.0</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div><h1 class="sect1"><a id="musl-temp" name="musl-temp"></a>2.4. Musl-temp-1.2.6</h1><div class="sect1" lang="en" xml:lang="en"><div class="package" lang="en" xml:lang="en"><p>The Musl Package contains an alternative main C library.</p><h3>Package Information</h3><div class="itemizedlist"><ul class="compact"><li class="listitem"><p>Download HTTP: <a class="ulink" href="https://musl.libc.org/releases/musl-1.2.6.tar.gz">https://musl.libc.org/releases/musl-1.2.6.tar.gz</a></p></li><li class="listitem"><p>Download SHA256 Sum: d585fd3b613c66151fc3249e8ed44f77020cb5e6c1e635a616d3f9f82460512a</p></li><li class="listitem"><p>Download Size: 1,057 KB</p></li><li class="listitem"><p>Estimated Disk Space: 25.2M</p></li><li class="listitem"><p>Estimated Build Time: less than 0.5 SBU</p></li></ul></div></div><div class="installation" lang="en" xml:lang="en"><h2 class="sect2">2.4.1. Installation of Musl-temp</h2><p>Prepare Musl-temp for compilation:</p><pre class="userinput"><kbd class="command">./configure --prefix=/usr \
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      2.4.&nbsp;Musl-temp-1.2.6
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Compiling a Cross-Toolchain
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-headers-7.0">Prev</a>
+          <p>
+            Linux-headers-7.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libstdcpp.html" title=
+          "Libstdcpp-15.2.0">Next</a>
+          <p>
+            Libstdcpp-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;2.&nbsp;Compiling a Cross-Toolchain">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="musl-temp" name="musl-temp"></a>2.4. Musl-temp-1.2.6
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Musl Package contains an alternative main C library.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://musl.libc.org/releases/musl-1.2.6.tar.gz">https://musl.libc.org/releases/musl-1.2.6.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                d585fd3b613c66151fc3249e8ed44f77020cb5e6c1e635a616d3f9f82460512a
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 1,057 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Required disk space 25.2M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Approximate build time less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          Additional Downloads
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Download HTTP:</strong> <span class=
+              "segbody"><a class="ulink" href=
+              "https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-40200.patch">
+              https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-40200.patch</a></span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Download SHA256 Sum:</strong>
+              <span class=
+              "segbody">1ee29f64f9ca8e8ad7c349779d661ff6b52126a27575d3586981357a52c406fb</span>
+            </div>
+          </div>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Download HTTP:</strong> <span class=
+              "segbody"><a class="ulink" href=
+              "https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-6042.patch">
+              https://gitlab.com/zed-linuxfromscratch/patches/-/raw/main/musl-1.2.6-cve-2026-6042.patch</a></span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Download SHA256 Sum:</strong>
+              <span class=
+              "segbody">1d0be2e72b9d5bd16546b923aa8af861d271322f01644716a81823bec4065c99</span>
+            </div>
+          </div>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Download HTTP:</strong> <span class=
+              "segbody"><a class="ulink" href=
+              "https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-rpmalloc.patch">
+              https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-rpmalloc.patch</a></span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Download SHA256 Sum:</strong>
+              <span class=
+              "segbody">3240f67b6049a6eaa7a42b18d9a3d447f74649acb8defb4d369ded997fd7b11f</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          2.4.1. Installation of Musl-temp
+        </h2>
+        <p>
+          Prepare Musl-temp for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
         --target=$LFS_TGT \
         --build=x86_64-lfs-linux-musl \
         --with-malloc=rpmalloc \
-        --enable-debug</kbd></pre><p>To Compile the Package, issue:</p><pre class="userinput"><kbd class="command">make</kbd></pre><p>Now Install the Package, as the root user:</p><pre class="userinput"><kbd class="command">make DESTDIR=$LFS install</kbd></pre><pre class="userinput"><kbd class="command">echo 'int main(){}' | $LFS_TGT-gcc -xc - ;
-readelf -l a.out | grep ld-musl</kbd></pre></div><div class="content" lang="en" xml:lang="en"><p>Details on this package are located in</p></div></div><div class="navfooter"><ul><li class="prev"><a accesskey="p" href="linux-headers.html" title="Linux-headers-7.0">Prev</a><p>Linux-headers-7.0</p></li><li class="next"><a accesskey="n" href="libstdcpp.html" title="Libstdcpp-15.2.0">Next</a><p>Libstdcpp-15.2.0</p></li><li class="up"><a accesskey="u" href="chapter05.html" title="Chapter 2. Compiling a Cross-Toolchain">Up</a></li><li class="home"><a accesskey="h" href="../index.html" title="Musl Linux From Scratch - Version 1.0-musl">Home</a></li></ul></div></body></html>
+        --enable-debug</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the <code class="systemitem">lfs</code>
+          user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make DESTDIR=$LFS install</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">echo 'int main(){}' | $LFS_TGT-gcc -xc - ;
+readelf -l a.out | grep ld-musl</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          2.4.2. Contents of Musl-temp
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">ld-x86_64-musl.so.1 (symlink to
+              libc.so)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libc.{a,so}, stub archive (libm.a,
+              librt.a, libpthread.a, libcrypt.a, libutil.a, libxnet.a,
+              libresolv.a, libdl.a)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed objects:</strong>
+              <span class="segbody">Scrt1.o ,crt1.o ,rcrt1.o ,crti.o ,and
+              crtn.o</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class=
+              "segbody">/usr/include/{,arpa,bits,net,netinet,scsi,sys}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <a id="ld-x86_64-musl.so.1" name="ld-x86_64-musl.so.1"></a>
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ch-tools-musl-temp" name=
+                    "ch-tools-musl-temp"></a><span class="term"><span class=
+                    "command"><strong>ld-x86_64-musl.so.1</strong></span></span>
+                  </p>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux-headers.html" title=
+          "Linux-headers-7.0">Prev</a>
+          <p>
+            Linux-headers-7.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libstdcpp.html" title=
+          "Libstdcpp-15.2.0">Next</a>
+          <p>
+            Libstdcpp-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;2.&nbsp;Compiling a Cross-Toolchain">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
