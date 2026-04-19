@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.31.&nbsp;Gettext-tiny-0.3.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="psmisc.html" title="Psmisc-23.7">Prev</a>
+          <p>
+            Psmisc-23.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bison.html" title="Bison-3.8.2">Next</a>
+          <p>
+            Bison-3.8.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="gettext-tiny" name="gettext-tiny"></a>5.31. Gettext-tiny-0.3.2
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          gettext-tiny provides lightweight replacements for tools typically
+          used from the GNU gettext suite, which is incredibly bloated and
+          takes a lot of time to build (in the order of an hour on slow
+          devices).
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz">
+                http://ftp.barfooze.de/pub/sabotage/tarballs/gettext-tiny-0.3.2.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                a9a72cfa21853f7d249592a3c6f6d36f5117028e24573d092f9184ab72bbe187
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 48 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 330K
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.31.1. Installation of Gettext-tiny
+        </h2>
+        <p>
+          Prepare Gettext-tiny for compilation:
+        </p>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make LIBINTL=MUSL prefix=/usr</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make LIBINTL=MUSL prefix=/usr install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.31.2. Contents of Gettext-tiny
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">msgfmt, msgmerge, xgettext, and
+              autopoint</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libintl.a</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/share/gettext-tiny,
+              /usr/share/aclocal</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="msgfmt" name="msgfmt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>msgfmt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates a binary message catalog from a translation
+                    catalog
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="msgmerge" name="msgmerge"></a><span class=
+                    "term"><span class=
+                    "command"><strong>msgmerge</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Combines two raw translations into a single file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xgettext" name="xgettext"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xgettext</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Extracts the translatable message lines from the given
+                    source files to make the first translation template
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="autopoint" name="autopoint"></a><span class=
+                    "term"><span class=
+                    "command"><strong>autopoint</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Copies standard Gettext infrastructure files into a
+                    source package
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libintl" name="libintl"></a><span class=
+                    "term"><code class="filename">libintl</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    a library that provides native language support to
+                    programs.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="psmisc.html" title="Psmisc-23.7">Prev</a>
+          <p>
+            Psmisc-23.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="bison.html" title="Bison-3.8.2">Next</a>
+          <p>
+            Bison-3.8.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

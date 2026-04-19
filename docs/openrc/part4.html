@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Part&nbsp;III.&nbsp;Finalizing the Cross Tools
+      Part&nbsp;IV.&nbsp;Chroot and Finalize Toolchain
     </title>
     <link rel="stylesheet" type="text/css" href="stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -19,17 +19,17 @@
       </h4>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="chapter02/libstdcpp.html" title=
-          "Libstdcpp-15.2.0">Prev</a>
+          <a accesskey="p" href="chapter03/gcc-pass2.html" title=
+          "Gcc-pass2-15.2.0">Prev</a>
           <p>
-            Libstdcpp-15.2.0
+            Gcc-pass2-15.2.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="chapter03/chapter03.html" title=
-          "Cross Compiling Temporary Tools">Next</a>
+          <a accesskey="n" href="chapter04/chapter04.html" title=
+          "Entering Chroot and Building Additional Temporary Tools">Next</a>
           <p>
-            Cross Compiling Temporary Tools
+            Entering Chroot and Building Additional Temporary Tools
           </p>
         </li>
         <li class="up">.
@@ -41,7 +41,7 @@
       </ul>
     </div>
     <h1 class="part">
-      <a id="part3" name="part3"></a>III. Finalizing the Cross Tools
+      <a id="part4" name="part4"></a>IV. Chroot and Finalize Toolchain
     </h1>
     <div class="part">
       <div class="toc">
@@ -51,66 +51,50 @@
         <ul>
           <li class="chapter">
             <h4>
-              <a href="chapter03/chapter03.html">3. Cross Compiling Temporary
-              Tools</a>
+              <a href="chapter04/chapter04.html">4. Entering Chroot and
+              Building Additional Temporary Tools</a>
             </h4>
             <ul>
               <li class="sect1">
-                <a href="chapter03/m4-temp.html">M4-temp-1.4.21</a>
+                <a href="chapter04/changingowner.html">Changing Ownership</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/creatingdirs.html">Creating
+                Directories</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/createfiles.html">Creating Essential Files
+                and Symlinks</a>
               </li>
               <li class="sect1">
                 <a href=
-                "chapter03/netbsd-curses-temp.html">Netbsd-curses-temp-0.3.2</a>
+                "chapter04/gettext-tiny-temp.html">Gettext-tiny-temp-0.3.2</a>
               </li>
               <li class="sect1">
-                <a href="chapter03/bash-temp.html">Bash-temp-5.3</a>
+                <a href="chapter04/bison-temp.html">Bison-temp-3.8.2</a>
               </li>
               <li class="sect1">
-                <a href=
-                "chapter03/coreutils-temp.html">Coreutils-temp-9.10</a>
+                <a href="chapter04/perl-temp.html">Perl-temp-5.42.2</a>
               </li>
               <li class="sect1">
-                <a href=
-                "chapter03/diffutils-temp.html">Diffutils-temp-3.12</a>
+                <a href="chapter04/python-temp.html">Python-temp-3.14.3</a>
               </li>
               <li class="sect1">
-                <a href="chapter03/file-temp.html">File-temp-5.47</a>
-              </li>
-              <li class="sect1">
-                <a href=
-                "chapter03/findutils-temp.html">Findutils-temp-4.10.0</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/gawk-temp.html">Gawk-temp-5.4.0</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/grep-temp.html">Grep-temp-3.12</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/gzip-temp.html">Gzip-temp-1.14</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/make-temp.html">Make-temp-4.4.1</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/patch-temp.html">Patch-temp-2.8</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/sed-temp.html">Sed-temp-4.9</a>
-              </li>
-              <li class="sect1">
-                <a href="chapter03/xz-temp.html">Xz-temp-5.8.3</a>
+                <a href="chapter04/texinfo-temp.html">Texinfo-temp-7.3</a>
               </li>
               <li class="sect1">
                 <a href=
-                "chapter03/libarchive-temp.html">Libarchive-temp-3.8.7</a>
+                "chapter04/util-linux-temp.html">Util-linux-temp-2.41.3</a>
               </li>
               <li class="sect1">
-                <a href=
-                "chapter03/binutils-pass2.html">Binutils-pass2-2.46.0</a>
+                <a href="chapter04/nano-temp.html">Nano-temp-9.0</a>
               </li>
               <li class="sect1">
-                <a href="chapter03/gcc-pass2.html">Gcc-pass2-15.2.0</a>
+                <a href="chapter04/less.html">Less-692</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter04/cleanup.html">Cleaning up and Saving the
+                Temporary System</a>
               </li>
             </ul>
           </li>
@@ -120,17 +104,17 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="chapter02/libstdcpp.html" title=
-          "Libstdcpp-15.2.0">Prev</a>
+          <a accesskey="p" href="chapter03/gcc-pass2.html" title=
+          "Gcc-pass2-15.2.0">Prev</a>
           <p>
-            Libstdcpp-15.2.0
+            Gcc-pass2-15.2.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="chapter03/chapter03.html" title=
-          "Cross Compiling Temporary Tools">Next</a>
+          <a accesskey="n" href="chapter04/chapter04.html" title=
+          "Entering Chroot and Building Additional Temporary Tools">Next</a>
           <p>
-            Cross Compiling Temporary Tools
+            Entering Chroot and Building Additional Temporary Tools
           </p>
         </li>
         <li class="up">.

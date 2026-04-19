@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.26.&nbsp;Shadow-4.19.4
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libxcrypt.html" title=
+          "Libxcrypt-4.5.2">Prev</a>
+          <p>
+            Libxcrypt-4.5.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc.html" title="Gcc-15.2.0">Next</a>
+          <p>
+            Gcc-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="shadow" name="shadow"></a>5.26. Shadow-4.19.4
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Shadow package contains programs for handling passwords in a
+          secure way.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://github.com//shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz">
+                https://github.com//shadow-maint/shadow/releases/download/4.19.4/shadow-4.19.4.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                ce57a313e315a0a7cb04a8f50cc20753e994e487bbe9b78a2a824ca75cb486c0
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 2,278 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 44.5M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.26.1. Installation of Shadow
+        </h2>
+        <p>
+          Prevent the installation of manual pages that were already
+          installed:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+find man -name Makefile.in -exec sed -i 's/passwd\.5 / /' {} \;
+
+sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:' \
+    -e 's:/var/spool/mail:/var/mail:' -e '/PATH=/{s@/sbin:@@;s@/bin:@@}' -i etc/login.defs
+
+touch /usr/bin/passwd</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Instead of using the default crypt method, use the much more
+            secure YESCRYPT method of password encryption, which also allows
+            passwords longer than 8 characters. It is also necessary to
+            change the obsolete /var/spool/mail location for user mailboxes
+            that Shadow uses by default to the /var/mail location used
+            currently. And, remove /bin and /sbin from the PATH, since they
+            are simply symlinks to their counterparts in /usr.
+          </p>
+        </div>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --sysconfdir=/etc \
+            --disable-static    \
+            --with-{b,yes}crypt \
+            --without-libbsd    \
+            --disable-logind    \
+            --with-group-name-max-length=32</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make exec_prefix=/usr install
+make -C man install-man</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.26.2. Configuring of Shadow
+        </h2>
+        <p>
+          To enable shadowed passwords, enable shadowed group passwords, to
+          change the default parameters, the file /etc/default/useradd must
+          be created and tailored to suit your particular needs. Create it
+          with:
+        </p>
+        <pre class="userinput"><kbd class="command">pwconv
+grpconv
+
+mkdir -p /etc/default
+
+useradd -D --gid 999
+
+sed -i '/MAIL/s/yes/no/' /etc/default/useradd
+
+echo "lfsroot" | passwd --stdin root</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Choose a password for user root and set it by running, the last
+            line is a quick way to set the root password.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.26.3. Contents of Shadow
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">chage, chfn, chgpasswd, chpasswd, chsh,
+              expiry, faillog, getsubids, gpasswd, groupadd, groupdel,
+              groupmems, groupmod, grpck, grpconv, grpunconv, login, logoutd,
+              newgidmap, newgrp, newuidmap, newusers, nologin, passwd, pwck,
+              pwconv, pwunconv, sg (link to newgrp), su, useradd, userdel,
+              usermod, vigr (link to vipw), and vipw</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libsubid.so.5.0.0</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/etc/default and
+              /usr/include/shadow</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chage" name="chage"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chage</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to change the maximum number of days between
+                    obligatory password changes
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chfn" name="chfn"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chfn</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to change a user's full name and other information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chgpasswd" name="chgpasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chgpasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to update group passwords in batch mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chpasswd" name="chpasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chpasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to update user passwords in batch mode
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chsh" name="chsh"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Used to change a user's default login shell
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="expiry" name="expiry"></a><span class=
+                    "term"><span class=
+                    "command"><strong>expiry</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks and enforces the current password expiration
+                    policy
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="faillog" name="faillog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>faillog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to examine the log of login failures, to set a
+                    maximum number of failures before an account is blocked,
+                    and to reset the failure count
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getsubids" name="getsubids"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getsubids</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to list the subordinate id ranges for a user
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpasswd" name="gpasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to add and delete members and administrators to
+                    groups
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groupadd" name="groupadd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groupadd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a group with the given name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groupdel" name="groupdel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groupdel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Deletes the group with the given name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groupmems" name="groupmems"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groupmems</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Allows a user to administer his/her own group membership
+                    list without the requirement of super user privileges.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="groupmod" name="groupmod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>groupmod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to modify the given group's name or GID
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grpck" name="grpck"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grpck</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Verifies the integrity of the group files <code class=
+                    "filename">/etc/group</code> and <code class=
+                    "filename">/etc/gshadow</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grpconv" name="grpconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grpconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates or updates the shadow group file from the normal
+                    group file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grpunconv" name="grpunconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grpunconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Updates <code class="filename">/etc/group</code> from
+                    <code class="filename">/etc/gshadow</code> and then
+                    deletes the latter
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="login" name="login"></a><span class=
+                    "term"><span class=
+                    "command"><strong>login</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used by the system to let users sign on
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="logoutd" name="logoutd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>logoutd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a daemon used to enforce restrictions on log-on time
+                    and ports
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="newgidmap" name="newgidmap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>newgidmap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to set the gid mapping of a user namespace
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="newgrp" name="newgrp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>newgrp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to change the current GID during a login session
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="newuidmap" name="newuidmap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>newuidmap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to set the uid mapping of a user namespace
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="newusers" name="newusers"></a><span class=
+                    "term"><span class=
+                    "command"><strong>newusers</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to create or update an entire series of user
+                    accounts
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nologin" name="nologin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nologin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays a message saying an account is not available; it
+                    is designed to be used as the default shell for disabled
+                    accounts
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="passwd" name="passwd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>passwd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to change the password for a user or group
+                    account
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pwck" name="pwck"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pwck</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Verifies the integrity of the password files <code class=
+                    "filename">/etc/passwd</code> and <code class=
+                    "filename">/etc/shadow</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pwconv" name="pwconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pwconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates or updates the shadow password file from the
+                    normal password file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pwunconv" name="pwunconv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pwunconv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Updates <code class="filename">/etc/passwd</code> from
+                    <code class="filename">/etc/shadow</code> and then
+                    deletes the latter
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sg" name="sg"></a><span class="term"><span class=
+                    "command"><strong>sg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Executes a given command while the user's GID is set to
+                    that of the given group
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="su" name="su"></a><span class="term"><span class=
+                    "command"><strong>su</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Runs a shell with substitute user and group IDs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="useradd" name="useradd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>useradd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates a new user with the given name, or updates the
+                    default new-user information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="userdel" name="userdel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>userdel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Deletes the specified user account
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="usermod" name="usermod"></a><span class=
+                    "term"><span class=
+                    "command"><strong>usermod</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is used to modify the given user's login name, user
+                    identification (UID), shell, initial group, home
+                    directory, etc.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vigr" name="vigr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vigr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Edits the <code class="filename">/etc/group</code> or
+                    <code class="filename">/etc/gshadow</code> files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vipw" name="vipw"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vipw</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Edits the <code class="filename">/etc/passwd</code> or
+                    <code class="filename">/etc/shadow</code> files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libsubid" name="libsubid"></a><span class=
+                    "term"><code class="filename">libsubid</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    library to handle subordinate id ranges for users and
+                    groups
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libxcrypt.html" title=
+          "Libxcrypt-4.5.2">Prev</a>
+          <p>
+            Libxcrypt-4.5.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc.html" title="Gcc-15.2.0">Next</a>
+          <p>
+            Gcc-15.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

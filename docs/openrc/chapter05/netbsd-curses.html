@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.28.&nbsp;Netbsd-curses-0.3.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="Gcc-15.2.0">Prev</a>
+          <p>
+            Gcc-15.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.9">Next</a>
+          <p>
+            Sed-4.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="netbsd-curses" name="netbsd-curses"></a>5.28.
+      Netbsd-curses-0.3.2
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          This is a port of netbsd's curses library for usage on Linux
+          systems (tested and developed on sabotage linux, based on musl
+          libc).
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz">
+                http://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                d28358b833e6cabcf229fecef98c649e2e90c29858aa34220476faf0e5ce10a1
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 522 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 4.5M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.28.1. Installation of Netbsd-curses
+        </h2>
+        <p>
+          Prepare Netbsd-curses for compilation:
+        </p>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make -E "CPPFLAGS=-DTERMINFO_COMPAT" PREFIX="/usr" all-dynamic</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make -E "CPPFLAGS=-DTERMINFO_COMPAT" PREFIX="/usr" install-dynamic</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.28.2. Contents of Netbsd-curses
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">tic, tset, tput, infocmp, tabs, and clear
+              (shell script)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libterminfo.so, libcurses.so,
+              libpanel.so, libmenu.so, and libform.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tic" name="tic"></a><span class=
+                    "term"><span class="command"><strong>tic</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The terminfo entry-description compiler that translates a
+                    terminfo file from source format into the binary format
+                    needed for the ncurses library routines
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tset" name="tset"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tset</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Can be used to initialize terminals
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tput" name="tput"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tput</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes the values of terminal-dependent capabilities
+                    available to the shell; it can also be used to reset or
+                    initialize a terminal or report its long name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="infocmp" name="infocmp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>infocmp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Compares or prints out terminfo descriptions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tabs" name="tabs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tabs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Clears and sets tab stops on a terminal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="clear" name="clear"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tic</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A POSIX shell script, Clears the screen, if possible
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libterminfo" name="libterminfo"></a><span class=
+                    "term"><code class="filename">libterminfo</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    has a built-in termcap database with entries for ansi,
+                    dumb, rxvt-unicode-256color, screen, screen-256color, st,
+                    tmux, tmux-256color, vt100, vt220, wsvt25, xterm, and
+                    xterm-256color terminals, which should handle the vast
+                    majority of cases.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcurses" name="libcurses"></a><span class=
+                    "term"><code class="filename">libcurses</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to display text in many complex ways
+                    on a terminal screen
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpanel" name="libpanel"></a><span class=
+                    "term"><code class="filename">libpanel</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement panels
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libmenu" name="libmenu"></a><span class=
+                    "term"><code class="filename">libmenu</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement menus
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libform" name="libform"></a><span class=
+                    "term"><code class="filename">libform</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement forms
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="Gcc-15.2.0">Prev</a>
+          <p>
+            Gcc-15.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sed.html" title="Sed-4.9">Next</a>
+          <p>
+            Sed-4.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

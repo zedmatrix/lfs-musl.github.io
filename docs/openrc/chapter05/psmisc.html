@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.30.&nbsp;Psmisc-23.7
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sed.html" title="Sed-4.9">Prev</a>
+          <p>
+            Sed-4.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gettext-tiny.html" title=
+          "Gettext-tiny-0.3.2">Next</a>
+          <p>
+            Gettext-tiny-0.3.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="psmisc" name="psmisc"></a>5.30. Psmisc-23.7
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Psmisc package contains programs for displaying information
+          about running processes.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz">
+                https://sourceforge.net/projects/psmisc/files/psmisc/psmisc-23.7.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                58c55d9c1402474065adae669511c191de374b0871eec781239ab400b907c327
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 422 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 4.4M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.30.1. Installation of Psmisc
+        </h2>
+        <p>
+          Prepare Psmisc for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.30.2. Contents of Psmisc
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">killall, pslog, prtstat, pstree, and
+              fuser</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Not Installed :</strong> <span class=
+              "segbody">peekfd (not built on musl)</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fuser" name="fuser"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fuser</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports the Process IDs (PIDs) of processes that use the
+                    given files or file systems
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pstree" name="pstree"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pstree</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays running processes as a tree (creates a symlink
+                    <code class="filename">pstree.x11</code>)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="prtstat" name="prtstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>prtstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prints information about a process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pslog" name="pslog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pslog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reports current logs path of a process
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="killall" name="killall"></a><span class=
+                    "term"><span class=
+                    "command"><strong>killall</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Kills processes by name; it sends a signal to all
+                    processes running any of the given commands
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sed.html" title="Sed-4.9">Prev</a>
+          <p>
+            Sed-4.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gettext-tiny.html" title=
+          "Gettext-tiny-0.3.2">Next</a>
+          <p>
+            Gettext-tiny-0.3.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

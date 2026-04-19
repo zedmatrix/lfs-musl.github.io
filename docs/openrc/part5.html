@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Part&nbsp;V.&nbsp;Building the Musl-LFS System
+    </title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter04/cleanup.html" title=
+          "Cleaning up and Saving the Temporary System">Prev</a>
+          <p>
+            Cleaning up and Saving the Temporary System
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chapter05/chapter05.html" title=
+          "Installing Basic System Software">Next</a>
+          <p>
+            Installing Basic System Software
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="part">
+      <a id="part5" name="part5"></a>V. Building the Musl-LFS System
+    </h1>
+    <div class="part">
+      <div class="toc">
+        <h3>
+          Table of Contents
+        </h3>
+        <ul>
+          <li class="chapter">
+            <h4>
+              <a href="chapter05/chapter05.html">5. Installing Basic System
+              Software</a>
+            </h4>
+            <ul>
+              <li class="sect1">
+                <a href="chapter05/man-pages.html">Man-pages-6.17</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/iana-etc.html">Iana-etc-20260327</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/musl.html">Musl-1.2.6</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/musl-compat.html">Musl-compat-1.2.6</a>
+              </li>
+              <li class="sect1">
+                <a href=
+                "chapter05/timezone-musl.html">Timezone-musl-2026a</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/zlib-ng.html">Zlib-ng-2.3.3</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bzip2.html">Bzip2-1.0.8</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/xz.html">Xz-5.8.3</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/lz4.html">Lz4-1.10.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/zstd.html">Zstd-1.5.7</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/file.html">File-5.47</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/libedit.html">Libedit-3.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/pcre2.html">Pcre2-10.47</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/m4.html">M4-1.4.21</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bc.html">Bc-7.0.3</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/flex.html">Flex-2.6.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/pkgconf.html">Pkgconf-2.5.1</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/binutils.html">Binutils-2.46.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gmp.html">Gmp-6.3.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/mpfr.html">Mpfr-4.2.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/mpc.html">Mpc-1.4.0</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/attr.html">Attr-2.5.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/acl.html">Acl-2.3.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/libcap.html">Libcap-2.77</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/libxcrypt.html">Libxcrypt-4.5.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/shadow.html">Shadow-4.19.4</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gcc.html">Gcc-15.2.0</a>
+              </li>
+              <li class="sect1">
+                <a href=
+                "chapter05/netbsd-curses.html">Netbsd-curses-0.3.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/sed.html">Sed-4.9</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/psmisc.html">Psmisc-23.7</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/gettext-tiny.html">Gettext-tiny-0.3.2</a>
+              </li>
+              <li class="sect1">
+                <a href="chapter05/bison.html">Bison-3.8.2</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="chapter04/cleanup.html" title=
+          "Cleaning up and Saving the Temporary System">Prev</a>
+          <p>
+            Cleaning up and Saving the Temporary System
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="chapter05/chapter05.html" title=
+          "Installing Basic System Software">Next</a>
+          <p>
+            Installing Basic System Software
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.24.&nbsp;Libcap-2.77
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acl.html" title="Acl-2.3.2">Prev</a>
+          <p>
+            Acl-2.3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libxcrypt.html" title=
+          "Libxcrypt-4.5.2">Next</a>
+          <p>
+            Libxcrypt-4.5.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="libcap" name="libcap"></a>5.24. Libcap-2.77
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Libcap package implements the userspace interface to the POSIX
+          1003.1e capabilities available in Linux kernels.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.77.tar.xz">
+                https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-2.77.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                897bc18b44afc26c70e78cead3dbb31e154acc24bee085a5a09079a88dbf6f52
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 195 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 1.2M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.24.1. Installation of Libcap
+        </h2>
+        <p>
+          Prepare Libcap for compilation:
+        </p>
+        <p>
+          To Compile the Package, and remove the static library issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i '/install -m.*STA/d' libcap/Makefile
+
+make prefix=/usr lib=lib</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make prefix=/usr lib=lib install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.24.2. Contents of
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">getpcaps, getcap, setcap, and
+              capsh</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libcap.so.2.77 and libpsx.so.2.77</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/sys,</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="capsh" name="capsh"></a><span class=
+                    "term"><span class=
+                    "command"><strong>capsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    A shell wrapper to explore and constrain capability
+                    support
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getpcaps" name="getpcaps"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getpcaps</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the capabilities of the queried process(es)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getcap" name="getcap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getcap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Examines file capabilities
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="setcap" name="setcap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>setcap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets file capabilities
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcap-lib" name="libcap-lib"></a><span class=
+                    "term"><code class="filename">libcap</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains the library functions for manipulating POSIX
+                    1003.1e capabilities
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpsx" name="libpsx"></a><span class=
+                    "term"><code class="filename">libpsx</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to support POSIX semantics for
+                    syscalls associated with the pthread library
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acl.html" title="Acl-2.3.2">Prev</a>
+          <p>
+            Acl-2.3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libxcrypt.html" title=
+          "Libxcrypt-4.5.2">Next</a>
+          <p>
+            Libxcrypt-4.5.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

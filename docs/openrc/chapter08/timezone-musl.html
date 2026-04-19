@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.5.&nbsp;Timezone-musl-2026a
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl-compat.html" title=
+          "Musl-compat-1.2.6">Prev</a>
+          <p>
+            Musl-compat-1.2.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib-ng.html" title="Zlib-ng-2.3.3">Next</a>
+          <p>
+            Zlib-ng-2.3.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="timezone-musl" name="timezone-musl"></a>5.5. Timezone-musl-2026a
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Time Zone Database (often called tz or zoneinfo) contains code
+          and data that represent the history of local time
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://gitlab.com/zed-linuxfromscratch/timezone-musl/-/archive/2026a/timezone-musl-2026a.tar.gz">
+                https://gitlab.com/zed-linuxfromscratch/timezone-musl/-/archive/2026a/timezone-musl-2026a.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                cdd676425447eec1ecab7d94edb59933e0261bb1cb11ae28f8a85dc9bd1b3ad3
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 645 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 2.2M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.5.1. Installation of Timezone-musl
+        </h2>
+        <p>
+          Prepare Timezone-musl for compilation:
+        </p>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make CC=gcc zic zdump tzselect</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">install -m755 zic /usr/bin
+install -m755 zdump /usr/bin
+install -m755 tzselect /usr/bin
+</kbd></pre>
+        <p>
+          Install and set up the time zone data with the following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ZONEINFO=/usr/share/zoneinfo
+mkdir -pv $ZONEINFO/{posix,right}
+
+for tz in etcetera southamerica northamerica europe africa antarctica  \
+  asia australasia backward; do
+  zic -L /dev/null   -d $ZONEINFO       ${tz}
+  zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+  zic -L leapseconds -d $ZONEINFO/right ${tz}
+done
+
+cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+zic -d $ZONEINFO -p America/New_York
+unset ZONEINFO tz
+</kbd></pre>
+        <p>
+          Then create the <code class="filename">/etc/localtime</code> file
+          by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -sfv /usr/share/zoneinfo/&lt;xxx&gt; /etc/localtime</kbd></pre>
+        <p>
+          Replace <code class="filename">&lt;xxx&gt;</code> with the name of
+          the time zone selected (e.g., Canada/Eastern).
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.5.2. Contents of Timezone-Musl
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">zic, zdump, tzselect</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/share/zoneinfo{posix,right}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="musl-compat.html" title=
+          "Musl-compat-1.2.6">Prev</a>
+          <p>
+            Musl-compat-1.2.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zlib-ng.html" title="Zlib-ng-2.3.3">Next</a>
+          <p>
+            Zlib-ng-2.3.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.3.&nbsp;Musl-1.2.6
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iana-etc.html" title=
+          "Iana-etc-20260327">Prev</a>
+          <p>
+            Iana-etc-20260327
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="musl-compat.html" title=
+          "Musl-compat-1.2.6">Next</a>
+          <p>
+            Musl-compat-1.2.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="musl" name="musl"></a>5.3. Musl-1.2.6
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Musl Package contains an alternative main C library.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://musl.libc.org/releases/musl-1.2.6.tar.gz">https://musl.libc.org/releases/musl-1.2.6.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                d585fd3b613c66151fc3249e8ed44f77020cb5e6c1e635a616d3f9f82460512a
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 1,057 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 25.1M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.3.1. Installation of Musl
+        </h2>
+        <p>
+          Prepare Musl for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
+            --with-malloc=rpmalloc</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <p>
+          The /etc/nsswitch.conf file needs to be created because the Glibc
+          defaults do not work well in a networked environment.
+        </p>
+        <p>
+          Create a new file /etc/nsswitch.conf by running the following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/nsswitch.conf &lt;&lt; "EOF"
+# Begin /etc/nsswitch.conf
+
+passwd: files
+group: files
+shadow: files
+
+hosts: files dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+# End /etc/nsswitch.conf
+EOF</kbd></pre>
+        <p>
+          By default, the dynamic loader (<code class=
+          "filename">/lib/ld-musl-x86_64.so.1</code>) searches through
+          <code class="filename">/usr/lib</code> for dynamic libraries that
+          are needed by programs as they are run. However, if there are
+          libraries in directories other than <code class=
+          "filename">/usr/lib</code>, these need to be added to the
+          <code class="filename">/etc/ld-musl-x86_64.path</code> file in
+          order for the dynamic loader to find them. Two directories that are
+          commonly known to contain additional libraries are <code class=
+          "filename">/usr/local/lib</code> and <code class=
+          "filename">/opt/lib</code>, so add those directories to the dynamic
+          loader's search path.
+        </p>
+        <p>
+          Create a new file <code class=
+          "filename">/etc/ld-musl-x86_64.path</code> by running the
+          following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/ld-musl-x86_64.path &lt;&lt; "EOF"
+# Begin /etc/ld.so.conf
+
+/usr/lib
+
+/usr/local/lib
+
+/opt/lib
+
+# End /etc/ld-musl-x86_64.path
+EOF</kbd></pre>
+        <p>
+          Add the <code class="filename">ldd</code> program as a symlink to
+          libc:
+        </p>
+        <pre class="userinput"><kbd class="command">case $(uname -m) in
+  i?86) ln -sfv ../lib/ld-musl.so.1 /usr/bin/ldd
+  ;;
+  x86_64) ln -sfv ../lib/ld-musl-x86_64.so.1 /usr/bin/ldd
+  ;;
+esac</kbd></pre>
+        <p>
+          Add the <code class="filename">ldconfig</code> program as a stub
+          for compatibility:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /sbin/ldconfig &lt;&lt; "EOF"
+#!/bin/sh
+# musl does not use ldconfig - stub for compatibility
+exit 0
+EOF
+chmod -v +x /usr/sbin/ldconfig</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.3.2. Contents of
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">ldd (symlink to ld-musl-x86_64.so.1),
+              ld-x86_64-musl.so.1 (symlink to libc.so) ldconfig (stub for
+              compact)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libc.{a,so}, stub archive (libm.a,
+              librt.a, libpthread.a, libcrypt.a, libutil.a, libxnet.a,
+              libresolv.a, libdl.a)</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed objects:</strong>
+              <span class="segbody">Scrt1.o ,crt1.o ,rcrt1.o ,crti.o ,and
+              crtn.o</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iana-etc.html" title=
+          "Iana-etc-20260327">Prev</a>
+          <p>
+            Iana-etc-20260327
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="musl-compat.html" title=
+          "Musl-compat-1.2.6">Next</a>
+          <p>
+            Musl-compat-1.2.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter08.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

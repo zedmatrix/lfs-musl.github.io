@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      5.19.&nbsp;Gmp-6.3.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-1.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 1.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils.html" title=
+          "Binutils-2.46.0">Prev</a>
+          <p>
+            Binutils-2.46.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mpfr.html" title="Mpfr-4.2.2">Next</a>
+          <p>
+            Mpfr-4.2.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="gmp" name="gmp"></a>5.19. Gmp-6.3.0
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The GMP package contains math libraries. These have useful
+          functions for arbitrary precision arithmetic.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download HTTP: <a class="ulink" href=
+                "https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz">
+                https://mirror.csclub.uwaterloo.ca/gnu/gmp/gmp-6.3.0.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                a3c2b80201b89e68616f4ad30bc66aee4927c3ce50e33929ca819d5c43538898
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download Size: 2,045 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Disk Space: 39.3M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated Build Time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.19.1. Installation of Gmp
+        </h2>
+        <p>
+          Prepare Gmp for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i '/long long t1;/,+1s/()/(...)/' configure
+./configure --prefix=/usr \
+            --enable-cxx  \
+            --disable-static \
+            --docdir=/usr/share/doc/gmp-6.3.0</kbd></pre>
+        <p>
+          To Compile the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make
+make html</kbd></pre>
+        <p>
+          To Test the Package, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make check 2&gt;&amp;1 | tee gmp-check-log</kbd></pre>
+        <p>
+          Now Install the Package, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command">make install
+make install-html
+awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Ensure that at least 199 tests in the test suite have passed.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.19.2. Contents of
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libgmp.so.10.5.0,
+              libgmpxx.so.4.7.0,</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/share/doc/gmp-6.3.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgmp" name="libgmp"></a><span class=
+                    "term"><code class="filename">libgmp</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains precision math functions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgmpxx" name="libgmpxx"></a><span class=
+                    "term"><code class="filename">libgmpxx</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains C++ precision math functions
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils.html" title=
+          "Binutils-2.46.0">Prev</a>
+          <p>
+            Binutils-2.46.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mpfr.html" title="Mpfr-4.2.2">Next</a>
+          <p>
+            Mpfr-4.2.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 1.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
