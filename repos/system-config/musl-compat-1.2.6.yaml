@@ -1,0 +1,24 @@
+description: "A Compilation of headers and programs for libc compatability."
+
+package:
+  name: musl-compat
+  version: 1.2.6
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/musl-compat-1.2.6.tar.xz
+    sha256: e1e1ef62406187becd97ef4ae4740f3955ad9c3dfde038baf68d8f2bea78773c
+    md5:
+
+build: |
+  make all
+
+install: |
+  make install
+
+required:
+  - musl
+
+note: "Required for building grub ... mainly sys/cdefs.h"

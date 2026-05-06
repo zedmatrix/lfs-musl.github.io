@@ -1,0 +1,9 @@
+# Begin /etc/ld.so.conf
+
+/usr/lib
+
+/usr/local/lib
+
+/opt/lib
+
+# End /etc/ld-musl-x86_64.path

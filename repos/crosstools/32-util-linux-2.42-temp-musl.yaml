@@ -1,0 +1,30 @@
+description: "The Util-linux package contains miscellaneous utility programs."
+
+package:
+  name: util-linux-temp
+  version: 2.42
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-2.42.tar.xz
+    sha256: 3452b260bbaa775d6e749ac3bb22111785003fc1f444970025c8da26dfa758e9
+    md5: cfb34c0a81a9907f25130c2f731e7e0b
+patches:
+  - url: sources/util-linux-2.42-nsenter-fix.patch
+    sha256: e8ade346bd91b007c79f07813a5327d85d21f210f7c636686c9d694a50901f0f
+    md5:
+
+prepare: |
+  mkdir -pv /var/lib/hwclock
+  ./configure --libdir=/usr/lib --runstatedir=/run --disable-chfn-chsh --disable-login \
+    --disable-nologin --disable-su --disable-setpriv --disable-runuser --disable-pylibmount \
+    --disable-static --disable-liblastlog2 --without-python \
+    ADJTIME_PATH=/var/lib/hwclock/adjtime --docdir=/usr/share/doc/util-linux-${PKGVER}
+
+build: |
+  make
+
+install: |
+  make DESTDIR="/ybuild/image/" install

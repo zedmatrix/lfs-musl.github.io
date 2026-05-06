@@ -1,0 +1,29 @@
+description: "libidn2 is a package designed for internationalized string handling based on standards from the Internet Engineering Task Force."
+
+package:
+  name: libidn2
+  version: 2.3.8
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/libidn/libidn2-2.3.8.tar.gz
+    sha256: f557911bf6171621e1f72ff35f5b1825bb35b52ed45325dcdee931e5d3c0787a
+    md5: a8e113e040d57a523684e141970eea7a
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make install
+
+recommended:
+  - libunistring
+
+optional:
+  - git
+  - gtk-doc

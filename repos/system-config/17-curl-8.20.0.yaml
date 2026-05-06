@@ -1,0 +1,46 @@
+description: "The cURL package contains a utility and a library used for transferring files with URL syntax"
+
+package:
+  name: curl
+  version: 8.20.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://curl.se/download/curl-8.20.0.tar.xz
+    sha256: 63fe2dc148ba0ceae89922ef838f7e5c946272c2e78b7c59fab4b79d3ce2b896
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --with-openssl --with-ca-path=/etc/ssl/certs
+
+build: |
+  make
+
+install: |
+  make install
+
+final: |
+  rm -rf docs/examples/.deps;
+  find docs \( -name Makefile\* -o -name \*.1 -o -name \*.3 -o -name CMakeLists.txt \) -delete;
+  cp -v -R docs -T /usr/share/doc/curl-${PKGVER}
+
+recommended:
+  - libpsl
+  - make-ca
+
+optional:
+  - brotli
+  - c-ares
+  - gnutls
+  - libidn2
+  - libssh2
+  - mitkrb5
+  - nghttp2
+  - openldap
+  - samba
+  - apache
+  - stunnel
+  - openssh
+  - valgrind

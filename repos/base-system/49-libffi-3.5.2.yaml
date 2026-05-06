@@ -1,0 +1,34 @@
+description: "The Libffi library provides a portable, high level programming interface to various calling conventions."
+
+package:
+  name: libffi
+  version: 3.5.2
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/libffi/libffi/releases/download/v3.5.2/libffi-3.5.2.tar.gz
+    sha256: f3a3082a23b37c293a4fcd1053147b371f2ff91fa7ea1b2a52e335676bac82dc
+    md5: 92af9efad4ba398995abf44835c5d9e9
+
+prepare: |
+  ./configure --prefix=/usr --disable-static --with-gcc-arch=native
+
+build: |
+  make
+
+check: |
+  make check || true
+
+install: |
+  make install
+
+required:
+  - bash
+  - binutils
+  - coreutils-temp
+  - gcc
+  - musl
+  - make-temp
+  - sed

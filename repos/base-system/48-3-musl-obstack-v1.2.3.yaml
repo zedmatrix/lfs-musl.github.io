@@ -1,0 +1,26 @@
+description: "The musl-obstack package is a copy + paste of the obstack functions and macros found in GNU gcc libiberty library for use with musl libc."
+
+package:
+  name: musl-obstack
+  version: 1.2.3
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://gitlab.com/zed-linuxfromscratch/musl-obstack/-/archive/v1.2.3/musl-obstack-v1.2.3.tar.gz
+    sha256: 9ffb3479b15df0170eba4480e51723c3961dbe0b461ec289744622db03a69395
+    md5:
+
+prepare: |
+  ./bootstrap.sh;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install
+
+required:
+  - musl

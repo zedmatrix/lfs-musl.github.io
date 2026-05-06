@@ -1,0 +1,22 @@
+description: "Package contains the Python development environment useful for object-oriented programming, writing scripts, prototyping large programs, and developing entire applications."
+
+package:
+  name: python-temp
+  version: 3.14.4
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.python.org/ftp/python/3.14.4/Python-3.14.4.tar.xz
+    sha256: d923c51303e38e249136fc1bdf3568d56ecb03214efdef48516176d3d7faaef8
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --without-ensurepip --without-static-libpython
+
+build: |
+  make
+
+install: |
+  make install

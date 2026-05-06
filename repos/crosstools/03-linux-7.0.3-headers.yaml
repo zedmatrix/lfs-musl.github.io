@@ -1,0 +1,27 @@
+description: "The Linux API Headers (in linux-7.0.tar.xz) expose the kernels API for use by libc"
+
+package:
+  name: linux-headers
+  version: 7.0.3
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://cdn.kernel.org/pub/linux/kernel/v7.x/linux-7.0.3.tar.xz
+    sha256: 0bedadbf5788693ddebbcc913c893f1a97349af79ddde7144c2a80b401959f1c
+    md5:
+
+prepare: |
+  make mrproper
+
+build: |
+  make headers
+
+install: |
+  find usr/include -type f ! -name '*.h' -delete &&
+  cp -rv usr/include $LFS/usr
+
+required:
+  - binutils-pass1
+  - gcc-pass1

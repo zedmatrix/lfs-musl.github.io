@@ -1,0 +1,34 @@
+description: "The libpng package contains libraries used by other programs for reading and writing PNG files."
+
+package:
+  name: libpng
+  version: 1.6.58
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://downloads.sourceforge.net/libpng/libpng-1.6.58.tar.xz
+    sha256: 28eb403f51f0f7405249132cecfe82ea5c0ef97f1b32c5a65828814ae0d34775
+    md5:
+  - url: https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-1.6.57-apng.patch.gz
+    sha256: 8a9fd589117bbb716f5f666291f56d00241213c06b8654db100996885b919483
+    md5:
+
+prepare: |
+  zcat -cd ${YSRC}/libpng-1.6.57-apng.patch.gz | patch -p1
+
+build: |
+  ./configure --prefix=/usr --disable-static &&
+  make
+
+install: |
+  make install
+
+final: |
+  mkdir -v /usr/share/doc/libpng-${PKGVER};
+  cp -v README libpng-manual.txt /usr/share/doc/libpng-${PKGVER}
+
+required:
+  - bash
+  - zlib

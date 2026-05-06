@@ -1,0 +1,32 @@
+description: "Make package contains a program for controlling the generation of executables and other non-source files of a package from source files."
+
+package:
+  name: make-temp
+  version: 4.4.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/make/make-4.4.1.tar.gz
+    sha256: dd16fb1d67bfab79a72f5e8390735c49e3e8e70b4945a15ab1f81ddb78658fb3
+    md5: c8469a3713cbbe04d955d4ae4be23eeb
+patches:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/make-4.4.1-gcc15.patch
+    sha256: ec9b07fa406042d1b20240d0a793767dbd2044cbac633bcd7c6e3f855e5c4069
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr \
+              --host=$LFS_TGT \
+              --build=$(build-aux/config.guess)
+
+build: |
+  make
+
+install: |
+  make DESTDIR=$LFS install
+
+required:
+  - gzip-temp
+  - musl-temp

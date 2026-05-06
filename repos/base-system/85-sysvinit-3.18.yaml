@@ -1,0 +1,27 @@
+description: "programs for controlling the startup, running, and shutdown of the system."
+
+package:
+  name: sysvinit
+  version: 3.18
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/sysvinit-3.18.tar.xz
+    sha256: 45b25144e449d9345527193bdb55472a53fea3469008df95c45f9d4f404e868a
+    md5:
+
+build: |
+  make
+
+install: |
+  make install
+
+required:
+  - binutils
+  - coreutils
+  - gcc
+  - musl
+  - make
+  - sed

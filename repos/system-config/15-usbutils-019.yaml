@@ -1,0 +1,26 @@
+description: "The USB Utils package contains utilities used to display information about USB buses in the system and the devices connected to them."
+
+package:
+  name: usbutils
+  version: 019
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://kernel.org/pub/linux/utils/usb/usbutils/usbutils-019.tar.xz
+    sha256: 659f40c440e31ba865c52c818a33d3ba6a97349e3353f8b1985179cb2aa71ec5
+    md5:
+
+prepare: |
+  meson setup build --prefix=/usr --buildtype=release
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+required:
+  - libusb
+  - hwdata

@@ -1,0 +1,36 @@
+description: "The Time Zone Database (often called tz or zoneinfo) contains code and data that represent the history of local time"
+
+package:
+  name: timezone-musl
+  version: 2026a
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://gitlab.com/zed-linuxfromscratch/timezone-musl/-/archive/2026a/timezone-musl-2026a.tar.gz
+    sha256: cdd676425447eec1ecab7d94edb59933e0261bb1cb11ae28f8a85dc9bd1b3ad3
+    md5:
+
+build: |
+  make CC=gcc zic zdump tzselect
+
+install: |
+  install -m755 zic /usr/bin
+  install -m755 zdump /usr/bin
+  install -m755 tzselect /usr/bin
+
+final: |
+  ZONEINFO=/usr/share/zoneinfo
+  mkdir -pv $ZONEINFO/{posix,right}
+
+  for tz in etcetera southamerica northamerica europe africa antarctica  \
+    asia australasia backward; do
+    zic -L /dev/null   -d $ZONEINFO       ${tz}
+    zic -L /dev/null   -d $ZONEINFO/posix ${tz}
+    zic -L leapseconds -d $ZONEINFO/right ${tz}
+  done
+
+  cp -v zone.tab zone1970.tab iso3166.tab $ZONEINFO
+  zic -d $ZONEINFO -p America/New_York
+  unset ZONEINFO tz

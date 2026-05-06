@@ -1,0 +1,35 @@
+description: "Is an implementation of the DHCP client specified in RFC2131."
+
+package:
+  name: dhcpcd
+  version: 10.3.2
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/NetworkConfiguration/dhcpcd/releases/download/v10.3.2/dhcpcd-10.3.2.tar.xz
+    sha256: b6aa46932074906a9badef1bfe142b8aff9d041c2689e1ef8b74c12e9fd942bd
+    md5:
+
+prepare: |
+  install  -v -m700 -d /var/lib/dhcpcd;
+  groupadd -g 52 dhcpcd;
+  useradd  -c 'dhcpcd PrivSep' -d /var/lib/dhcpcd -g dhcpcd \
+           -s /bin/false -u 52 dhcpcd;
+  chown    -v dhcpcd:dhcpcd /var/lib/dhcpcd
+
+build: |
+  ./configure --prefix=/usr --sysconfdir=/etc --privsepuser=dhcpcd \
+    --libexecdir=/usr/lib/dhcpcd --dbdir=/var/lib/dhcpcd --runstatedir=/run &&
+  make
+
+check: |
+  make test || true
+
+install: |
+  make install
+
+optional:
+  - llvm
+  - ntp

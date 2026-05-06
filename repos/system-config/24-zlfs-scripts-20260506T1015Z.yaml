@@ -1,0 +1,16 @@
+description: "The Zlfs Scripts provides bash and openssh services"
+
+package:
+  name: zlfs-scripts
+  version: 20260506T1015Z
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/zlfs-scripts-20260506T1015Z.tar.xz
+    sha256: 7a02e05d8a47d9e8ac3a723615c074905a05262b9decc793b8adf123e87f3d24
+    md5:
+
+install: |
+  make RELEASE=Zirconium REV=sysv VER=2.0 all

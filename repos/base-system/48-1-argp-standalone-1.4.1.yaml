@@ -1,0 +1,30 @@
+description: "This is a continuation of Niels Möller's work on an argp library for systems which don't provide one themselves (most non-GNU ones)."
+
+package:
+  name: argp-standalone
+  version: 1.4.1
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://gitlab.com/zed-linuxfromscratch/argp-standalone/-/archive/1.4.1/argp-standalone-1.4.1.tar.gz
+    sha256: 879d76374424dce051b812f16f43c6d16de8dbaddd76002f83fd1b6e57d39e0b
+    md5:
+
+prepare: |
+  autoreconf -vif
+  CFLAGS="-fPIC" ./configure --prefix=/usr
+
+build: |
+  make
+
+check: |
+  make check
+
+install: |
+  cp -v argp.h /usr/include/argp.h
+  cp -v libargp.a /usr/lib/libargp.a
+
+required:
+  - musl

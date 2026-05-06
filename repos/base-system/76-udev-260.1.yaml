@@ -1,0 +1,75 @@
+description: "Udev is from Systemd used for dynamic creation of device nodes."
+
+package:
+  name: udev
+  version: 260.1
+  rel: 1
+  archive: false
+  delete: true
+  libc: "musl"
+
+sources:
+  - url: https://github.com/systemd/systemd/archive/v260.1/systemd-260.1.tar.gz
+    sha256: 11b9821892b75d19af7b21f0f7f4e53636638147faf3e6a4ded78b40cb38993f
+    md5:
+  - url: https://anduin.linuxfromscratch.org/LFS/systemd-man-pages-260.1.tar.xz
+    sha256: b0c143b3388afac9e1154facf0821809b396ab86f3f61ddc8028679a7d65d83c
+    md5:
+  - url: https://anduin.linuxfromscratch.org/LFS/udev-lfs-20230818.tar.xz
+    sha256: 104cdde52a898c648ce346a9ed1fbe9297514656534636a6584132cf2d7428d9
+    md5:
+
+prepare: |
+  ${YPKG}/udev-patch.sh &&
+  meson setup Ybuild --prefix=/usr --buildtype=release -Dlibc=musl -Dmode=release -Dlogind=false \
+    -Dstandalone-binaries=true -Ddev-kvm-mode=0660 -Dlink-udev-shared=false -Dvconsole=false
+
+build: |
+  cd Ybuild
+  export udev_helpers=$(grep "'name' :" ../src/udev/meson.build | \
+    awk '{print $3}' | tr -d ",'" | grep -v 'udevadm');
+  ninja udevadm systemd-hwdb $(ninja -n | grep -Eo '(src/(lib)?udev|rules.d|hwdb.d)/[^ ]*') \
+      $(realpath libudev.so --relative-to .) $udev_helpers;
+  install -vm755 -d {/usr/lib,/etc}/udev/{hwdb.d,rules.d,network}
+  install -vm755 $udev_helpers /usr/lib/udev
+
+install: |
+  cd Ybuild &&
+  install -vm755 -d /usr/{lib,share}/pkgconfig
+  install -vm755 udevadm /usr/bin/
+  install -vm755 systemd-hwdb /usr/bin/udev-hwdb
+  ln -svfn ../bin/udevadm /usr/sbin/udevd
+  cp -av libudev.so{,*[0-9]} /usr/lib/
+  install -vm644 ../src/libudev/libudev.h /usr/include/
+  install -vm644 src/libudev/*.pc /usr/lib/pkgconfig/
+  install -vm644 src/udev/*.pc /usr/share/pkgconfig/
+  install -vm644 ../src/udev/udev.conf /etc/udev/
+  install -vm644 rules.d/* ../rules.d/README /usr/lib/udev/rules.d/
+  install -vm644 $(find ../rules.d/*.rules -not -name '*power-switch*') /usr/lib/udev/rules.d/
+  install -vm644 hwdb.d/*  ../hwdb.d/{*.hwdb,README} /usr/lib/udev/hwdb.d/
+  install -vm644 ../network/99-default.link /usr/lib/udev/network
+
+final: |
+  ${YPKG}/udev-rules-man.sh &&
+  udev-hwdb update
+
+required:
+  - acl
+  - bash
+  - binutils
+  - coreutils
+  - diffutils
+  - gawk
+  - gcc
+  - musl
+  - gperf
+  - grep
+  - jinja2
+  - libcap
+  - libxcrypt
+  - meson
+  - openssl
+  - pkgconf
+  - sed
+  - util-linux-temp
+  - zstd

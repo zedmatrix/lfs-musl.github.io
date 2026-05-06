@@ -1,0 +1,16 @@
+description: "contains a set of scripts to start/stop the LFS system at bootup/shutdown."
+
+package:
+  name: zlfs-bootscripts
+  version: 20260504
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://trak4.com/musl-from-scratch/musl-packages/lfs-bootscripts-20260504.tar.xz
+    sha256: 3c6f1af0ac72d525fa5b6d27a7c3d839d06950b1c523e08c5987f1431fa42d86
+    md5:
+
+install: |
+  make install

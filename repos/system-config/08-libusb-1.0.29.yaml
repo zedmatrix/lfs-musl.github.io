@@ -1,0 +1,25 @@
+description: "The libusb package contains a library used by some applications for USB device access."
+
+package:
+  name: libusb
+  version: 1.0.29
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://github.com/libusb/libusb/releases/download/v1.0.29/libusb-1.0.29.tar.bz2
+    sha256: 5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85
+    md5: 12d4a782ce606a0582fb5038c16d0f75
+
+prepare: |
+  ./configure --prefix=/usr --disable-static
+
+build: |
+  make
+
+install: |
+  make install
+
+optional:
+  - doxygen

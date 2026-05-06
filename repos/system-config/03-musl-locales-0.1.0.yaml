@@ -1,0 +1,25 @@
+description: "a collection of translations and locale tooling for Linux distributions using the musl libc."
+
+package:
+  name: musl-locales
+  version: 0.1.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://gitlab.com/zed-linuxfromscratch/musl-locales/-/archive/0.1.0/musl-locales-0.1.0.tar.gz
+    sha256: 5b10e3d0c5e5beaaadfb274214e3c6c90d4185501dcd5180858f5c891dedfd85
+    md5: f497028e2dc383f0a4e18fe8fdcfa813
+
+prepare: |
+  meson setup build --prefix=/usr
+
+build: |
+  ninja -C build
+
+install: |
+  ninja -C build install
+
+required:
+  - musl

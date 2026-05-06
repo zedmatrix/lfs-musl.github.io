@@ -1,0 +1,38 @@
+description: "Libstdc++ is the standard C++ library needed to compile C++ code."
+
+package:
+  name: libstdcpp
+  version: 15.2.0
+  rel: 1
+  archive: false
+  delete: true
+
+sources: 
+  - url: https://mirror.csclub.uwaterloo.ca/gnu/gcc/gcc-15.2.0/gcc-15.2.0.tar.xz
+    sha256: 438fd996826b0c82485a29da03a72d71d6e3541a83ec702df4271f6fe025d24e
+    md5:
+
+prepare: |
+  mkdir -v build && cd build
+  ../libstdc++-v3/configure --host=$LFS_TGT \
+        --build=$(../config.guess) \
+        --prefix=/usr \
+        --disable-nls \
+        --disable-multilib \
+        --disable-libstdcxx-pch \
+        --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/15.2.0
+
+build: |
+  cd build
+  make
+
+install: |
+  cd build
+  make DESTDIR=$LFS install
+  rm -v $LFS/usr/lib/lib{stdc++{,exp,fs},supc++}.la
+
+required:
+  - binutils-pass1
+  - gcc-pass1
+  - linux-headers
+  - musl-temp

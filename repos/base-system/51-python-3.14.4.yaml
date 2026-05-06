@@ -1,0 +1,60 @@
+description: "The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, and developing entire applications."
+
+package:
+  name: python
+  version: 3.14.4
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://www.python.org/ftp/python/3.14.4/Python-3.14.4.tar.xz
+    sha256: d923c51303e38e249136fc1bdf3568d56ecb03214efdef48516176d3d7faaef8
+    md5:
+  - url: https://www.python.org/ftp/python/doc/3.14.4/python-3.14.4-docs-html.tar.bz2
+    sha256: b3e8f1565ed891104ca3dd48f2c1a641b2fe3ccc82408cc233235d68b638a62f
+    md5:
+
+patches:
+  - url: https://www.linuxfromscratch.org/patches/downloads/Python/Python-3.14.4-security_fixes-2.patch
+    sha256: 5b362c700719363a9dd3640c70313b5edd93cd49d85f56e7cfa095d85e463b23
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr --enable-shared --with-system-expat \
+    --enable-optimizations --without-static-libpython
+
+build: |
+  make
+
+check: |
+  make test TESTOPTS="--timeout 120" || true
+
+install: |
+  make install;
+  install -vm644 ${YPKG}/python-pip.conf /etc/pip.conf;
+  install -v -dm755 /usr/share/doc/python-${PKGVER}/html
+
+final: |
+  tar --strip-components=1 --no-same-owner --no-same-permissions \
+      -C /usr/share/doc/python-${PKGVER}/html \
+      -xvf ${YSRC}/python-${PKGVER}-docs-html.tar.bz2
+
+required:
+  - bash
+  - binutils
+  - coreutils-temp
+  - expat
+  - gcc
+  - gdbm
+  - gettext
+  - musl
+  - grep
+  - libffi
+  - libxcrypt
+  - make-temp
+  - ncurses
+  - openssl
+  - pkgconf
+  - sed
+  - util-linux-temp

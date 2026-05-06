@@ -1,0 +1,26 @@
+description: "The musl-fts package implements the fts(3) functions fts_open, fts_read, fts_children, fts_set and fts_close, which are missing in musl libc."
+
+package:
+  name: musl-fts
+  version: 1.2.7
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://gitlab.com/zed-linuxfromscratch/musl-fts/-/archive/v1.2.7/musl-fts-v1.2.7.tar.gz
+    sha256: 49ae567a96dbab22823d045ffebe0d6b14b9b799925e9ca9274d47d26ff482a6
+    md5:
+
+prepare: |
+  ./bootstrap.sh;
+  ./configure --prefix=/usr
+
+build: |
+  make
+
+install: |
+  make install
+
+required:
+  - musl

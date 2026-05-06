@@ -1,0 +1,52 @@
+description: "The Tcl package contains the Tool Command Language, a robust general-purpose scripting language."
+
+package:
+  name: tcl
+  version: 8.6.17
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://downloads.sourceforge.net/tcl/tcl8.6.17-src.tar.gz
+    sha256: a3903371efcce8a405c5c245d029e9f6850258a60fa3761c4d58995610949b31
+    md5: 1ec3444533f54d0f86cd120058e15e48
+  - url: https://downloads.sourceforge.net/tcl/tcl8.6.17-html.tar.gz
+    sha256: 879db5fc7e618eee5a375d74d715f0f1c730eebcff1181153b5fdfcb61662b4b
+    md5: 60c71044e723b0db5f21be82929f3534
+
+prepare: |
+  SRCDIR=$(pwd) && cd unix &&
+  ./configure --prefix=/usr --mandir=/usr/share/man --disable-rpath
+
+build: |
+  SRCDIR=$(pwd) && cd unix && make &&
+  sed -e "s|$SRCDIR/unix|/usr/lib|" -e "s|$SRCDIR|/usr/include|" -i tclConfig.sh;
+  sed -e "s|$SRCDIR/unix/pkgs/tdbc1.1.12|/usr/lib/tdbc1.1.12|" \
+      -e "s|$SRCDIR/pkgs/tdbc1.1.12/generic|/usr/include|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.12/library|/usr/lib/tcl8.6|" \
+    -e "s|$SRCDIR/pkgs/tdbc1.1.12|/usr/include|" -i pkgs/tdbc1.1.12/tdbcConfig.sh;
+  sed -e "s|$SRCDIR/unix/pkgs/itcl4.3.4|/usr/lib/itcl4.3.4|" \
+    -e "s|$SRCDIR/pkgs/itcl4.3.4/generic|/usr/include|" \
+    -e "s|$SRCDIR/pkgs/itcl4.3.4|/usr/include|" -i pkgs/itcl4.3.4/itclConfig.sh;
+
+check: |
+  cd unix &&
+  LC_ALL=C.UTF-8 make test
+
+install: |
+  cd unix && make DESTDIR="/ybuild/image" install;
+  make DESTDIR="/ybuild/image" install-private-headers;
+  chmod 644 /ybuild/image/usr/lib/libtclstub8.6.a;
+  chmod -v u+w /ybuild/image/usr/lib/libtcl8.6.so;
+  ln -sfv tclsh8.6 /usr/bin/tclsh;
+  mv /ybuild/image/usr/share/man/man3/{Thread,Tcl_Thread}.3
+
+final: |
+  tar -xf ${YSRC}/tcl8.6.17-html.tar.gz --strip-components=1 &&
+  mkdir -v -p /ybuild/image/usr/share/doc/tcl-8.6.17;
+  cp -v -r ./html/* /ybuild/image/usr/share/doc/tcl-8.6.17
+
+required:
+  - musl
+  - zlib

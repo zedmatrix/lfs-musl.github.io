@@ -1,0 +1,39 @@
+description: "The LVM2 package is a set of tools that manage logical partitions."
+
+package:
+  name: lvm2
+  version: 2.03.40
+  rel: 1
+  archive: false
+  delete: true
+
+sources:
+  - url: https://sourceware.org/ftp/lvm2/LVM2.2.03.40.tgz
+    sha256: 60c9bb5c0a109f20267bb40ba50c00c84a110fc14c129f21afb5566929bf5645
+    md5:
+patches:
+  - url: sources/lvm2-2.03.40-fix-stdio-usage.patch
+    sha256: 790100e2a03e3702ee26226377a1babcd8018dcbc1609ab2bdc9b4144206c9ed
+    md5:
+
+prepare: |
+  ./configure --prefix=/usr --enable-cmdlib --enable-pkgconfig --enable-udev_sync
+
+build: |
+  make
+
+install: |
+  make install
+  rm -fv /usr/lib/udev/rules.d/69-dm-lvm.rules
+
+required:
+  - libaio
+  - systemd
+  - udev
+  - which
+
+optional:
+  - libnvme
+  - mdadm
+  - valgrind
+  - xfsprogs
