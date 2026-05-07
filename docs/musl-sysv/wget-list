@@ -111,7 +111,8 @@ https://www.linuxfromscratch.org/patches/lfs/development/bzip2-1.0.8-install_doc
 https://www.linuxfromscratch.org/patches/lfs/development/coreutils-9.11-i18n-1.patch
 https://www.linuxfromscratch.org/patches/lfs/development/expect-5.45.4-gcc15-1.patch
 https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-rpmalloc.patch
-https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-iconv-fix.patch
+https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-cve-2026-40200.patch
+https://trak4.com/musl-from-scratch/musl-packages/musl-1.2.6-cve-2026-6042.patch
 https://www.linuxfromscratch.org/patches/lfs/development/kbd-2.9.0-backspace-1.patch
 https://trak4.com/musl-from-scratch/musl-packages/make-4.4.1-gcc15.patch
 https://trak4.com/musl-from-scratch/musl-packages/elfutils-musl-macros.patch
