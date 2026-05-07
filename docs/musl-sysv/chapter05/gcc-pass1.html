@@ -23,16 +23,16 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="binutils-pass1.html" title=
-          "Binutils-2.45.1 - Pass 1">Prev</a>
+          "Binutils-2.46.0 - Pass 1">Prev</a>
           <p>
-            Binutils-2.45.1 - Pass 1
+            Binutils-2.46.0 - Pass 1
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="linux-headers.html" title=
-          "Linux-6.6.129 API Headers">Next</a>
+          "Linux-7.0.3 API Headers">Next</a>
           <p>
-            Linux-6.6.129 API Headers
+            Linux-7.0.3 API Headers
           </p>
         </li>
         <li class="up">
@@ -99,8 +99,8 @@
 mv -v mpfr-4.2.2 mpfr
 tar -xf ../gmp-6.3.0.tar.xz
 mv -v gmp-6.3.0 gmp
-tar -xf ../mpc-1.3.1.tar.gz
-mv -v mpc-1.3.1 mpc</kbd></pre>
+tar -xf ../mpc-1.4.1.tar.xz
+mv -v mpc-1.4.1 mpc</kbd></pre>
         <p>
           On x86_64 hosts, set the default directory name for 64-bit
           libraries to <span class="quote">“<span class=
@@ -148,7 +148,6 @@ cd       build</kbd></pre>
         "command">../configure                  \
     --target=$LFS_TGT         \
     --prefix=$LFS/tools       \
-    --with-glibc-version=2.42 \
     --with-sysroot=$LFS       \
     --with-newlib             \
     --without-headers         \
@@ -170,19 +169,6 @@ cd       build</kbd></pre>
             <strong>The meaning of the configure options:</strong>
           </p>
           <dl class="variablelist">
-            <dt>
-              <span class="term"><em class=
-              "parameter"><code>--with-glibc-version=2.42</code></em></span>
-            </dt>
-            <dd>
-              <p>
-                This option specifies the version of Musl-libc which will be
-                used on the target. It is not relevant to the libc of the
-                host distro because everything compiled by pass1 GCC will run
-                in the chroot environment, which is isolated from libc of the
-                host distro.
-              </p>
-            </dd>
             <dt>
               <span class="term"><em class=
               "parameter"><code>--with-newlib</code></em></span>
@@ -232,7 +218,8 @@ cd       build</kbd></pre>
               <p>
                 This switch forces GCC to link its internal libraries
                 statically. We need this because the shared libraries require
-                Glibc, which is not yet installed on the target system.
+                <span class="phrase">Musl libc,</span> which is not yet
+                installed on the target system.
               </p>
             </dd>
             <dt>
@@ -290,10 +277,11 @@ cd       build</kbd></pre>
           "filename">$LFS/usr/include/limits.h</code> does not exist, so the
           internal header that has just been installed is a partial,
           self-contained file and does not include the extended features of
-          the system header. This is adequate for building Glibc, but the
-          full internal header will be needed later. Create a full version of
-          the internal header using a command that is identical to what the
-          GCC build system does in normal circumstances:
+          the system header. This is adequate for building <span class=
+          "phrase">Musl libc,</span> but the full internal header will be
+          needed later. Create a full version of the internal header using a
+          command that is identical to what the GCC build system does in
+          normal circumstances:
         </p>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -317,7 +305,7 @@ cat gcc/limitx.h gcc/glimits.h gcc/limity.h &gt; \
         <p>
           Details on this package are located in <a class="xref" href=
           "../chapter08/gcc.html#contents-gcc" title=
-          "8.31.2.&nbsp;Contents of GCC">Section&nbsp;8.31.2, “Contents of
+          "8.30.2.&nbsp;Contents of GCC">Section&nbsp;8.30.2, “Contents of
           GCC.”</a>
         </p>
       </div>
@@ -326,16 +314,16 @@ cat gcc/limitx.h gcc/glimits.h gcc/limity.h &gt; \
       <ul>
         <li class="prev">
           <a accesskey="p" href="binutils-pass1.html" title=
-          "Binutils-2.45.1 - Pass 1">Prev</a>
+          "Binutils-2.46.0 - Pass 1">Prev</a>
           <p>
-            Binutils-2.45.1 - Pass 1
+            Binutils-2.46.0 - Pass 1
           </p>
         </li>
         <li class="next">
           <a accesskey="n" href="linux-headers.html" title=
-          "Linux-6.6.129 API Headers">Next</a>
+          "Linux-7.0.3 API Headers">Next</a>
           <p>
-            Linux-6.6.129 API Headers
+            Linux-7.0.3 API Headers
           </p>
         </li>
         <li class="up">

@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      7.10.&nbsp;Python-3.14.3
+      7.10.&nbsp;Python-3.14.4
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,15 +23,15 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="perl.html" title="Perl-5.42.0">Prev</a>
+          <a accesskey="p" href="perl.html" title="Perl-5.42.2">Prev</a>
           <p>
-            Perl-5.42.0
+            Perl-5.42.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="texinfo.html" title="Texinfo-7.2">Next</a>
+          <a accesskey="n" href="texinfo.html" title="Texinfo-7.3">Next</a>
           <p>
-            Texinfo-7.2
+            Texinfo-7.3
           </p>
         </li>
         <li class="up">
@@ -46,7 +46,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-Python" name="ch-tools-Python"></a>7.10. Python-3.14.3
+      <a id="ch-tools-Python" name="ch-tools-Python"></a>7.10. Python-3.14.4
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -82,7 +82,7 @@
             There are two package files whose name starts with the
             <span class="quote">“<span class="quote">python</span>”</span>
             prefix. The one to extract from is <code class=
-            "filename">Python-3.14.3.tar.xz</code> (notice the uppercase
+            "filename">Python-3.14.4.tar.xz</code> (notice the uppercase
             first letter).
           </p>
         </div>
@@ -91,8 +91,10 @@
         </p>
         <pre class="userinput"><kbd class=
         "command">./configure --prefix=/usr       \
-            --enable-shared     \
-            --without-ensurepip \
+            --enable-shared        \
+            --enable-optimizations \
+            --disable-test-modules \
+            --without-ensurepip    \
             --without-static-libpython</kbd></pre>
         <div class="variablelist">
           <p class="title">
@@ -106,6 +108,27 @@
             <dd>
               <p>
                 This switch prevents installation of static libraries.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-optimizations</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch enables Profile Guided Optimization (PGO) and
+                Link Time Optimization (LTO) during the build.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-test-modules</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents the installation of test suite modules
+                for running Python's own test suite and serve no purpose in a
+                production installation.testsuites.
               </p>
             </dd>
             <dt>
@@ -133,8 +156,7 @@
         <p>
           Compile the package:
         </p>
-        <pre class="userinput"><kbd class=
-        "command">make PROFILE_TASK='-m test --pgo -i test_fma_zero_result -i test_locale_caching -i test_locale_compiled'</kbd></pre>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
@@ -161,7 +183,7 @@
         <p>
           Details on this package are located in <a class="xref" href=
           "../chapter08/Python.html#contents-python" title=
-          "8.57.2.&nbsp;Contents of Python 3">Section&nbsp;8.57.2, “Contents
+          "8.59.2.&nbsp;Contents of Python 3">Section&nbsp;8.59.2, “Contents
           of Python 3.”</a>
         </p>
       </div>
@@ -169,15 +191,15 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="perl.html" title="Perl-5.42.0">Prev</a>
+          <a accesskey="p" href="perl.html" title="Perl-5.42.2">Prev</a>
           <p>
-            Perl-5.42.0
+            Perl-5.42.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="texinfo.html" title="Texinfo-7.2">Next</a>
+          <a accesskey="n" href="texinfo.html" title="Texinfo-7.3">Next</a>
           <p>
-            Texinfo-7.2
+            Texinfo-7.3
           </p>
         </li>
         <li class="up">

@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.70.&nbsp;GRUB-2.12
+      8.72.&nbsp;GRUB-2.14
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -22,9 +22,9 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="groff.html" title="Groff-1.23.0">Prev</a>
+          <a accesskey="p" href="groff.html" title="Groff-1.24.1">Prev</a>
           <p>
-            Groff-1.23.0
+            Groff-1.24.1
           </p>
         </li>
         <li class="next">
@@ -44,44 +44,32 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-grub" name="ch-system-grub"></a>8.70. GRUB-2.12
+      <a id="ch-system-grub" name="ch-system-grub"></a>8.72. GRUB-2.14
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <p>
           The GRUB package contains the GRand Unified Bootloader.
         </p>
-        <div class="segmentedlist">
-          <div class="seglistitem">
-            <div class="seg">
-              <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">0.3 SBU</span>
-            </div>
-            <div class="seg">
-              <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">166 MB</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="installation" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          8.70.1. Installation of GRUB
-        </h2>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
             Note
           </h3>
           <p>
-            If your system has UEFI support and you wish to boot LFS with
-            UEFI, you need to install GRUB with UEFI support (and its
-            dependencies) by following the instructions on <a class="ulink"
-            href=
-            "https://www.linuxfromscratch.org/blfs/view/svn/postlfs/grub-efi.html">
-            the BLFS page</a>. You may skip this package, or install this
-            package and the BLFS GRUB for UEFI package without conflict (the
-            BLFS page provides instructions for both cases).
+            This page is split up into multiple sections aimed to install for
+            a specific boot method (BIOS, 64-bit UEFI, and 32-bit UEFI). GRUB
+            cannot be built with all the boot method architectures at once.
+          </p>
+          <p>
+            You may skip other sections to go to the boot method you need. If
+            in doubt, you may follow all of the sections at the cost of extra
+            build time. After you have installed support for your boot
+            method, then continue building the rest of the packages in this
+            chapter. Making your LFS system bootable with GRUB will be
+            discussed in <a class="xref" href="../chapter10/grub.html" title=
+            "10.4.&nbsp;Using GRUB to Set Up the Boot Process">Section&nbsp;10.4,
+            “Using GRUB to Set Up the Boot Process.”</a>
           </p>
         </div>
         <div class="admon warning">
@@ -102,11 +90,28 @@
             optimization.
           </p>
         </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.3 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">166 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.72.1. Installation of GRUB for BIOS
+        </h2>
         <p>
-          Add a file missing from the release tarball:
+          First fix a bug introduced in grub-2.14:
         </p>
-        <pre class="userinput"><kbd class="command">echo <code class=
-        "literal">depends bli part_gpt</code> &gt; grub-core/extra_deps.lst</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
         <p>
           Prepare GRUB for compilation:
         </p>
@@ -153,21 +158,137 @@
           "command"><strong>make check</strong></span>.
         </p>
         <p>
-          Install the package, and move the Bash completion support file to
-          the location recommended by the Bash completion maintainers:
+          Install the package:
         </p>
-        <pre class="userinput"><kbd class="command">make install
-mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions</kbd></pre>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.72.2. Installation of GRUB for 64-bit UEFI
+        </h2>
         <p>
-          Making your LFS system bootable with GRUB will be discussed in
-          <a class="xref" href="../chapter10/grub.html" title=
-          "10.4.&nbsp;Using GRUB to Set Up the Boot Process">Section&nbsp;10.4,
-          “Using GRUB to Set Up the Boot Process.”</a>
+          If you want to boot with 64-bit UEFI, you should build support for
+          it.
         </p>
+        <p>
+          First, if you built GRUB from any of the sections above, clean the
+          source tree:
+        </p>
+        <pre class="userinput"><kbd class="command">make clean</kbd></pre>
+        <p>
+          Fix a bug introduced in grub-2.14:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
+        <p>
+          Now configure GRUB for 64-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr       \
+            --sysconfdir=/etc   \
+            --target=x86_64     \
+            --with-platform=efi \
+            --disable-efiemu    \
+            --disable-werror</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--target=x86_64</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This defines that the UEFI firmware architecture is x86_64,
+                which GRUB should target.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-platform=efi</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This specifies that EFI is a platform GRUB should target. In
+                combination with <em class=
+                "parameter"><code>--target=x86_64</code></em>, GRUB will have
+                the ability to target the <code class=
+                "literal">x86_64-efi</code> platform.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package for 64-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install support for 64-bit UEFI:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          8.72.3. Installation of GRUB for 32-bit UEFI
+        </h2>
+        <p>
+          If you want to boot with 32-bit UEFI, which is very rare, you
+          should build support for it.
+        </p>
+        <p>
+          First, if you built GRUB from any of the sections above, clean the
+          source tree:
+        </p>
+        <pre class="userinput"><kbd class="command">make clean</kbd></pre>
+        <p>
+          Fix a bug introduced in grub-2.14:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
+        <p>
+          Now configure GRUB for 32-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr       \
+            --sysconfdir=/etc   \
+            --target=i386       \
+            --with-platform=efi \
+            --disable-efiemu    \
+            --disable-werror</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--target=i386</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This defines that the UEFI firmware architecture is
+                i386/32-bit, which GRUB should target. In combination with
+                <em class="parameter"><code>--with-platform=efi</code></em>,
+                GRUB will have the ability to target the <code class=
+                "literal">i386-efi</code> platform.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package for 32-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install support for 32-bit UEFI:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="contents-gRUB" name="contents-gRUB"></a>8.70.2. Contents of
+          <a id="contents-gRUB" name="contents-gRUB"></a>8.72.4. Contents of
           GRUB
         </h2>
         <div class="segmentedlist">
@@ -190,6 +311,17 @@ mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions</kbd></
               run)</span>
             </div>
           </div>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            <code class="filename">/usr/lib/grub</code> will have different
+            contents based on what platform(s) you have installed GRUB for.
+            Namely, there will be different GRUB modules for each platform.
+          </p>
         </div>
         <div class="variablelist">
           <h3>
@@ -569,9 +701,9 @@ mv -v /etc/bash_completion.d/grub /usr/share/bash-completion/completions</kbd></
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="groff.html" title="Groff-1.23.0">Prev</a>
+          <a accesskey="p" href="groff.html" title="Groff-1.24.1">Prev</a>
           <p>
-            Groff-1.23.0
+            Groff-1.24.1
           </p>
         </li>
         <li class="next">

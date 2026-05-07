@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      5.4.&nbsp;Linux-6.6.129 API Headers
+      5.4.&nbsp;Linux-7.0.3 API Headers
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -29,9 +29,9 @@
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="musl.html" title="Musl-1.2.5">Next</a>
+          <a accesskey="n" href="musl.html" title="Musl-1.2.6">Next</a>
           <p>
-            Musl-1.2.5
+            Musl-1.2.6
           </p>
         </li>
         <li class="up">
@@ -46,12 +46,12 @@
     </div>
     <h1 class="sect1">
       <a id="ch-tools-linux-headers" name="ch-tools-linux-headers"></a>5.4.
-      Linux-6.6.129 API Headers
+      Linux-7.0.3 API Headers
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <p>
-          The Linux API Headers (in linux-6.6.129.tar.xz) expose the kernel's
+          The Linux API Headers (in linux-7.0.3.tar.xz) expose the kernel's
           API for use by Glibc.
         </p>
         <div class="segmentedlist">
@@ -73,9 +73,10 @@
         </h2>
         <p>
           The Linux kernel needs to expose an Application Programming
-          Interface (API) for the system's C library (Musl libc in LFS) to
-          use. This is done by way of sanitizing various C header files that
-          are shipped in the Linux kernel source tarball.
+          Interface (API) for the system's C library <span class=
+          "phrase">Musl libc</span> to use. This is done by way of sanitizing
+          various C header files that are shipped in the Linux kernel source
+          tarball.
         </p>
         <p>
           Make sure there are no stale files embedded in the package:
@@ -294,9 +295,9 @@ find usr/include -type f ! -name '*.h' -delete
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="musl.html" title="Musl-1.2.5">Next</a>
+          <a accesskey="n" href="musl.html" title="Musl-1.2.6">Next</a>
           <p>
-            Musl-1.2.5
+            Musl-1.2.6
           </p>
         </li>
         <li class="up">

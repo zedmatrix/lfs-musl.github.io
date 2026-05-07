@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.97.&nbsp;Stripping
+      8.99.&nbsp;Stripping
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -45,7 +45,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-stripping" name="ch-system-stripping"></a>8.97.
+      <a id="ch-system-stripping" name="ch-system-stripping"></a>8.99.
       Stripping
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
@@ -140,9 +140,8 @@
              libquadmath.so.0.0.0
              libstdc++.so.6.0.34
              libitm.so.1.0.0
-             libatomic.so.1.2.0"
-
-cd /usr/lib
+             libatomic.so.1.2.0"</kbd></pre>
+      <pre class="userinput"><kbd class="command">cd /usr/lib
 
 for LIB in $save_usrlib; do
     objcopy --only-keep-debug --compress-debug-sections=zstd $LIB $LIB.dbg
@@ -151,27 +150,27 @@ for LIB in $save_usrlib; do
     objcopy --add-gnu-debuglink=$LIB.dbg /tmp/$LIB
     install -vm755 /tmp/$LIB /usr/lib
     rm /tmp/$LIB
-done
-
-online_usrbin="bash find strip"
-online_usrlib="libbfd-2.45.1.so
-               libsframe.so.2.0.0
+done</kbd></pre>
+      <pre class="userinput"><kbd class=
+      "command">online_usrbin="bash find strip"
+online_usrlib="libbfd-2.46.0.20260210.so
+               libsframe.so.3.0.0
                libhistory.so.8.3
                libncursesw.so.6.6
                libreadline.so.8.3
-               libz.so.1.3.1
-               libzstd.so.1.5.7"
-
-for BIN in $online_usrbin; do
+               libz.so.1.3.2
+               libzstd.so.1.5.7"</kbd></pre>
+      <pre class="userinput"><kbd class=
+      "command">for BIN in $online_usrbin; do
     cp /usr/bin/$BIN /tmp/$BIN
-    strip --strip-debug /tmp/$BIN
+    strip --strip-unneeded /tmp/$BIN
     install -vm755 /tmp/$BIN /usr/bin
     rm /tmp/$BIN
 done
 
 for LIB in $online_usrlib; do
     cp /usr/lib/$LIB /tmp/$LIB
-    strip --strip-debug /tmp/$LIB
+    strip --strip-unneeded /tmp/$LIB
     install -vm755 /tmp/$LIB /usr/lib
     rm /tmp/$LIB
 done
@@ -182,7 +181,7 @@ for i in $(find /usr/lib -type f -name \*.so* ! -name \*dbg) \
     case "$online_usrbin $online_usrlib $save_usrlib" in
         *$(basename $i)* )
             ;;
-        * ) strip --strip-debug $i
+        * ) strip --strip-unneeded $i
             ;;
     esac
 done

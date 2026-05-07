@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      7.12.&nbsp;Util-linux-2.41.3
+      7.12.&nbsp;Util-linux-2.42
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,15 +23,15 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="texinfo.html" title="Texinfo-7.2">Prev</a>
+          <a accesskey="p" href="texinfo.html" title="Texinfo-7.3">Prev</a>
           <p>
-            Texinfo-7.2
+            Texinfo-7.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nano.html" title="Nano-8.7.1">Next</a>
+          <a accesskey="n" href="nano.html" title="Nano-9.0">Next</a>
           <p>
-            Nano-8.7.1
+            Nano-9.0
           </p>
         </li>
         <li class="up">
@@ -47,7 +47,7 @@
     </div>
     <h1 class="sect1">
       <a id="ch-tools-util-linux" name="ch-tools-util-linux"></a>7.12.
-      Util-linux-2.41.3
+      Util-linux-2.42
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -83,6 +83,11 @@
         <p>
           Prepare Util-linux for compilation:
         </p>
+        <p>
+          First, add a missing define in nsenter.c:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../util-linux-2.42-nsenter-fix.patch</kbd></pre>
         <pre class="userinput"><kbd class=
         "command">./configure --libdir=/usr/lib     \
             --runstatedir=/run    \
@@ -97,7 +102,7 @@
             --disable-liblastlog2 \
             --without-python      \
             ADJTIME_PATH=/var/lib/hwclock/adjtime \
-            --docdir=/usr/share/doc/util-linux-2.41.3</kbd></pre>
+            --docdir=/usr/share/doc/util-linux-2.42</kbd></pre>
         <div class="variablelist">
           <p class="title">
             <strong>The meaning of the configure options:</strong>
@@ -175,7 +180,7 @@
         <p>
           Details on this package are located in <a class="xref" href=
           "../chapter08/util-linux.html#contents-utillinux" title=
-          "8.86.2.&nbsp;Contents of Util-linux">Section&nbsp;8.86.2,
+          "8.88.2.&nbsp;Contents of Util-linux">Section&nbsp;8.88.2,
           “Contents of Util-linux.”</a>
         </p>
       </div>
@@ -183,15 +188,15 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="texinfo.html" title="Texinfo-7.2">Prev</a>
+          <a accesskey="p" href="texinfo.html" title="Texinfo-7.3">Prev</a>
           <p>
-            Texinfo-7.2
+            Texinfo-7.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nano.html" title="Nano-8.7.1">Next</a>
+          <a accesskey="n" href="nano.html" title="Nano-9.0">Next</a>
           <p>
-            Nano-8.7.1
+            Nano-9.0
           </p>
         </li>
         <li class="up">

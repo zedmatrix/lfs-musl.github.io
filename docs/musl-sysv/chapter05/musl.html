@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      5.5.&nbsp;Musl-1.2.5
+      5.5.&nbsp;Musl-1.2.6
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -23,9 +23,9 @@
       <ul>
         <li class="prev">
           <a accesskey="p" href="linux-headers.html" title=
-          "Linux-6.6.129 API Headers">Prev</a>
+          "Linux-7.0.3 API Headers">Prev</a>
           <p>
-            Linux-6.6.129 API Headers
+            Linux-7.0.3 API Headers
           </p>
         </li>
         <li class="next">
@@ -46,7 +46,7 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-tools-glibc" name="ch-tools-glibc"></a>5.5. Musl-1.2.5
+      <a id="ch-tools-musl" name="ch-tools-musl"></a>5.5. Musl-1.2.6
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -61,7 +61,7 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">1.4 SBU</span>
+              <span class="segbody">less than 1 SBU</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
@@ -101,18 +101,19 @@ esac</kbd></pre>
           </p>
         </div>
         <p>
+          Patch some vulnerabilities:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../musl-1.2.6-cve-2026-40200.patch
+patch -Np1 -i ../musl-1.2.6-cve-2026-6042.patch</kbd></pre>
+        <p>
           The <span class="command"><strong>malloc</strong></span>
           implementation used by Musl is slow. Apply the following patch to
           use <span class="command"><strong>rpmalloc</strong></span> as a
           faster alternative:
         </p>
         <pre class="userinput"><kbd class=
-        "command">patch -Np1 -i ../musl-1.2.5-rpmalloc.patch</kbd></pre>
-        <p>
-          Patch some vulnerabilities:
-        </p>
-        <pre class="userinput"><kbd class=
-        "command">patch -Np1 -i ../musl-1.2.5-iconv-fix.patch</kbd></pre>
+        "command">patch -Np1 -i ../musl-1.2.6-rpmalloc.patch</kbd></pre>
         <p>
           Prepare Musl for compilation:
         </p>
@@ -239,9 +240,9 @@ readelf -l a.out | grep ld-musl</kbd></pre>
       <ul>
         <li class="prev">
           <a accesskey="p" href="linux-headers.html" title=
-          "Linux-6.6.129 API Headers">Prev</a>
+          "Linux-7.0.3 API Headers">Prev</a>
           <p>
-            Linux-6.6.129 API Headers
+            Linux-7.0.3 API Headers
           </p>
         </li>
         <li class="next">
