@@ -147,7 +147,7 @@
 for LIB in $save_usrlib; do
     objcopy --only-keep-debug --compress-debug-sections=zstd $LIB $LIB.dbg
     cp $LIB /tmp/$LIB
-    strip --strip-debug /tmp/$LIB
+    strip --strip-unneeded /tmp/$LIB
     objcopy --add-gnu-debuglink=$LIB.dbg /tmp/$LIB
     install -vm755 /tmp/$LIB /usr/lib
     rm /tmp/$LIB
