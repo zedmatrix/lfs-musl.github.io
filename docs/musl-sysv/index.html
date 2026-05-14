@@ -12,7 +12,7 @@
     media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="book">
       <div class="titlepage">
         <div>
@@ -23,12 +23,12 @@
           </div>
           <div>
             <h2 class="subtitle">
-              Version 2.0-musl
+              Version 3.0-musl
             </h2>
           </div>
           <div>
             <h2 class="subtitle">
-              Published May 4th, 2026
+              Published May 14th, 2026
             </h2>
           </div>
           <div>
@@ -37,18 +37,6 @@
                 <h3 class="author">
                   <span class="firstname">Maintained by Zed</span>
                   <span class="surname">Matrix</span>
-                </h3>
-              </div>
-              <div class="author">
-                <h3 class="author">
-                  <span class="firstname">Created By: Gerard</span>
-                  <span class="surname">Beekmans</span>
-                </h3>
-              </div>
-              <div class="author">
-                <h3 class="author">
-                  <span class="firstname">Managing Editor: Bruce</span>
-                  <span class="surname">Dubbs</span>
                 </h3>
               </div>
             </div>
@@ -77,7 +65,7 @@
         <ul>
           <li class="preface">
             <h4>
-              Preface
+              <a href="prologue/preface.html">Preface</a>
             </h4>
             <ul>
               <li class="sect1">
@@ -114,12 +102,12 @@
           </li>
           <li class="part">
             <h3>
-              I. Introduction
+              <a href="part1.html">I. Introduction</a>
             </h3>
             <ul>
               <li class="chapter">
                 <h4>
-                  1. Introduction
+                  <a href="chapter01/chapter01.html">1. Introduction</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -145,12 +133,13 @@
           </li>
           <li class="part">
             <h3>
-              II. Preparing for the Build
+              <a href="part2.html">II. Preparing for the Build</a>
             </h3>
             <ul>
               <li class="chapter">
                 <h4>
-                  2. Preparing the Host System
+                  <a href="chapter02/chapter02.html">2. Preparing the Host
+                  System</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -184,7 +173,8 @@
               </li>
               <li class="chapter">
                 <h4>
-                  3. Packages and Patches
+                  <a href="chapter03/chapter03.html">3. Packages and
+                  Patches</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -200,7 +190,8 @@
               </li>
               <li class="chapter">
                 <h4>
-                  4. Final Preparations
+                  <a href="chapter04/chapter04.html">4. Final
+                  Preparations</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -231,12 +222,14 @@
           </li>
           <li class="part">
             <h3>
-              III. Building the LFS Cross Toolchain and Temporary Tools
+              <a href="part3.html">III. Building the LFS Cross Toolchain and
+              Temporary Tools</a>
             </h3>
             <ul>
               <li class="preface">
                 <h4>
-                  Important Preliminary Material
+                  <a href="partintro/partintro.html">Important Preliminary
+                  Material</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -254,7 +247,8 @@
               </li>
               <li class="chapter">
                 <h4>
-                  5. Compiling a Cross-Toolchain
+                  <a href="chapter05/chapter05.html">5. Compiling a
+                  Cross-Toolchain</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -265,11 +259,11 @@
                     Pass 1</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter05/gcc-pass1.html">GCC-15.2.0 - Pass
+                    <a href="chapter05/gcc-pass1.html">GCC-16.1.0 - Pass
                     1</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter05/linux-headers.html">Linux-7.0.3 API
+                    <a href="chapter05/linux-headers.html">Linux-7.0.6 API
                     Headers</a>
                   </li>
                   <li class="sect1">
@@ -277,13 +271,14 @@
                   </li>
                   <li class="sect1">
                     <a href="chapter05/gcc-libstdc++.html">Libstdc++ from
-                    GCC-15.2.0</a>
+                    GCC-16.1.0</a>
                   </li>
                 </ul>
               </li>
               <li class="chapter">
                 <h4>
-                  6. Cross Compiling Temporary Tools
+                  <a href="chapter06/chapter06.html">6. Cross Compiling
+                  Temporary Tools</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -296,7 +291,7 @@
                     <a href="chapter06/ncurses.html">Ncurses-6.6</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter06/bash.html">Bash-5.3</a>
+                    <a href="chapter06/bash.html">Bash-5.3.9</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter06/coreutils.html">Coreutils-9.11</a>
@@ -339,14 +334,15 @@
                     Pass 2</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter06/gcc-pass2.html">GCC-15.2.0 - Pass
+                    <a href="chapter06/gcc-pass2.html">GCC-16.1.0 - Pass
                     2</a>
                   </li>
                 </ul>
               </li>
               <li class="chapter">
                 <h4>
-                  7. Entering Chroot and Building Additional Temporary Tools
+                  <a href="chapter07/chapter07.html">7. Entering Chroot and
+                  Building Additional Temporary Tools</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -376,22 +372,22 @@
                     <a href="chapter07/gettext.html">Gettext-1.0</a>
                   </li>
                   <li class="sect1">
+                    <a href="chapter07/nano.html">Nano-9.0</a>
+                  </li>
+                  <li class="sect1">
                     <a href="chapter07/bison.html">Bison-3.8.2</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter07/perl.html">Perl-5.42.2</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter07/Python.html">Python-3.14.4</a>
+                    <a href="chapter07/Python.html">Python-3.14.5</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter07/texinfo.html">Texinfo-7.3</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter07/util-linux.html">Util-linux-2.42</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter07/nano.html">Nano-9.0</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter07/cleanup.html">Cleaning up and Saving
@@ -403,12 +399,13 @@
           </li>
           <li class="part">
             <h3>
-              IV. Building the LFS System
+              <a href="part4.html">IV. Building the LFS System</a>
             </h3>
             <ul>
               <li class="chapter">
                 <h4>
-                  8. Installing Basic System Software
+                  <a href="chapter08/chapter08.html">8. Installing Basic
+                  System Software</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -418,7 +415,7 @@
                     <a href="chapter08/pkgmgt.html">Package Management</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/iana-etc.html">Iana-Etc-20260327</a>
+                    <a href="chapter08/iana-etc.html">Iana-Etc-20260504</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/musl.html">Musl-1.2.6</a>
@@ -500,7 +497,7 @@
                     <a href="chapter08/shadow.html">Shadow-4.19.4</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/gcc.html">GCC-15.2.0</a>
+                    <a href="chapter08/gcc.html">GCC-16.1.0</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/ncurses.html">Ncurses-6.6</a>
@@ -521,7 +518,7 @@
                     <a href="chapter08/grep.html">Grep-3.12</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/bash.html">Bash-5.3</a>
+                    <a href="chapter08/bash.html">Bash-5.3.9</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/libtool.html">Libtool-2.5.4</a>
@@ -593,7 +590,7 @@
                     <a href="chapter08/sqlite.html">Sqlite-3530000</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/Python.html">Python-3.14.4</a>
+                    <a href="chapter08/Python.html">Python-3.14.5</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/flit-core.html">Flit-Core-3.12.0</a>
@@ -602,7 +599,7 @@
                     <a href="chapter08/packaging.html">Packaging-26.2</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/wheel.html">Wheel-0.46.3</a>
+                    <a href="chapter08/wheel.html">Wheel-0.47.0</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/setuptools.html">Setuptools-82.0.1</a>
@@ -630,9 +627,6 @@
                   </li>
                   <li class="sect1">
                     <a href="chapter08/groff.html">Groff-1.24.1</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/grub.html">GRUB-2.14</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/gzip.html">Gzip-1.14</a>
@@ -693,22 +687,7 @@
                     <a href="chapter08/sysvinit.html">SysVinit-3.18</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter08/dhcpcd.html">dhcpcd-10.3.2</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/openssh.html">OpenSSH-10.3p1</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/popt.html">Popt-1.19</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/dosfstools.html">dosfstools-4.2</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/efivar.html">efivar-39</a>
-                  </li>
-                  <li class="sect1">
-                    <a href="chapter08/efibootmgr.html">efibootmgr-18</a>
+                    <a href="chapter08/cleanup.html">Cleaning Up</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter08/aboutdebug.html">About Debugging
@@ -717,14 +696,12 @@
                   <li class="sect1">
                     <a href="chapter08/stripping.html">Stripping</a>
                   </li>
-                  <li class="sect1">
-                    <a href="chapter08/cleanup.html">Cleaning Up</a>
-                  </li>
                 </ul>
               </li>
               <li class="chapter">
                 <h4>
-                  9. System Configuration
+                  <a href="chapter09/chapter09.html">9. System
+                  Configuration</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -765,11 +742,34 @@
                     <a href="chapter09/etcshells.html">Creating the
                     /etc/shells File</a>
                   </li>
+                  <li class="sect1">
+                    <a href=
+                    "chapter09/dejavu-fonts.html">dejavu-fonts-ttf-2.37</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/which.html">Which-2.23</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libaio.html">libaio-0.3.113</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/lvm2.html">LVM2-2.03.40</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/fuse.html">Fuse-3.18.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/libpng.html">Libpng-1.6.58</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter09/freetype2.html">FreeType-2.14.3</a>
+                  </li>
                 </ul>
               </li>
               <li class="chapter">
                 <h4>
-                  10. Making the LFS System Bootable
+                  <a href="chapter10/chapter10.html">10. Making the LFS
+                  System Bootable</a>
                 </h4>
                 <ul>
                   <li class="sect1">
@@ -780,11 +780,32 @@
                     File</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter10/kernel.html">Linux-7.0.3</a>
+                    <a href="chapter10/kernel.html">Linux-7.0.6</a>
                   </li>
                   <li class="sect1">
-                    <a href="chapter10/grub.html">Using GRUB to Set Up the
-                    Boot Process</a>
+                    <a href="chapter10/grub.html">GRUB-2.14</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/popt.html">Popt-1.19</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/dosfstools.html">dosfstools-4.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/efivar.html">efivar-39</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/efibootmgr.html">efibootmgr-18</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/dhcpcd.html">dhcpcd-10.3.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/openssh.html">OpenSSH-10.3p1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter10/boot-grub.html">Using GRUB to Set Up
+                    the Boot Process</a>
                   </li>
                   <li class="sect1">
                     <a href="chapter10/systemd.html">Using Systemd-boot to
@@ -794,9 +815,47 @@
               </li>
               <li class="chapter">
                 <h4>
-                  11. The End
+                  <a href="chapter11/chapter11.html">11. The End - System
+                  Utilities</a>
                 </h4>
                 <ul>
+                  <li class="sect1">
+                    <a href=
+                    "chapter11/libunistring.html">Libunistring-1.4.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/libidn2.html">Libidn2-2.3.8</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/libpsl.html">Libpsl-0.21.5</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/libusb.html">Libusb-1.0.29</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/libtasn1.html">Libtasn1-4.21.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/p11-kit.html">P11-kit-0.26.2</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/make-ca.html">Make-ca-1.16.1</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/curl.html">cURL-8.20.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/wget.html">Wget-1.25.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/hwdata.html">Hwdata-0.407</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/pciutils.html">Pciutils-3.15.0</a>
+                  </li>
+                  <li class="sect1">
+                    <a href="chapter11/usbutils.html">Usbutils-019</a>
+                  </li>
                   <li class="sect1">
                     <a href="chapter11/theend.html">The End</a>
                   </li>
@@ -819,23 +878,31 @@
           </li>
           <li class="part">
             <h3>
-              V. Appendices
+              <a href="part5.html">V. Appendices</a>
             </h3>
             <ul>
               <li class="appendix">
-                <a href="appendices/acronymlist.html">A. Acronyms and
-                Terms</a>
+                <h3>
+                  <a href="appendices/acronymlist.html">A. Acronyms and
+                  Terms</a>
+                </h3>
               </li>
               <li class="appendix">
-                <a href="appendices/acknowledgments.html">B.
-                Acknowledgments</a>
+                <h3>
+                  <a href="appendices/acknowledgments.html">B.
+                  Acknowledgments</a>
+                </h3>
               </li>
               <li class="appendix">
-                <a href="appendices/dependencies.html">C. Dependencies</a>
+                <h3>
+                  <a href="appendices/dependencies.html">C. Dependencies</a>
+                </h3>
               </li>
               <li class="appendix">
-                <a href="scripts/scripts.html">D. Boot and sysconfig scripts
-                version-20260504</a>
+                <h3>
+                  <a href="scripts/scripts.html">D. Boot and sysconfig
+                  scripts version-20260504</a>
+                </h3>
                 <ul>
                   <li class="sect1">
                     <a href="scripts/apds01.html">/etc/rc.d/init.d/rc</a>
@@ -948,8 +1015,10 @@
                 </ul>
               </li>
               <li class="appendix">
-                <a href="scripts/udev-rules.html">E. Udev configuration
-                rules</a>
+                <h3>
+                  <a href="scripts/udev-rules.html">E. Udev configuration
+                  rules</a>
+                </h3>
                 <ul>
                   <li class="sect1">
                     <a href="scripts/apes01.html">55-lfs.rules</a>
@@ -957,7 +1026,9 @@
                 </ul>
               </li>
               <li class="appendix">
-                <a href="appendices/licenses.html">F. LFS Licenses</a>
+                <h3>
+                  <a href="appendices/licenses.html">F. LFS Licenses</a>
+                </h3>
                 <ul>
                   <li class="sect1">
                     <a href="appendices/creat-comm.html">Creative Commons

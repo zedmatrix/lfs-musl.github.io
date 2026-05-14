@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;6.&nbsp;Cross Compiling Temporary Tools
@@ -41,7 +41,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
@@ -58,11 +58,11 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">0.1 SBU</span>
+              <span class="segbody">less than 0.5 SBU</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">42 MB</span>
+              <span class="segbody">31 MB</span>
             </div>
           </div>
         </div>
@@ -71,6 +71,11 @@
         <h2 class="sect2">
           6.7.1. Installation of File
         </h2>
+        <p>
+          Apply a fix for the compare GUID function:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../file-5.47-compare-guid.patch</kbd></pre>
         <p>
           The <span class="command"><strong>file</strong></span> command on
           the build host needs to be the same version as the one we are
@@ -160,7 +165,7 @@ popd</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

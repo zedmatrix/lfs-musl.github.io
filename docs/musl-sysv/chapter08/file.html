@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;8.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
@@ -60,7 +60,7 @@
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">19 MB</span>
+              <span class="segbody">21 MB</span>
             </div>
           </div>
         </div>
@@ -69,6 +69,11 @@
         <h2 class="sect2">
           8.11.1. Installation of File
         </h2>
+        <p>
+          Apply a fix for the compare GUID function:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../file-5.47-compare-guid.patch</kbd></pre>
         <p>
           Prepare File for compilation:
         </p>
@@ -170,7 +175,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

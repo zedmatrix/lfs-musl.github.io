@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.13.&nbsp;libaio-0.3.113
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="which.html" title="Which-2.23">Prev</a>
+          <p>
+            Which-2.23
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lvm2.html" title="LVM2-2.03.40">Next</a>
+          <p>
+            LVM2-2.03.40
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-config-libaio" name="ch-config-libaio"></a>9.13.
+      libaio-0.3.113
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.1. Introduction to libaio
+        </h2>
+        <p>
+          The <span class="application">libaio</span> package is an
+          asynchronous I/O facility ("async I/O", or "aio") that has a richer
+          API and capability set than the simple POSIX async I/O facility.
+          This library, libaio, provides the Linux-native API for async I/O.
+          The POSIX async I/O facility requires this library in order to
+          provide kernel-accelerated async I/O capabilities, as do
+          applications which require the Linux-native async I/O API.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">786 KB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.2. Installation of libaio
+        </h2>
+        <p>
+          First, disable the installation of the static library:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i '/install.*libaio.a/s/^/#/' src/Makefile</kbd></pre>
+        <p>
+          Next, fix an issue in the test suite:
+        </p>
+        <pre class="userinput"><kbd class="command">case "$(uname -m)" in
+  i?86) sed -e "s/off_t/off64_t/" -i harness/cases/23.t ;;
+esac</kbd></pre>
+        <p>
+          Build <span class="application">libaio</span> by running the
+          following command:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make partcheck</kbd></pre>
+        <p>
+          Now, install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.13.3. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libaio.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libaio-lib" name="libaio-lib"></a><span class=
+                    "term"><code class="filename">libaio.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the libaio library
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="which.html" title="Which-2.23">Prev</a>
+          <p>
+            Which-2.23
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lvm2.html" title="LVM2-2.03.40">Next</a>
+          <p>
+            LVM2-2.03.40
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

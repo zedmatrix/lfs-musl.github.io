@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;8.&nbsp;Installing Basic System Software
@@ -39,7 +39,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">12 MB</span>
+              <span class="segbody">6.5 MB</span>
             </div>
           </div>
         </div>
@@ -130,29 +130,6 @@
           Install the package:
         </p>
         <pre class="userinput"><kbd class="command">make install</kbd></pre>
-        <div class="admon note">
-          <img alt="[Note]" src="../images/note.png" />
-          <h3>
-            Note
-          </h3>
-          <p>
-            The instructions above disabled obsolete API functions since no
-            package installed by compiling from sources would link against
-            them at runtime. However, the only known binary-only applications
-            that link against these functions require ABI version 1. If you
-            must have such functions because of some binary-only application
-            or to be compliant with LSB, build the package again with the
-            following commands:
-          </p>
-          <pre class="userinput"><kbd class="command">make distclean
-./configure --prefix=/usr                \
-            --enable-hashes=strong,glibc \
-            --enable-obsolete-api=glibc  \
-            --disable-static             \
-            --disable-failure-tokens
-make
-cp -av --remove-destination .libs/libcrypt.so.1* /usr/lib</kbd></pre>
-        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -215,7 +192,7 @@ cp -av --remove-destination .libs/libcrypt.so.1* /usr/lib</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

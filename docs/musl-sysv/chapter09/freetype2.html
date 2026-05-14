@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.17.&nbsp;FreeType-2.14.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libpng.html" title="Libpng-1.6.58">Prev</a>
+          <p>
+            Libpng-1.6.58
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter10/chapter10.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-config-freetype2" name="ch-config-freetype2"></a>9.17.
+      FreeType-2.14.3
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.17.1. Introduction to FreeType2
+        </h2>
+        <p>
+          The <span class="application">FreeType2</span> package contains a
+          library which allows applications to properly render <span class=
+          "application">TrueType</span> fonts.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">31.2 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.17.2. Installation of FreeType2
+        </h2>
+        <p>
+          If you downloaded the additional documentation, unpack it into the
+          source tree using the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar -xf ../freetype-doc-2.14.3.tar.xz --strip-components=2 -C docs</kbd></pre>
+        <p>
+          First command enables GX/AAT and OpenType table validation and
+          second command enables Subpixel Rendering. Note that Subpixel
+          Rendering may have patent issues.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -ri "s:.*(AUX_MODULES.*valid):\1:" modules.cfg
+sed -r "s:.*(#.*SUBPIXEL_RENDERING) .*:\1:" \
+    -i include/freetype/config/ftoption.h</kbd></pre>
+        <p>
+          Prepare <span class="application">FreeType2</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr            \
+            --disable-static         \
+            --enable-freetype-config \
+            --with-harfbuzz=dynamic</kbd></pre>
+        <p>
+          Now, Build the package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, Install the package, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <p>
+          If you downloaded the optional documentation, install it:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cp -v -R docs -T /usr/share/doc/freetype-2.14.3
+
+rm -v /usr/share/doc/freetype-2.14.3/freetype-config.1</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.17.3. Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--enable-freetype-config</code></em>:
+          This switch ensures that the man page for freetype-config is
+          installed.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-harfbuzz=dynamic</code></em>:
+          This switch ensures that HarfBuzz is loaded dynamically, skipping
+          the requirement to rebuild this package after HarfBuzz is
+          installed.
+        </p>
+        <p>
+          <code class="option">--without-harfbuzz</code>: If <span class=
+          "application">harfbuzz</span> is installed prior to <span class=
+          "application">freetype</span> without <span class=
+          "application">freetype</span> support, use this switch to avoid a
+          build failure.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.17.4. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">freetype-config</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libfreetype.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/freetype2 and
+              /usr/share/doc/freetype-2.14.3</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="freetype-config" name=
+                    "freetype-config"></a><span class="term"><span class=
+                    "command"><strong>freetype-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to get <span class="application">FreeType</span>
+                    compilation and linking information
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfreetype" name="libfreetype"></a><span class=
+                    "term"><code class=
+                    "filename">libfreetype.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions for rendering various font types, such
+                    as TrueType and Type1
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libpng.html" title="Libpng-1.6.58">Prev</a>
+          <p>
+            Libpng-1.6.58
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter10/chapter10.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

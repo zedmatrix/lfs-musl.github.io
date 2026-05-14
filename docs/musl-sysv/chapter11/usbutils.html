@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      11.12.&nbsp;Usbutils-019
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;11.&nbsp;The End - System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pciutils.html" title=
+          "Pciutils-3.15.0">Prev</a>
+          <p>
+            Pciutils-3.15.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="theend.html" title="The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter11.html" title=
+          "Chapter&nbsp;11.&nbsp;The End - System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-finalize-usbutils" name="ch-finalize-usbutils"></a>11.12.
+      Usbutils-019
+    </h1>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          11.12.1. Introduction to USB Utils
+        </h2>
+        <p>
+          The <span class="application">USB Utils</span> package contains
+          utilities used to display information about USB buses in the system
+          and the devices connected to them.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.5 MB</span>
+            </div>
+          </div>
+        </div>
+        <h3>
+          USB Utils Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="libusb.html" title=
+          "11.4.&nbsp;Libusb-1.0.29">libusb-1.0.29</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="hwdata.html" title=
+          "11.10.&nbsp;Hwdata-0.407">Section&nbsp;11.10, “Hwdata-0.407”</a>
+          (runtime)
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          11.12.2. Installation of USB Utils
+        </h2>
+        <p>
+          Prepare <span class="application">USB Utils</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">meson setup build         \
+      --prefix=/usr       \
+      --buildtype=release</kbd></pre>
+        <p>
+          Build <span class="application">USB Utils</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now Install, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build install</kbd></pre>
+        <p>
+          The script <span class="command"><strong>lsusb.py</strong></span>
+          displays information in a more easily readable form than
+          <span class="command"><strong>lsusb</strong></span>. To find the
+          options, use <span class="command"><strong>lsusb.py
+          -h</strong></span>. One form of use recommended by the developer is
+          <span class="command"><strong>lsusb.py -ciu</strong></span>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          11.12.3. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">lsusb, lsusb.py, usb-devices, and
+              usbhid-dump</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsusb" name="lsusb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsusb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility for displaying information about all USB
+                    buses in the system and all devices connected to them,
+                    but not in human friendly form
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lsusb.py" name="lsusb.py"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lsusb.py</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    displays information about all USB buses in the system
+                    and all devices connected to them in reasonable human
+                    friendly form
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="usb-devices" name="usb-devices"></a><span class=
+                    "term"><span class=
+                    "command"><strong>usb-devices</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a shell script that displays details of USB buses and
+                    devices connected to them. It is designed to be used if
+                    /proc/bus/usb/devices is not available on your system
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="usbhid-dump" name="usbhid-dump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>usbhid-dump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to dump report descriptors and streams from HID
+                    (human interface device) interfaces of USB devices
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pciutils.html" title=
+          "Pciutils-3.15.0">Prev</a>
+          <p>
+            Pciutils-3.15.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="theend.html" title="The End">Next</a>
+          <p>
+            The End
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter11.html" title=
+          "Chapter&nbsp;11.&nbsp;The End - System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

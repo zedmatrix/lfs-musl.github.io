@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.14.&nbsp;LVM2-2.03.40
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libaio.html" title="libaio-0.3.113">Prev</a>
+          <p>
+            libaio-0.3.113
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fuse.html" title="Fuse-3.18.2">Next</a>
+          <p>
+            Fuse-3.18.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-config-lvm2" name="ch-config-lvm2"></a>9.14. LVM2-2.03.40
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.14.1. Introduction to LVM2
+        </h2>
+        <p>
+          The <span class="application">LVM2</span> package is a set of tools
+          that manage logical partitions. It allows spanning of file systems
+          across multiple physical disks and disk partitions and provides for
+          dynamic growing or shrinking of logical partitions, mirroring and
+          low storage footprint snapshots.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">33.6 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kernel" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="lvm2-kernel" name="lvm2-kernel"></a>9.14.2. Kernel
+          Configuration
+        </h2>
+        <p>
+          Enable the following options in the kernel configuration and
+          recompile the kernel:
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            There are several other Device Mapper options in the kernel
+            beyond those listed below. In order to get reasonable results if
+            running the regression tests, all must be enabled either
+            internally or as a module. The tests will all time out if Magic
+            SysRq key is not enabled.
+          </p>
+          <p>
+            In addition most of the optional packages for tests require
+            kernel options that are needed. If the optional packages or their
+            kernel options are not installed the tests will be flagged as
+            either failed or skipped in an inconsistent way.
+          </p>
+        </div>
+        <pre class="screen"><span class="blue">D</span>evice Drivers ---&gt;
+  [*] <span class=
+"blue">B</span>lock devices ---&gt;                                               [BLK_DEV]
+    &lt;*/M&gt; <span class=
+"blue">R</span>AM block device support                                 [BLK_DEV_RAM]
+  [*] M<span class=
+"blue">u</span>ltiple devices driver support (RAID and LVM) ---&gt;                   [MD]
+    &lt;*/M&gt; <span class=
+"blue">D</span>evice mapper support                                     [BLK_DEV_DM]
+    &lt;*/M&gt;   <span class=
+"blue">C</span>rypt target support                                      [DM_CRYPT]
+    &lt;*/M&gt;   <span class=
+"blue">S</span>napshot target                                        [DM_SNAPSHOT]
+    &lt;*/M&gt;   <span class=
+"blue">T</span>hin provisioning target                      [DM_THIN_PROVISIONING]
+    &lt;*/M&gt;   <span class=
+"blue">C</span>ache target (EXPERIMENTAL)                               [DM_CACHE]
+    &lt;*/M&gt;   M<span class=
+"blue">i</span>rror target                                            [DM_MIRROR]
+    &lt;*/M&gt;   <span class=
+"blue">Z</span>ero target                                                [DM_ZERO]
+    &lt;*/M&gt;   <span class=
+"blue">I</span>/O delaying target                                       [DM_DELAY]
+
+<span class="blue">K</span>ernel hacking ---&gt;
+  <span class="blue">G</span>eneric Kernel Debugging Instruments ---&gt;
+    [*] M<span class=
+"blue">a</span>gic SysRq key                                            [MAGIC_SYSRQ]</pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.14.3. Installation of LVM2
+        </h2>
+        <p>
+          Prepare <span class="application">LVM2</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">PATH+=:/usr/sbin                \
+./configure --prefix=/usr       \
+            --enable-cmdlib     \
+            --enable-pkgconfig  \
+            --enable-udev_sync</kbd></pre>
+        <p>
+          Build <span class="application">LVM2</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          The tests use <span class="application">udev</span> for logical
+          volume synchronization, so the LVM udev rules and some utilities
+          need to be installed before running the tests. If you are
+          installing <span class="application">LVM2</span> for the first
+          time, and do not want to install the full package before running
+          the tests, the minimal set of utilities can be installed by running
+          the following instructions:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make -C tools install_tools_dynamic
+make -C udev  install
+make -C libdm install</kbd></pre>
+        <p>
+          To test the results, issue, as the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">LC_ALL=en_US.UTF-8 make check_local</kbd></pre>
+        <p>
+          Some tests may hang. In this case they can be skipped by adding
+          <span class="command"><strong>S=&lt;testname&gt;</strong></span> to
+          the <span class="command"><strong>make</strong></span> command.
+          Other targets are available and can be listed with <span class=
+          "command"><strong>make -C test help</strong></span>. The test
+          timings are very dependent on the speed of the disk(s), and on the
+          number of enabled kernel options.
+        </p>
+        <p>
+          The tests do not implement the <span class="quote">“<span class=
+          "quote">expected fail</span>”</span> possibility and some test
+          failures are expected by upstream.
+        </p>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Most tests will fail if the kernel does not have all the
+                device drivers listed above.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                More failures may happen because some kernel options are
+                missing. For example, the lack of the <span class=
+                "emphasis"><em>dm-delay</em></span> device mapper target
+                explains some failures.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Some tests may fail if there is insufficient free space
+                available in the partition with the /tmp directory. At least
+                one test fails if 16 TB is not available.
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Some tests are flagged <span class="quote">“<span class=
+                "quote">warned</span>”</span> if <a class="ulink" href=
+                "https://github.com/jthornber/thin-provisioning-tools">thin-provisioning-tools</a>
+                are not installed. A workaround is to add the following flags
+                to <span class="command"><strong>configure</strong></span>:
+              </p>
+            </li>
+          </ul>
+        </div>
+        <pre class="userinput"><kbd class=
+        "command">     --with-thin-check=    \
+     --with-thin-dump=     \
+     --with-thin-repair=   \
+     --with-thin-restore=  \
+     --with-cache-check=   \
+     --with-cache-dump=    \
+     --with-cache-repair=  \
+     --with-cache-restore= \</kbd></pre>
+        <p>
+          Some tests may hang. They can be removed if necessary, for example:
+          <span class="command"><strong>rm
+          test/shell/lvconvert-raid-reshape.sh</strong></span>. The tests
+          generate a lot of kernel messages, which may clutter your terminal.
+          You can disable them by issuing <span class="command"><strong>dmesg
+          -D</strong></span> before running the tests (do not forget to issue
+          <span class="command"><strong>dmesg -E</strong></span> when tests
+          are done).
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The checks create device nodes in the /tmp directory. The tests
+            will fail if /tmp is mounted with the nodev option.
+          </p>
+        </div>
+        <p>
+          Now, Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install
+rm -fv /usr/lib/udev/rules.d/69-dm-lvm.rules</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.14.4. Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>PATH+=:/usr/sbin</strong></span>: The
+          path must contain <code class="filename">/usr/sbin</code> for
+          proper system tool detection by the <span class=
+          "command"><strong>configure</strong></span> script. This
+          instruction ensures that PATH is properly set even if you build as
+          an unprivileged user.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-cmdlib</code></em>: This
+          switch enables building of the shared command library. It is
+          required when building the event daemon.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-pkgconfig</code></em>: This
+          switch enables installation of <span class=
+          "command"><strong>pkg-config</strong></span> support files.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-udev_sync</code></em>: This
+          switch enables synchronisation with <span class=
+          "application">Udev</span> processing.
+        </p>
+        <p>
+          <code class="option">--enable-dmeventd</code>: This switch enables
+          building of the <span class="application">Device Mapper</span>
+          event daemon.
+        </p>
+        <p>
+          <span class="command"><strong>rm
+          .../69-dm-lvm.rules</strong></span>: Under certain circumstances,
+          this udev rule calls <span class=
+          "command"><strong>systemd-run</strong></span>, which is not
+          available on sysv. It performs actions that are done by another
+          boot script anyway, so it is not needed.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.14.5. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">blkdeactivate, dmeventd (optional),
+              dmsetup, fsadm, lvm, lvmdump, and lvm_import_vdo. There are
+              also numerous symbolic links to lvm that implement specific
+              functionalities</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libdevmapper.so and liblvm2cmd.so;
+              optional: libdevmapper-event.so, libdevmapper-event-lvm2.so,
+              libdevmapper-event-lvm2mirror.so,
+              libdevmapper-event-lvm2raid.so,
+              libdevmapper-event-lvm2snapshot.so,
+              libdevmapper-event-lvm2thin.so, and
+              libdevmapper-event-lvm2vdo.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/lvm and /usr/lib/device-mapper
+              (optional)</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="blkdeactivate" name=
+                    "blkdeactivate"></a><span class="term"><span class=
+                    "command"><strong>blkdeactivate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility to deactivate block devices
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmeventd" name="dmeventd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dmeventd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    (optional) is the Device Mapper event daemon
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmsetup" name="dmsetup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dmsetup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a low level logical volume management tool
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="fsadm" name="fsadm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>fsadm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility used to resize or check filesystem on a
+                    device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lvm" name="lvm"></a><span class=
+                    "term"><span class="command"><strong>lvm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the command-line tools for <span class=
+                    "application">LVM2</span>. Commands are implemented via
+                    symbolic links to this program to manage physical devices
+                    (pv*), volume groups (vg*) and logical volumes (lv*)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lvmdump" name="lvmdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lvmdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool used to dump various information concerning
+                    <span class="application">LVM2</span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vgimportclone" name=
+                    "vgimportclone"></a><span class="term"><span class=
+                    "command"><strong>vgimportclone</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to import a duplicated VG (e.g. hardware
+                    snapshot)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libdevmapper" name="libdevmapper"></a><span class=
+                    "term"><code class=
+                    "filename">libdevmapper.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">Device
+                    Mapper</span> API functions
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libaio.html" title="libaio-0.3.113">Prev</a>
+          <p>
+            libaio-0.3.113
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fuse.html" title="Fuse-3.18.2">Next</a>
+          <p>
+            Fuse-3.18.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

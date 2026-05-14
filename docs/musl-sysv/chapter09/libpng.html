@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      9.16.&nbsp;Libpng-1.6.58
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;9.&nbsp;System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="fuse.html" title="Fuse-3.18.2">Prev</a>
+          <p>
+            Fuse-3.18.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="freetype2.html" title=
+          "FreeType-2.14.3">Next</a>
+          <p>
+            FreeType-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="ch-config-libpng" name="ch-config-libpng"></a>9.16.
+      Libpng-1.6.58
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.16.1. Introduction to libpng
+        </h2>
+        <p>
+          The <span class="application">libpng</span> package contains
+          libraries used by other programs for reading and writing PNG files.
+          The PNG format was designed as a replacement for GIF and, to a
+          lesser extent, TIFF, with many improvements and extensions and lack
+          of patent problems.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.5 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">11.6 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.16.2. Installation of libpng
+        </h2>
+        <p>
+          If you want to patch libpng to support apng files, apply it here:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">zcat -cd ../libpng-1.6.57-apng.patch.gz | patch -p1</kbd></pre>
+        <p>
+          Prepare <span class="application">libpng</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <p>
+          Now Build the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Now Install:
+        </p>
+        <pre class="userinput"><kbd class="command">make install
+
+mkdir -v /usr/share/doc/libpng-1.6.58
+cp -v README libpng-manual.txt /usr/share/doc/libpng-1.6.58</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          9.16.3. Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">libpng-config (symlink), libpng16-config,
+              pngfix and png-fix-itxt</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libpng.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/libpng16 and
+              /usr/share/doc/libpng-1.6.58</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pngfix" name="pngfix"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pngfix</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    tests, optimizes and optionally fixes the zlib header in
+                    PNG files. Optionally, when fixing, strips ancillary
+                    chunks from the file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="png-fix-itxt" name="png-fix-itxt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>png-fix-itxt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    fixes PNG files that have an incorrect length field in
+                    the iTXt chunks
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpng-config" name=
+                    "libpng-config"></a><span class="term"><span class=
+                    "command"><strong>libpng-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a shell script that provides configuration information
+                    for applications wanting to use <span class=
+                    "application">libpng</span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpng-lin" name="libpng-lin"></a><span class=
+                    "term"><code class="filename">libpng.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contain routines used to create and manipulate PNG format
+                    graphics files
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="fuse.html" title="Fuse-3.18.2">Prev</a>
+          <p>
+            Fuse-3.18.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="freetype2.html" title=
+          "FreeType-2.14.3">Next</a>
+          <p>
+            FreeType-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter09.html" title=
+          "Chapter&nbsp;9.&nbsp;System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

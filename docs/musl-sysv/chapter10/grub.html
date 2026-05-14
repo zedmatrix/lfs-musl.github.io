@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      10.4.&nbsp;Using GRUB to Set Up the Boot Process
+      10.4.&nbsp;GRUB-2.14
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,26 +12,25 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;10.&nbsp;Making the LFS System Bootable
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="kernel.html" title="Linux-7.0.3">Prev</a>
+          <a accesskey="p" href="kernel.html" title="Linux-7.0.6">Prev</a>
           <p>
-            Linux-7.0.3
+            Linux-7.0.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="systemd.html" title=
-          "Using Systemd-boot to Set Up the Boot Process">Next</a>
+          <a accesskey="n" href="popt.html" title="Popt-1.19">Next</a>
           <p>
-            Using Systemd-boot to Set Up the Boot Process
+            Popt-1.19
           </p>
         </li>
         <li class="up">
@@ -40,220 +39,292 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-bootable-grub" name="ch-bootable-grub"></a>10.4. Using GRUB
-      to Set Up the Boot Process
+      <a id="ch-system-grub" name="ch-system-grub"></a>10.4. GRUB-2.14
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
-      <div class="admon note">
-        <img alt="[Note]" src="../images/note.png" />
-        <h3>
-          Note
-        </h3>
+      <div class="package" lang="en" xml:lang="en">
         <p>
-          If your system has UEFI support and you wish to boot LFS with UEFI,
-          you should skip the instructions in this page but still learn the
-          syntax of <code class="filename">grub.cfg</code> and the method to
-          specify a partition in the file from this page, and configure GRUB
-          with UEFI support using the instructions provided in <a class=
-          "ulink" href=
-          "https://www.linuxfromscratch.org/blfs/view/svn/postlfs/grub-setup.html">
-          the BLFS page</a>.
+          The GRUB package contains the GRand Unified Bootloader.
         </p>
-      </div>
-      <div class="sect2" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          10.4.1. Introduction
-        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            This page is split up into multiple sections aimed to install for
+            a specific boot method (BIOS, 64-bit UEFI, and 32-bit UEFI). GRUB
+            cannot be built with all the boot method architectures at once.
+          </p>
+          <p>
+            You may skip other sections to go to the boot method you need. If
+            in doubt, you may follow all of the sections at the cost of extra
+            build time. After you have installed support for your boot
+            method, then continue building the rest of the packages in this
+            chapter. Making your LFS system bootable with GRUB will be
+            discussed in <a class="xref" href="boot-grub.html" title=
+            "10.11.&nbsp;Using GRUB to Set Up the Boot Process">Section&nbsp;10.11,
+            “Using GRUB to Set Up the Boot Process.”</a>
+          </p>
+        </div>
         <div class="admon warning">
           <img alt="[Warning]" src="../images/warning.png" />
           <h3>
             Warning
           </h3>
           <p>
-            Configuring GRUB incorrectly can render your system inoperable
-            without an alternate boot device such as a CD-ROM or bootable USB
-            drive. This section is not required to boot your LFS system. You
-            may just want to modify your current boot loader, e.g.
-            Grub-Legacy, GRUB2, or LILO.
+            Unset any environment variables which may affect the build:
           </p>
-        </div>
-        <p>
-          Ensure that an emergency boot disk is ready to <span class=
-          "quote">“<span class="quote">rescue</span>”</span> the computer if
-          the computer becomes unusable (un-bootable). If you do not already
-          have a boot device, you can create one. In order for the procedure
-          below to work, you need to jump ahead to BLFS and install
-          <strong class="userinput"><code>xorriso</code></strong> from the
-          <a class="ulink" href=
-          "https://www.linuxfromscratch.org/blfs/view/svn/multimedia/libisoburn.html">
-          libisoburn</a> package.
-        </p>
-        <pre class="userinput"><kbd class="command">cd /tmp
-grub-mkrescue --output=grub-img.iso
-xorriso -as cdrecord -v dev=/dev/cdrw blank=as_needed grub-img.iso</kbd></pre>
-      </div>
-      <div class="sect2" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          10.4.2. GRUB Naming Conventions
-        </h2>
-        <p>
-          GRUB uses its own naming structure for drives and partitions in the
-          form of <span class="emphasis"><em>(hdn,m)</em></span>, where
-          <span class="emphasis"><em>n</em></span> is the hard drive number
-          and <span class="emphasis"><em>m</em></span> is the partition
-          number. The hard drive numbers start from zero, but the partition
-          numbers start from one for normal partitions (from five for
-          extended partitions). Note that this is different from earlier
-          versions where both numbers started from zero. For example,
-          partition <code class="filename">sda1</code> is <span class=
-          "emphasis"><em>(hd0,1)</em></span> to GRUB and <code class=
-          "filename">sdb3</code> is <span class=
-          "emphasis"><em>(hd1,3)</em></span>. In contrast to Linux, GRUB does
-          not consider CD-ROM drives to be hard drives. For example, if using
-          a CD on <code class="filename">hdb</code> and a second hard drive
-          on <code class="filename">hdc</code>, that second hard drive would
-          still be <span class="emphasis"><em>(hd1)</em></span>.
-        </p>
-      </div>
-      <div class="sect2" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          10.4.3. Setting Up the Configuration
-        </h2>
-        <p>
-          GRUB works by writing data to the first physical track of the hard
-          disk. This area is not part of any file system. The programs there
-          access GRUB modules in the boot partition. The default location is
-          /boot/grub/.
-        </p>
-        <p>
-          The location of the boot partition is a choice of the user that
-          affects the configuration. One recommendation is to have a separate
-          small (suggested size is 200 MB) partition just for boot
-          information. That way each build, whether LFS or some commercial
-          distro, can access the same boot files and access can be made from
-          any booted system. If you choose to do this, you will need to mount
-          the separate partition, move all files in the current <code class=
-          "filename">/boot</code> directory (e.g. the Linux kernel you just
-          built in the previous section) to the new partition. You will then
-          need to unmount the partition and remount it as <code class=
-          "filename">/boot</code>. If you do this, be sure to update
-          <code class="filename">/etc/fstab</code>.
-        </p>
-        <p>
-          Leaving <code class="filename">/boot</code> on the current LFS
-          partition will also work, but configuration for multiple systems is
-          more difficult.
-        </p>
-        <p>
-          Using the above information, determine the appropriate designator
-          for the root partition (or boot partition, if a separate one is
-          used). For the following example, it is assumed that the root (or
-          separate boot) partition is <code class="filename">sda2</code>.
-        </p>
-        <p>
-          Install the GRUB files into <code class=
-          "filename">/boot/grub</code> and set up the boot track:
-        </p>
-        <div class="admon warning">
-          <img alt="[Warning]" src="../images/warning.png" />
-          <h3>
-            Warning
-          </h3>
+          <pre class="userinput"><kbd class=
+          "command">unset {C,CPP,CXX,LD}FLAGS</kbd></pre>
           <p>
-            The following command will overwrite the current boot loader. Do
-            not run the command if this is not desired, for example, if using
-            a third party boot manager to manage the Master Boot Record
-            (MBR).
+            Don't try <span class="quote">“<span class=
+            "quote">tuning</span>”</span> this package with custom
+            compilation flags. This package is a bootloader. The low-level
+            operations in the source code may be broken by aggressive
+            optimization.
           </p>
         </div>
-        <pre class="userinput"><kbd class=
-        "command">grub-install /dev/sda</kbd></pre>
-        <div class="admon note">
-          <img alt="[Note]" src="../images/note.png" />
-          <h3>
-            Note
-          </h3>
-          <p>
-            If the system has been booted using UEFI, <span class=
-            "command"><strong>grub-install</strong></span> will try to
-            install files for the <span class=
-            "emphasis"><em>x86_64-efi</em></span> target, but those files
-            have not been installed in <a class="xref" href=
-            "../chapter08/chapter08.html" title=
-            "Chapter&nbsp;8.&nbsp;Installing Basic System Software">Chapter&nbsp;8</a>.
-            If this is the case, add <code class="option">--target
-            i386-pc</code> to the command above.
-          </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.3 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">166 MB</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="sect2" lang="en" xml:lang="en">
+      <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          <a id="grub-cfg" name="grub-cfg"></a>10.4.4. Creating the GRUB
-          Configuration File
+          10.4.1. Installation of GRUB for BIOS
         </h2>
         <p>
-          Generate <code class="filename">/boot/grub/grub.cfg</code>:
+          First fix a bug introduced in grub-2.14:
         </p>
         <pre class="userinput"><kbd class=
-        "command">cat &gt; /boot/grub/grub.cfg &lt;&lt; "EOF"
-<code class="literal"># Begin /boot/grub/grub.cfg
-set default=0
-set timeout=5
-
-insmod part_gpt
-insmod ext2
-set root=(hd0,2)
-set gfxpayload=1024x768x32
-
-menuentry "GNU/Linux, Linux 7.0.3-lfs-2.0-musl" {
-        linux   /boot/vmlinuz-7.0.3-lfs-2.0-musl root=/dev/sda2 ro
-}</code>
-EOF</kbd></pre>
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
         <p>
-          The <span class="command"><strong>insmod</strong></span> commands
-          load the <span class="application">GRUB</span> modules named
-          <code class="filename">part_gpt</code> and <code class=
-          "filename">ext2</code>. Despite the naming, <code class=
-          "filename">ext2</code> actually supports <code class=
-          "systemitem">ext2</code>, <code class="systemitem">ext3</code>, and
-          <code class="systemitem">ext4</code> filesystems. The <span class=
-          "command"><strong>grub-install</strong></span> command has embedded
-          some modules into the main <span class="application">GRUB</span>
-          image (installed into the MBR or the GRUB BIOS partition) to access
-          the other modules (in <code class=
-          "filename">/boot/grub/i386-pc</code>) without a chicken-or-egg
-          issue, so with a typical configuration these two modules are
-          already embedded and those two <span class=
-          "command"><strong>insmod</strong></span> commands will do nothing.
-          But they do no harm anyway, and they may be needed with some rare
-          configurations.
+          Prepare GRUB for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --disable-efiemu  \
+            --disable-werror</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-werror</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This allows the build to complete with warnings introduced by
+                more recent versions of Flex.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-efiemu</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option minimizes what is built by disabling a feature
+                and eliminating some test programs not needed for LFS.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          The test suite for this packages is not recommended. Most of the
+          tests depend on packages that are not available in the limited LFS
+          environment. To run the tests anyway, run <span class=
+          "command"><strong>make check</strong></span>.
         </p>
         <p>
-          The <span class="command"><strong>set
-          gfxpayload=1024x768x32</strong></span> command sets the resolution
-          and color depth of the VESA framebuffer to be passed to the kernel.
-          It's necessary for the kernel SimpleDRM driver to use the VESA
-          framebuffer. You can use a different resolution or color depth
-          value which better suits for your monitor.
+          Install the package:
         </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.4.2. Installation of GRUB for 64-bit UEFI
+        </h2>
+        <p>
+          If you want to boot with 64-bit UEFI, you should build support for
+          it.
+        </p>
+        <p>
+          First, if you built GRUB from any of the sections above, clean the
+          source tree:
+        </p>
+        <pre class="userinput"><kbd class="command">make clean</kbd></pre>
+        <p>
+          To enable the unifonts and starfield theme extract:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">zcat ../unifont-17.0.03.pcf.gz &gt; unifont.pcf</kbd></pre>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
           <h3>
             Note
           </h3>
           <p>
-            From <span class="application">GRUB</span>'s perspective, the
-            kernel files are relative to the partition used. If you used a
-            separate /boot partition, remove /boot from the above
-            <span class="emphasis"><em>linux</em></span> line. You will also
-            need to change the <span class="emphasis"><em>set
-            root</em></span> line to point to the boot partition.
+            This also requires the previous dejavu-fonts-ttf
           </p>
+        </div>
+        <p>
+          Fix a bug introduced in grub-2.14:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
+        <p>
+          Now configure GRUB for 64-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr       \
+            --sysconfdir=/etc   \
+            --target=x86_64     \
+            --with-platform=efi \
+            --disable-efiemu    \
+            --disable-werror</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--target=x86_64</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This defines that the UEFI firmware architecture is x86_64,
+                which GRUB should target.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-platform=efi</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This specifies that EFI is a platform GRUB should target. In
+                combination with <em class=
+                "parameter"><code>--target=x86_64</code></em>, GRUB will have
+                the ability to target the <code class=
+                "literal">x86_64-efi</code> platform.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package for 64-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install support for 64-bit UEFI:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          10.4.3. Installation of GRUB for 32-bit UEFI
+        </h2>
+        <p>
+          If you want to boot with 32-bit UEFI, which is very rare, you
+          should build support for it.
+        </p>
+        <p>
+          First, if you built GRUB from any of the sections above, clean the
+          source tree:
+        </p>
+        <pre class="userinput"><kbd class="command">make clean</kbd></pre>
+        <p>
+          Fix a bug introduced in grub-2.14:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed 's/--image-base/--nonexist-linker-option/' -i configure</kbd></pre>
+        <p>
+          Now configure GRUB for 32-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr       \
+            --sysconfdir=/etc   \
+            --target=i386       \
+            --with-platform=efi \
+            --disable-efiemu    \
+            --disable-werror</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the new configure options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--target=i386</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This defines that the UEFI firmware architecture is
+                i386/32-bit, which GRUB should target. In combination with
+                <em class="parameter"><code>--with-platform=efi</code></em>,
+                GRUB will have the ability to target the <code class=
+                "literal">i386-efi</code> platform.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package for 32-bit UEFI support:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install support for 32-bit UEFI:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-gRUB" name="contents-gRUB"></a>10.4.4. Contents of
+          GRUB
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">grub-bios-setup, grub-editenv, grub-file,
+              grub-fstest, grub-glue-efi, grub-install, grub-kbdcomp,
+              grub-macbless, grub-menulst2cfg, grub-mkconfig, grub-mkimage,
+              grub-mklayout, grub-mknetdir, grub-mkpasswd-pbkdf2,
+              grub-mkrelpath, grub-mkrescue, grub-mkstandalone,
+              grub-ofpathname, grub-probe, grub-reboot, grub-render-label,
+              grub-script-check, grub-set-default, grub-sparc64-setup, and
+              grub-syslinux2cfg</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/lib/grub, /etc/grub.d,
+              /usr/share/grub, and /boot/grub (when grub-install is first
+              run)</span>
+            </div>
+          </div>
         </div>
         <div class="admon note">
           <img alt="[Note]" src="../images/note.png" />
@@ -261,88 +332,398 @@ EOF</kbd></pre>
             Note
           </h3>
           <p>
-            The GRUB designator for a partition may change if you added or
-            removed some disks (including removable disks like USB thumb
-            devices). The change may cause boot failure because <code class=
-            "filename">grub.cfg</code> refers to some <span class=
-            "quote">“<span class="quote">old</span>”</span> designators. If
-            you wish to avoid such a problem, you may use the UUID of a
-            partition and the UUID of a filesystem instead of a GRUB
-            designator to specify a device. Run <span class=
-            "command"><strong>lsblk -o
-            UUID,PARTUUID,PATH,MOUNTPOINT</strong></span> to show the UUIDs
-            of your filesystems (in the <code class="literal">UUID</code>
-            column) and partitions (in the <code class=
-            "literal">PARTUUID</code> column). Then replace <code class=
-            "literal">set root=(hdx,y)</code> with <code class=
-            "literal">search --set=root --fs-uuid <em class=
-            "replaceable"><code>&lt;UUID of the filesystem where the kernel
-            is installed&gt;</code></em></code>, and replace <code class=
-            "literal">root=/dev/sda2</code> with <code class=
-            "literal">root=PARTUUID=<em class="replaceable"><code>&lt;UUID of
-            the partition where LFS is built&gt;</code></em></code>.
-          </p>
-          <p>
-            Note that the UUID of a partition is completely different from
-            the UUID of the filesystem in this partition. Some online
-            resources may instruct you to use <code class=
-            "literal">root=UUID=<em class="replaceable"><code>&lt;filesystem
-            UUID&gt;</code></em></code> instead of <code class=
-            "literal">root=PARTUUID=<em class=
-            "replaceable"><code>&lt;partition UUID&gt;</code></em></code>,
-            but doing so will require an initramfs, which is beyond the scope
-            of LFS.
-          </p>
-          <p>
-            The name of the device node for a partition in <code class=
-            "filename">/dev</code> may also change (this is less likely than
-            a GRUB designator change). You can also replace paths to device
-            nodes like <code class="literal">/dev/sda1</code> with
-            <code class="literal">PARTUUID=<em class=
-            "replaceable"><code>&lt;partition UUID&gt;</code></em></code>, in
-            <code class="filename">/etc/fstab</code>, to avoid a potential
-            boot failure in case the device node name has changed.
+            <code class="filename">/usr/lib/grub</code> will have different
+            contents based on what platform(s) you have installed GRUB for.
+            Namely, there will be different GRUB modules for each platform.
           </p>
         </div>
-        <p>
-          GRUB is an extremely powerful program and it provides a tremendous
-          number of options for booting from a wide variety of devices,
-          operating systems, and partition types. There are also many options
-          for customization such as graphical splash screens, playing sounds,
-          mouse input, etc. The details of these options are beyond the scope
-          of this introduction.
-        </p>
-        <div class="admon caution">
-          <img alt="[Caution]" src="../images/caution.png" />
+        <div class="variablelist">
           <h3>
-            Caution
+            Short Descriptions
           </h3>
-          <p>
-            There is a command, <span class=
-            "application">grub-mkconfig</span>, that can write a
-            configuration file automatically. It uses a set of scripts in
-            /etc/grub.d/ and will destroy any customizations that you make.
-            These scripts are designed primarily for non-source distributions
-            and are not recommended for LFS. If you install a commercial
-            Linux distribution, there is a good chance that this program will
-            be run. Be sure to back up your grub.cfg file.
-          </p>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-bios-setup" name=
+                    "grub-bios-setup"></a><span class="term"><span class=
+                    "command"><strong>grub-bios-setup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a helper program for <span class=
+                    "command"><strong>grub-install</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-editenv" name="grub-editenv"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-editenv</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a tool to edit the environment block
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-file" name="grub-file"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-file</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks to see if the given file is of the specified type
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-fstest" name="grub-fstest"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-fstest</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a tool to debug the file system driver
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-glue-efi" name=
+                    "grub-glue-efi"></a><span class="term"><span class=
+                    "command"><strong>grub-glue-efi</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Glues 32-bit and 64-bit binaries into a single file (for
+                    Apple machines)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-install" name="grub-install"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-install</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Installs GRUB on your drive
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-kbdcomp" name="grub-kbdcomp"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-kbdcomp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a script that converts an xkb layout into one
+                    recognized by GRUB
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-macbless" name=
+                    "grub-macbless"></a><span class="term"><span class=
+                    "command"><strong>grub-macbless</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is the Mac-style bless for HFS or HFS+ file systems
+                    (<span class="command"><strong>bless</strong></span> is
+                    peculiar to Apple machines; it makes a device bootable)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-menulst2cfg" name=
+                    "grub-menulst2cfg"></a><span class="term"><span class=
+                    "command"><strong>grub-menulst2cfg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Converts a GRUB Legacy <code class=
+                    "filename">menu.lst</code> into a <code class=
+                    "filename">grub.cfg</code> for use with GRUB 2
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkconfig" name=
+                    "grub-mkconfig"></a><span class="term"><span class=
+                    "command"><strong>grub-mkconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates a <code class="filename">grub.cfg</code> file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkimage" name="grub-mkimage"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-mkimage</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes a bootable image of GRUB
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mklayout" name=
+                    "grub-mklayout"></a><span class="term"><span class=
+                    "command"><strong>grub-mklayout</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates a GRUB keyboard layout file
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mknetdir" name=
+                    "grub-mknetdir"></a><span class="term"><span class=
+                    "command"><strong>grub-mknetdir</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Prepares a GRUB netboot directory
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkpasswd-pbkdf2" name=
+                    "grub-mkpasswd-pbkdf2"></a><span class=
+                    "term"><span class="command"><strong>grub-mkpasswd-pbkdf2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates an encrypted PBKDF2 password for use in the
+                    boot menu
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkrelpath" name=
+                    "grub-mkrelpath"></a><span class="term"><span class=
+                    "command"><strong>grub-mkrelpath</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes a system pathname relative to its root
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkrescue" name=
+                    "grub-mkrescue"></a><span class="term"><span class=
+                    "command"><strong>grub-mkrescue</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Makes a bootable image of GRUB suitable for a floppy
+                    disk, CDROM/DVD, or a USB drive
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-mkstandalone" name=
+                    "grub-mkstandalone"></a><span class="term"><span class=
+                    "command"><strong>grub-mkstandalone</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Generates a standalone image
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-ofpathname" name=
+                    "grub-ofpathname"></a><span class="term"><span class=
+                    "command"><strong>grub-ofpathname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a helper program that prints the path to a GRUB device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-probe" name="grub-probe"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-probe</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Probes device information for a given path or device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-reboot" name="grub-reboot"></a><span class=
+                    "term"><span class=
+                    "command"><strong>grub-reboot</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the default boot entry for GRUB for the next boot
+                    only
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-render-label" name=
+                    "grub-render-label"></a><span class="term"><span class=
+                    "command"><strong>grub-render-label</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Renders Apple .disk_label for Apple Macs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-script-check" name=
+                    "grub-script-check"></a><span class="term"><span class=
+                    "command"><strong>grub-script-check</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Checks the GRUB configuration script for syntax errors
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-set-default" name=
+                    "grub-set-default"></a><span class="term"><span class=
+                    "command"><strong>grub-set-default</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Sets the default boot entry for GRUB
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-sparc64-setup" name=
+                    "grub-sparc64-setup"></a><span class="term"><span class=
+                    "command"><strong>grub-sparc64-setup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a helper program for grub-setup
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="grub-syslinux2cfg" name=
+                    "grub-syslinux2cfg"></a><span class="term"><span class=
+                    "command"><strong>grub-syslinux2cfg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Transforms a syslinux config file into grub.cfg format
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="kernel.html" title="Linux-7.0.3">Prev</a>
+          <a accesskey="p" href="kernel.html" title="Linux-7.0.6">Prev</a>
           <p>
-            Linux-7.0.3
+            Linux-7.0.6
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="systemd.html" title=
-          "Using Systemd-boot to Set Up the Boot Process">Next</a>
+          <a accesskey="n" href="popt.html" title="Popt-1.19">Next</a>
           <p>
-            Using Systemd-boot to Set Up the Boot Process
+            Popt-1.19
           </p>
         </li>
         <li class="up">
@@ -351,7 +732,7 @@ EOF</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

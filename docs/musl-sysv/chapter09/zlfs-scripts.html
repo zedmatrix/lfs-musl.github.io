@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;9.&nbsp;System Configuration
@@ -41,7 +41,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
@@ -76,7 +76,43 @@
           Install the package:
         </p>
         <pre class="userinput"><kbd class=
-        "command">make install-root install-extra install-skel</kbd></pre>
+        "command">make RELEASE=Zirconium VER=3.0-musl REV=sysv all</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <strong>The meaning of the make options:</strong>
+          </p>
+          <dl class="variablelist">
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>RELEASE=</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Gets added to specific os and release files normally
+                installed in chapter 11.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>VER=</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                Populates the specific os release files usually installed in
+                chapter 11.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>REV=</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This parameter installs specific revision files.
+              </p>
+            </dd>
+          </dl>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -86,10 +122,12 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed Program:</strong>
-              <span class="segbody">zlfs-scripts</span>
+              <span class="segbody">CurlPaste, /lib/services/dhcpcd,
+              /etc/init.d/sshd</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Libraries:</strong>
+              <strong class="segtitle">Installed Files:</strong> <span class=
+              "segbody">/etc/{inittab, bashrc, profile}</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
@@ -122,7 +160,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

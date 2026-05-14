@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;7.&nbsp;Entering Chroot and Building Additional
@@ -43,7 +43,7 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
@@ -99,7 +99,6 @@ zprint() { echo -e "\033[1;32m *** $1 *** \033[0m"; }
 stars() { printf '%.0s*' {1..100}; printf '\n'; }
 
 LFS=${LFS:-/mnt/lfs}
-LFS_TGT=${LFS_TGT:-$(uname -m)-lfs-linux-musl}
 LC_ALL=POSIX
 
 chroot_pre() {
@@ -199,7 +198,7 @@ chmod -v +x $LFS/sbin/musl-lfs-chroot
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>

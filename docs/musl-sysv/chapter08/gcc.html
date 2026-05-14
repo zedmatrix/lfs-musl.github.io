@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      8.30.&nbsp;GCC-15.2.0
+      8.30.&nbsp;GCC-16.1.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -12,10 +12,10 @@
     "text/css" media="print" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
-  <body class="lfs" id="lfs-2.0-musl">
+  <body class="blfs" id="blfs-3.0-musl">
     <div class="navheader">
       <h4>
-        Musl Linux From Scratch - Version 2.0-musl
+        Musl Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
         Chapter&nbsp;8.&nbsp;Installing Basic System Software
@@ -39,12 +39,12 @@
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="ch-system-gcc" name="ch-system-gcc"></a>8.30. GCC-15.2.0
+      <a id="ch-system-gcc" name="ch-system-gcc"></a>8.30. GCC-16.1.0
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
@@ -56,11 +56,11 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Approximate build time:</strong>
-              <span class="segbody">46 SBU (with tests)</span>
+              <span class="segbody">7.5 SBU (add 40 sbu with tests)</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Required disk space:</strong>
-              <span class="segbody">6.6 GB</span>
+              <span class="segbody">4.5 GB</span>
             </div>
           </div>
         </div>
@@ -282,8 +282,8 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           ownership to the <code class="systemitem">root</code> user and
           group:
         </p>
-        <pre class="userinput"><kbd class="command">chown -v -R root:root \
-    /usr/lib/gcc/$(gcc -dumpmachine)/15.2.0/include{,-fixed}</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">chown -v -R root:root $(gcc -print-file-name=include){,-fixed}</kbd></pre>
         <p>
           Create a symlink required by the <a class="ulink" href=
           "https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03s09.html">FHS</a>
@@ -296,7 +296,7 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           "command"><strong>cc</strong></span> to call the C compiler. We've
           already created <span class="command"><strong>cc</strong></span> as
           a symlink in <a class="xref" href="../chapter06/gcc-pass2.html"
-          title="6.18.&nbsp;GCC-15.2.0 - Pass 2">gcc-pass2</a>, create its
+          title="6.18.&nbsp;GCC-16.1.0 - Pass 2">gcc-pass2</a>, create its
           man page as a symlink as well:
         </p>
         <pre class="userinput"><kbd class=
@@ -306,8 +306,7 @@ su tester -c "PATH=$PATH make -k check"</kbd></pre>
           Time Optimization (LTO):
         </p>
         <pre class="userinput"><kbd class=
-        "command">ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/15.2.0/liblto_plugin.so \
-        /usr/lib/bfd-plugins/</kbd></pre>
+        "command">ln -sfvr $(gcc -print-prog-name=liblto_plugin.so) /usr/lib/bfd-plugins/</kbd></pre>
         <p>
           Now that our final toolchain is in place, it is important to again
           ensure that compiling and linking will work as expected. We do this
@@ -332,9 +331,9 @@ readelf -l a.out | grep ': /lib'</kbd></pre>
           The output of the last command should be:
         </p>
         <pre class="screen"><code class=
-        "computeroutput">/usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/../../../../lib/Scrt1.o succeeded
-/usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/../../../../lib/crti.o succeeded
-/usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/../../../../lib/crtn.o succeeded</code></pre>
+        "computeroutput">/usr/lib/gcc/x86_64-pc-linux-musl/16.1.0/../../../../lib/Scrt1.o succeeded
+/usr/lib/gcc/x86_64-pc-linux-musl/16.1.0/../../../../lib/crti.o succeeded
+/usr/lib/gcc/x86_64-pc-linux-musl/16.1.0/../../../../lib/crtn.o succeeded</code></pre>
         <p>
           Depending on your machine architecture, the above may differ
           slightly. The difference will be the name of the directory after
@@ -353,7 +352,7 @@ readelf -l a.out | grep ': /lib'</kbd></pre>
           This command should return the following output:
         </p>
         <pre class="screen"><code class=
-        "computeroutput">ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/../../../../x86_64-pc-linux-musl/include"
+        "computeroutput">ignoring nonexistent directory "/usr/lib/gcc/x86_64-pc-linux-musl/16.1.0../../../../x86_64-pc-linux-musl/include"
 #include "..." search starts here:
 #include &lt;...&gt; search starts here:
  /usr/local/include
@@ -390,8 +389,8 @@ SEARCH_DIR("/usr/lib");</code></pre>
           The output of the last command should be:
         </p>
         <pre class="screen"><code class=
-        "computeroutput">attempt to open /usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/libc.so failed
-attempt to open /usr/lib/gcc/x86_64-pc-linux-musl/15.2.0/../../../../lib/libc.so succeeded</code></pre>
+        "computeroutput">attempt to open /usr/lib/gcc/x86_64-pc-linux-musl/16.1.0/libc.so failed
+attempt to open /usr/lib/gcc/x86_64-pc-linux-musl/16.1.0/../../../../lib/libc.so succeeded</code></pre>
         <p>
           Make sure GCC is using the correct dynamic linker:
         </p>
@@ -428,7 +427,7 @@ mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib</kbd></pre>
             <div class="seg">
               <strong class="segtitle">Installed directories:</strong>
               <span class="segbody">/usr/include/c++, /usr/lib/gcc,
-              /usr/libexec/gcc, and /usr/share/gcc-15.2.0</span>
+              /usr/libexec/gcc, and /usr/share/gcc-16.1.0</span>
             </div>
           </div>
         </div>
@@ -889,7 +888,7 @@ mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib</kbd></pre>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
-          "Musl Linux From Scratch - Version 2.0-musl">Home</a>
+          "Musl Linux From Scratch - Version 3.0-musl">Home</a>
         </li>
       </ul>
     </div>
