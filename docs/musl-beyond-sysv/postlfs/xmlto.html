@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      xmlto-0.0.29
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="docbook-xsl.html" title=
+          "DocBook-xsl-nons-1.79.2">Prev</a>
+          <p>
+            DocBook-xsl-nons-1.79.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="itstool.html" title="itstool-2.0.7">Next</a>
+          <p>
+            itstool-2.0.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="xmlto" name="xmlto"></a>xmlto-0.0.29
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to xmlto
+        </h2>
+        <p>
+          The <span class="application">xmlto</span> package is a front-end
+          to a XSL toolchain. It chooses an appropriate stylesheet for the
+          conversion you want and applies it using an external XSLT
+          processor. It also performs any necessary post-processing.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz">https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                40504db68718385a4eaa9154a28f59e51e59d006d1aa14f5bc9d6fded1d6017a
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 63 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 1.6M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          xmlto Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="docbook.html" title=
+          "DocBook-xml-4.5">docbook-xml-4.5</a>, <a class="xref" href=
+          "docbook-xsl.html" title=
+          "DocBook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>, and
+          <a class="xref" href="libxslt.html" title=
+          "libxslt-1.1.45">libxslt-1.1.45</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of xmlto
+        </h2>
+        <p>
+          Prepare <span class="application">xmlto</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">autoreconf -fiv</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">LINKS="/usr/bin/links" ./configure --prefix=/usr</kbd></pre>
+        <p>
+          Build <span class="application">xmlto</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <code class="envar">LINKS="/usr/bin/links"</code>: This environment
+          variable fixes a bug causing <span class=
+          "command"><strong>xmlto</strong></span> to think that <span class=
+          "command"><strong>links</strong></span> command is the same as
+          <span class="command"><strong>elinks</strong></span>. Setting this
+          variable does not cause problems if <span class=
+          "application">"Links"</span> is not installed, unless you have
+          <a class="ulink" href="http://elinks.or.cz/">ELinks</a> installed,
+          and you wish to use it for text backend post-processing. If you do
+          wish to ELinks, you should remove this environment variable.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">xmlif and xmlto</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/share/xmlto</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmlif" name="xmlif"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmlif</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a conditional processing instructions for XML
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmlto-prog" name="xmlto-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmlto</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    applies an XSL stylesheet to an XML document
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="docbook-xsl.html" title=
+          "DocBook-xsl-nons-1.79.2">Prev</a>
+          <p>
+            DocBook-xsl-nons-1.79.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="itstool.html" title="itstool-2.0.7">Next</a>
+          <p>
+            itstool-2.0.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

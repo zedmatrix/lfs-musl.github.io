@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      libuv-1.52.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="icu.html" title="icu-78.3">Prev</a>
+          <p>
+            icu-78.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libksba.html" title="libksba-1.8.0">Next</a>
+          <p>
+            libksba-1.8.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="libuv" name="libuv"></a>libuv-1.52.1
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libuv
+        </h2>
+        <p>
+          The <span class="application">libuv</span> package is a
+          multi-platform support library with a focus on asynchronous I/O.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://dist.libuv.org/dist/v1.52.1/libuv-v1.52.1.tar.gz">https://dist.libuv.org/dist/v1.52.1/libuv-v1.52.1.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 sum:
+                66d511b9e6e334c0e62279eb234fbfb2b3110b1479c09b95b44c7afca8cff9e7
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 1,323 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 14.4 MB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libuv
+        </h2>
+        <p>
+          Prepare <span class="application">libuv</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">sh autogen.sh</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <p>
+          Build <span class="application">libuv</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          If you want to run the tests, as a non-root user:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libuv.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/include/uv</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libuv.so" name="libuv.so"></a><span class=
+                    "term"><code class="filename">libuv.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains API functions for asynchronous I/O operations
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="icu.html" title="icu-78.3">Prev</a>
+          <p>
+            icu-78.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libksba.html" title="libksba-1.8.0">Next</a>
+          <p>
+            libksba-1.8.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

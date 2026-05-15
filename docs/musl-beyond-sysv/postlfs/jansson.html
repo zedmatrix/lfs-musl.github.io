@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      Jansson-2.15.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libevent.html" title=
+          "libevent-2.1.12">Prev</a>
+          <p>
+            libevent-2.1.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nghttp2.html" title=
+          "nghttp2-1.69.0">Next</a>
+          <p>
+            nghttp2-1.69.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Jansson
+        </h2>
+        <p>
+          The <span class="application">Jansson</span> package contains a
+          library used to encode, decode, and manipulate JSON data.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
+                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 475 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 4M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Jansson
+        </h2>
+        <p>
+          Prepare <span class="application">jansson</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libjansson.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libjansson" name="libjansson"></a><span class=
+                    "term"><code class="filename">libjansson.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains an API for encoding, decoding, and manipulating
+                    JSON data
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libevent.html" title=
+          "libevent-2.1.12">Prev</a>
+          <p>
+            libevent-2.1.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nghttp2.html" title=
+          "nghttp2-1.69.0">Next</a>
+          <p>
+            nghttp2-1.69.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

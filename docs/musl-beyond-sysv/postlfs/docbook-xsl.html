@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      DocBook-xsl-nons-1.79.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="docbook.html" title=
+          "DocBook-xml-4.5">Prev</a>
+          <p>
+            DocBook-xml-4.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xmlto.html" title="xmlto-0.0.29">Next</a>
+          <p>
+            xmlto-0.0.29
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="DocBook-xsl-nons" name=
+      "DocBook-xsl-nons"></a>DocBook-xsl-nons-1.79.2
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to DocBook XSL Stylesheets
+        </h2>
+        <p>
+          The <span class="application">DocBook XSL Stylesheets</span>
+          package contains XSL stylesheets. These are useful for performing
+          transformations on XML DocBook files.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2">
+                https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-nons-1.79.2.tar.bz2</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                ee8b9eca0b7a8f89075832a2da7534bce8c5478fc8fc2676f512d5d87d832102
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 22,852 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 51.8M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Required patch: <a class="ulink" href=
+                "https://www.linuxfromscratch.org/patches/downloads/docbook-xsl-nons/docbook-xsl-nons-1.79.2-stack_fix-1.patch">
+                https://www.linuxfromscratch.org/patches/downloads/docbook-xsl-nons/docbook-xsl-nons-1.79.2-stack_fix-1.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Patch SHA256 Sum:
+                a92c39715c54949ba9369add1809527b8f155b7e2a2b2e30cb4b39ee715f2e30
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="itemizedlist">
+          <p class="title">
+            <strong>Optional documentation</strong>
+          </p>
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-doc-1.79.2.tar.bz2">
+                https://github.com/docbook/xslt10-stylesheets/releases/download/release/1.79.2/docbook-xsl-doc-1.79.2.tar.bz2</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                9bc38a3015717279a3a0620efb2d4bcace430077241ae2b0da609ba67d8340bc
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 522 KB
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of DocBook XSL Stylesheets
+        </h2>
+        <p>
+          First, fix a problem that causes stack overflows when doing
+          recursion:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../docbook-xsl-nons-1.79.2-stack_fix-1.patch</kbd></pre>
+        <p>
+          If you downloaded the optional documentation tarball, unpack it
+          with the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar -xf ../docbook-xsl-doc-1.79.2.tar.bz2 --strip-components=1</kbd></pre>
+        <p>
+          BLFS does not install the required packages to run the test suite
+          and provide meaningful results.
+        </p>
+        <p>
+          Install <span class="application">DocBook XSL Stylesheets</span> by
+          running the following commands as the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -m755 -d /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2
+
+cp -v -R VERSION assembly common eclipse epub epub3 extensions fo        \
+         highlighting html htmlhelp images javahelp lib manpages params  \
+         profiling roundtrip slides template tests tools webhelp website \
+         xhtml xhtml-1_1 xhtml5                                          \
+    /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2
+
+ln -s VERSION /usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/VERSION.xsl
+
+install -v -m644 -D README /usr/share/doc/docbook-xsl-nons-1.79.2/README.txt
+
+install -v -m644    RELEASE-NOTES* NEWS* /usr/share/doc/docbook-xsl-nons-1.79.2</kbd></pre>
+        <p>
+          If you downloaded the optional documentation tarball, install the
+          documentation by issuing the following command as the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cp -v -R doc/* /usr/share/doc/docbook-xsl-nons-1.79.2</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring DocBook XSL Stylesheets
+        </h2>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="docbook-xsl-config" name="docbook-xsl-config"></a>Config
+            Files
+          </h3>
+          <p>
+            <code class="filename">/etc/xml/catalog</code>
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Create (or append) and populate the XML catalog file using the
+            following commands as the <code class="systemitem">root</code>
+            user (both <span class="emphasis"><em>http</em></span> and
+            <span class="emphasis"><em>https</em></span> forms are used
+            because upstream have had both in their documentation):
+          </p>
+          <pre class="root"><kbd class=
+          "command">if [ ! -d /etc/xml ]; then install -v -m755 -d /etc/xml; fi
+if [ ! -f /etc/xml/catalog ]; then
+    xmlcatalog --noout --create /etc/xml/catalog
+fi
+
+xmlcatalog --noout --add "rewriteSystem"                        \
+           "http://cdn.docbook.org/release/xsl-nons/1.79.2"     \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteSystem"                        \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2"    \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteURI"                           \
+           "http://cdn.docbook.org/release/xsl-nons/1.79.2"     \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteURI"                           \
+           "https://cdn.docbook.org/release/xsl-nons/1.79.2"    \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteSystem"                        \
+           "http://cdn.docbook.org/release/xsl-nons/current"    \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteSystem"                        \
+           "https://cdn.docbook.org/release/xsl-nons/current"   \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteURI"                           \
+           "http://cdn.docbook.org/release/xsl-nons/current"    \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteURI"                           \
+           "https://cdn.docbook.org/release/xsl-nons/current"   \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteSystem"                        \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog
+
+xmlcatalog --noout --add "rewriteURI"                           \
+           "http://docbook.sourceforge.net/release/xsl/current" \
+           "/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2" \
+           /etc/xml/catalog</kbd></pre>
+          <p>
+            Occasionally, you may find the need to install other versions of
+            the XSL stylesheets as some projects reference a specific
+            version. One example is BLFS-6.0, which required the 1.67.2
+            version. In these instances you should install any other required
+            version in its own versioned directory and create catalog entries
+            as follows (substitute the desired version number for <em class=
+            "replaceable"><code>&lt;version&gt;</code></em>):
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">xmlcatalog --noout --add "rewriteSystem"                          \
+           "http://docbook.sourceforge.net/release/xsl/<em class=
+"replaceable"><code>&lt;version&gt;</code></em>" \
+           "/usr/share/xml/docbook/xsl-stylesheets-<em class=
+"replaceable"><code>&lt;version&gt;</code></em>"     \
+           /etc/xml/catalog &amp;&amp;
+
+xmlcatalog --noout --add "rewriteURI"                             \
+           "http://docbook.sourceforge.net/release/xsl/<em class=
+"replaceable"><code>&lt;version&gt;</code></em>" \
+           "/usr/share/xml/docbook/xsl-stylesheets-<em class=
+"replaceable"><code>&lt;version&gt;</code></em>"     \
+           /etc/xml/catalog</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Files:</strong> <span class=
+              "segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2/*/*.xsl</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class=
+              "segbody">/usr/share/xml/docbook/xsl-stylesheets-nons-1.79.2
+              and /usr/share/doc/docbook-xsl-nons-1.79.2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xsl-stylesheets" name=
+                    "xsl-stylesheets"></a><span class="term"><code class=
+                    "filename">XSL Stylesheets</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    are used for performing transformations on XML files
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="docbook.html" title=
+          "DocBook-xml-4.5">Prev</a>
+          <p>
+            DocBook-xml-4.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xmlto.html" title="xmlto-0.0.29">Next</a>
+          <p>
+            xmlto-0.0.29
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      itstool-2.0.7
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xmlto.html" title="xmlto-0.0.29">Prev</a>
+          <p>
+            xmlto-0.0.29
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iso-codes.html" title=
+          "ISO Codes-4.20.1">Next</a>
+          <p>
+            ISO Codes-4.20.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="itstool" name="itstool"></a>itstool-2.0.7
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to itstool
+        </h2>
+        <p>
+          <span class="application">Itstool</span> extracts messages from XML
+          files and outputs PO template files, then merges translations from
+          MO files to create translated XML files. It determines what to
+          translate and how to chunk it into messages using the W3C
+          Internationalization Tag Set (ITS).
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/itstool/itstool/archive/2.0.7/itstool-2.0.7.tar.gz">
+                https://github.com/itstool/itstool/archive/2.0.7/itstool-2.0.7.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                fba78a37dc3535e4686c7f57407b97d03c676e3a57beac5fb2315162b0cc3176
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 78 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 1.3M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Required patch: <a class="ulink" href=
+                "https://www.linuxfromscratch.org/patches/downloads/itstool/itstool-2.0.7-lxml-1.patch">
+                https://www.linuxfromscratch.org/patches/downloads/itstool/itstool-2.0.7-lxml-1.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Patch SHA256 Sum:
+                035a0d22bd1cf37a00357ebc096454e1eb8594f3ea54f8122e8e76fdced0cbec
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Itstool Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="docbook.html" title=
+          "DocBook-xml-4.5">docbook-xml-4.5</a> and <a class="xref" href=
+          "../python/ch03s01.html" title="lxml-6.1.0">lxml-6.1.0</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of itstool
+        </h2>
+        <p>
+          First, apply a patch to use <a class="xref" href=
+          "../python/ch03s01.html" title="lxml-6.1.0">lxml-6.1.0</a> for
+          handling the XML files instead of the deprecated (disabled by
+          default) Python module from <a class="xref" href="libxml2.html"
+          title="libxml2-2.15.3">libxml2-2.15.3</a>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../itstool-2.0.7-lxml-1.patch</kbd></pre>
+        <p>
+          Prepare <span class="application">itstool</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">PYTHON=/usr/bin/python3 ./autogen.sh --prefix=/usr</kbd></pre>
+        <p>
+          Build <span class="application">itstool</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>python3
+          tests/run_tests.py</strong></span>.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">python3 tests/run_tests.py</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">itstool</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/share/itstool</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="itstool-prog" name="itstool-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>itstool</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to create translated XML files
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xmlto.html" title="xmlto-0.0.29">Prev</a>
+          <p>
+            xmlto-0.0.29
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iso-codes.html" title=
+          "ISO Codes-4.20.1">Next</a>
+          <p>
+            ISO Codes-4.20.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

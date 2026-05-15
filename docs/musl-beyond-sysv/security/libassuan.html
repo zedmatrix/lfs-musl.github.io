@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      libassuan-3.0.2
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;1.&nbsp;Security Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libgpg-error.html" title=
+          "libgpg-error-1.61">Prev</a>
+          <p>
+            libgpg-error-1.61
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libgcrypt.html" title=
+          "libgcrypt-1.12.2">Next</a>
+          <p>
+            libgcrypt-1.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="libassuan" name="libassuan"></a>libassuan-3.0.2
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libassuan
+        </h2>
+        <p>
+          The <span class="application">libassuan</span> package contains an
+          inter process communication library used by some of the other
+          <span class="application">GnuPG</span> related packages.
+          <span class="application">libassuan</span>'s primary use is to
+          allow a client to interact with a non-persistent server.
+          <span class="application">libassuan</span> is not, however, limited
+          to use with <span class="application">GnuPG</span> servers and
+          clients. It was designed to be flexible enough to meet the demands
+          of many transaction based environments with non-persistent servers.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.2.tar.bz2">
+                https://www.gnupg.org/ftp/gcrypt/libassuan/libassuan-3.0.2.tar.bz2</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                d2931cdad266e633510f9970e1a2f346055e351bb19f9b78912475b8074c36f6
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 580 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 5.7M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          libassuan Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="libgpg-error.html" title=
+          "libgpg-error-1.61">libgpg-error-1.61</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libassuan
+        </h2>
+        <p>
+          Prepare <span class="application">libassuan</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr</kbd></pre>
+        <p>
+          Build <span class="application">libassuan</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make
+
+make -C doc html
+makeinfo --html --no-split -o doc/assuan_nochunks.html doc/assuan.texi
+makeinfo --plaintext       -o doc/assuan.txt           doc/assuan.texi
+</kbd></pre>
+        <p>
+          To test the results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install
+
+install -v -dm755   /usr/share/doc/libassuan-3.0.2/html
+
+install -v -m644 doc/assuan.html/* /usr/share/doc/libassuan-3.0.2/html
+
+install -v -m644 doc/assuan_nochunks.html /usr/share/doc/libassuan-3.0.2
+
+install -v -m644 doc/assuan.{txt,texi} /usr/share/doc/libassuan-3.0.2</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libassuan.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/share/doc/libassuan-3.0.2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libassuan-lib" name=
+                    "libassuan-lib"></a><span class="term"><code class=
+                    "filename">libassuan.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an inter process communication library which
+                    implements the Assuan protocol
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libgpg-error.html" title=
+          "libgpg-error-1.61">Prev</a>
+          <p>
+            libgpg-error-1.61
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libgcrypt.html" title=
+          "libgcrypt-1.12.2">Next</a>
+          <p>
+            libgcrypt-1.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

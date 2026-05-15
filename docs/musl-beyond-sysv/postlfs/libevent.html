@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      libevent-2.1.12
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iso-codes.html" title=
+          "ISO Codes-4.20.1">Prev</a>
+          <p>
+            ISO Codes-4.20.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="jansson.html" title=
+          "Jansson-2.15.0">Next</a>
+          <p>
+            Jansson-2.15.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="libevent" name="libevent"></a>libevent-2.1.12
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libevent
+        </h2>
+        <p>
+          <span class="application">libevent</span> is an asynchronous event
+          notification software library. The <span class=
+          "application">libevent</span> API provides a mechanism to execute a
+          callback function when a specific event occurs on a file descriptor
+          or after a timeout has been reached. Furthermore, <span class=
+          "application">libevent</span> also supports callbacks due to
+          signals or regular timeouts.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz">
+                https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 1,075 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 17.2M
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libevent
+        </h2>
+        <p>
+          First, fix an issue that prevents event_rpcgen.py from working:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i 's/python/&amp;3/' event_rpcgen.py</kbd></pre>
+        <p>
+          Prepare <span class="application">libevent</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <p>
+          Build <span class="application">libevent</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Six tests in every suite related to <code class=
+          "filename">regress_ssl.c</code> and <code class=
+          "filename">regress_http.c</code> are known to fail due to
+          incompatibilities with OpenSSL-3. Some tests that are related to
+          <code class="filename">regress_dns.c</code> are also known to fail
+          intermittently due to insufficient test timeouts. To test the
+          results, issue:
+        </p>
+        <pre class="userinput"><kbd class="command">make verify</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">event_rpcgen.py</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libevent_core.so, libevent_extra.so,
+              libevent_openssl.so, libevent_pthreads.so and
+              libevent.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/include/event2 and
+              /usr/share/doc/libevent-2.1.12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="iso-codes.html" title=
+          "ISO Codes-4.20.1">Prev</a>
+          <p>
+            ISO Codes-4.20.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="jansson.html" title=
+          "Jansson-2.15.0">Next</a>
+          <p>
+            Jansson-2.15.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;2.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
