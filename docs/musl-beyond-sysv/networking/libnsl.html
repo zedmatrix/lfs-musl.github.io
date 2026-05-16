@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      nghttp2-1.69.0
+      libnsl-2.0.1
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,25 +18,26 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software
+        Chapter&nbsp;2.&nbsp;Networking Packages
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="jansson.html" title=
-          "Jansson-2.15.0">Prev</a>
+          <a accesskey="p" href="libtirpc.html" title=
+          "libtirpc-1.3.7">Prev</a>
           <p>
-            Jansson-2.15.0
+            libtirpc-1.3.7
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="cmake.html" title="CMake-4.3.2">Next</a>
+          <a accesskey="n" href="rpcsvc-proto.html" title=
+          "rpcsvc-proto-1.4.4">Next</a>
           <p>
-            CMake-4.3.2
+            rpcsvc-proto-1.4.4
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+          <a accesskey="u" href="networking.html" title=
+          "Chapter&nbsp;2.&nbsp;Networking Packages">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -45,16 +46,17 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="nghttp2" name="nghttp2"></a>nghttp2-1.69.0
+      <a id="libnsl" name="libnsl"></a>libnsl-2.0.1
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to nghttp2
+          Introduction to libnsl
         </h2>
         <p>
-          <span class="application">nghttp2</span> is an implementation of
-          HTTP/2 and its header compression algorithm, HPACK.
+          The <span class="application">libnsl</span> package contains the
+          public client interface for NIS(YP). It replaces the NIS library
+          that used to be in glibc.
         </p>
         <h3>
           Package Information
@@ -64,24 +66,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/nghttp2/nghttp2/releases/download/v1.69.0/nghttp2-1.69.0.tar.xz">
-                https://github.com/nghttp2/nghttp2/releases/download/v1.69.0/nghttp2-1.69.0.tar.xz</a>
+                "https://github.com/thkukuk/libnsl/releases/download/v2.0.1/libnsl-2.0.1.tar.xz">
+                https://github.com/thkukuk/libnsl/releases/download/v2.0.1/libnsl-2.0.1.tar.xz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                1fb324b6ec2c56f6bde0658f4139ffd8209fa9e77ce98fd7a5f63af8d0e508ad
+                5c9e470b232a7acd3433491ac5221b4832f0c71318618dc6aa04dd05ffcd8fd9
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 1,657 KB
+                Download size: 275 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 16.9M
+                Estimated disk space required: 2.5 MB
               </p>
             </li>
             <li class="listitem">
@@ -92,58 +94,36 @@
           </ul>
         </div>
         <h3>
-          nghttp2 Dependencies
+          libnsl Dependencies
         </h3>
         <h4>
-          Recommended
+          Required
         </h4>
         <p class="required">
-          <a class="xref" href="libxml2.html" title=
-          "libxml2-2.15.3">libxml2-2.15.3</a>
-        </p>
-        <h4>
-          Optional
-        </h4>
-        <p class="optional">
-          The following are only used if building the full package instead of
-          only the main libraries: <a class="xref" href="c-ares.html" title=
-          "c-ares-1.34.6">c-ares-1.34.6</a>, <a class="xref" href=
-          "jansson.html" title="Jansson-2.15.0">jansson-2.15.0</a>, <a class=
-          "xref" href="libevent.html" title=
-          "libevent-2.1.12">libevent-2.1.12</a>
+          <a class="xref" href="libtirpc.html" title=
+          "libtirpc-1.3.7">libtirpc-1.3.7</a>
         </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of nghttp2
+          Installation of libnsl
         </h2>
         <p>
-          Prepare <span class="application">nghttp2</span> by running:
+          Prepare <span class="application">libnsl</span> by running:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr     \
-            --disable-static  \
-            --enable-lib-only \
-            --docdir=/usr/share/doc/nghttp2-1.69.0</kbd></pre>
+        "command">./configure --sysconfdir=/etc --disable-static</kbd></pre>
+        <p>
+          Build <span class="application">libnsl</span> by running:
+        </p>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
-          To test the results, issue:
+          This package does not come with a test suite.
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
         <pre class="root"><kbd class="command">make install</kbd></pre>
-      </div>
-      <div class="commands" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          Command Explanations
-        </h2>
-        <p>
-          <em class="parameter"><code>--enable-lib-only</code></em>: only
-          build libnghttp2. Omit this switch if you'd like to build the
-          example applications, Python bindings, or the C++ asio library.
-        </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -157,12 +137,11 @@
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Libraries:</strong>
-              <span class="segbody">libnghttp2.so</span>
+              <span class="segbody">libnsl.so</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">/usr/include/nghttp2, /usr/share/nghttp2,
-              and /usr/share/doc/nghttp2-1.69.0</span>
+              <span class="segbody">/usr/include/rpcsvc</span>
             </div>
           </div>
         </div>
@@ -179,14 +158,14 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libnghttp2" name="libnghttp2"></a><span class=
-                    "term"><code class="filename">libnghttp2.so</code></span>
+                    <a id="libnsl-lib" name="libnsl-lib"></a><span class=
+                    "term"><code class="filename">libnsl.so</code></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    an implementation of the Hypertext Transfer Protocol
-                    version 2 in C
+                    provides the NIS (YP) API functions required by other
+                    programs
                   </p>
                 </td>
               </tr>
@@ -198,21 +177,22 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="jansson.html" title=
-          "Jansson-2.15.0">Prev</a>
+          <a accesskey="p" href="libtirpc.html" title=
+          "libtirpc-1.3.7">Prev</a>
           <p>
-            Jansson-2.15.0
+            libtirpc-1.3.7
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="cmake.html" title="CMake-4.3.2">Next</a>
+          <a accesskey="n" href="rpcsvc-proto.html" title=
+          "rpcsvc-proto-1.4.4">Next</a>
           <p>
-            CMake-4.3.2
+            rpcsvc-proto-1.4.4
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+          <a accesskey="u" href="networking.html" title=
+          "Chapter&nbsp;2.&nbsp;Networking Packages">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

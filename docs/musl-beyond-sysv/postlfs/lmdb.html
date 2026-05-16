@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      libgpg-error-1.61
+      lmdb-0.9.35
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,25 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;1.&nbsp;Security Packages and System Utilities
+        Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="nettle.html" title="Nettle-4.0">Prev</a>
+          <a accesskey="p" href="duktape.html" title="duktape-2.7.0">Prev</a>
           <p>
-            Nettle-4.0
+            duktape-2.7.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="libassuan.html" title=
-          "libassuan-3.0.2">Next</a>
+          <a accesskey="n" href="../python/python.html" title=
+          "Python Dependencies">Next</a>
           <p>
-            libassuan-3.0.2
+            Python Dependencies
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="security.html" title=
-          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -45,17 +45,20 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="libgpg-error" name="libgpg-error"></a>libgpg-error-1.61
+      <a id="lmdb" name="lmdb"></a>lmdb-0.9.35
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to libgpg-error
+          Introduction to lmdb
         </h2>
         <p>
-          The <span class="application">libgpg-error</span> package contains
-          a library that defines common error values for all <span class=
-          "application">GnuPG</span> components.
+          The <span class="application">lmdb</span> package is a fast,
+          compact, key-value embedded data store. It uses memory-mapped
+          files, so it has the read performance of a pure in-memory database
+          while still offering the persistence of standard disk-based
+          databases, and is only limited to the size of the virtual address
+          space
         </p>
         <h3>
           Package Information
@@ -65,24 +68,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2">
-                https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-1.61.tar.bz2</a>
+                "https://git.openldap.org/openldap/openldap/-/archive/LMDB_0.9.35/LMDB_0.9.35.tar.bz2">
+                https://git.openldap.org/openldap/openldap/-/archive/LMDB_0.9.35/LMDB_0.9.35.tar.bz2</a>
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download SHA256 sum:
-                7a85413f2bc354f4f8aa832b718af122e48965e9e0eb9012ee659c13c6385c93
+                Download SAH256 Sum:
+                3fa3ec5e52966cb81b1deb3f59d1a1f241aef1d0bf323b7a1146519c2d284924
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 1,098 KB
+                Download size: 119 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 10.4M
+                Estimated disk space required: 4.8 MB
               </p>
             </li>
             <li class="listitem">
@@ -95,24 +98,34 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of libgpg-error
+          Installation of lmdb
         </h2>
         <p>
-          Prepare <span class="application">libgpg-error</span> by running:
+          Build <span class="application">lmdb</span> by running the
+          following commands:
         </p>
-        <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --sysconfdir=/etc</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <pre class="userinput"><kbd class="command">cd libraries/liblmdb
+make
+sed -i 's| liblmdb.a||' Makefile</kbd></pre>
         <p>
-          To test the results, issue:
+          This package does not come with a test suite.
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install
-
-install -v -m644 -D README /usr/share/doc/libgpg-error-1.61/README</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">make prefix=/usr install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>sed ... liblmdb.a ...
+          Makefile</strong></span>: The package executables use a static
+          library so it must be created. This command suppresses installation
+          of the static library.
+        </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -121,18 +134,17 @@ install -v -m644 -D README /usr/share/doc/libgpg-error-1.61/README</kbd></pre>
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">gpg-error, gpgrt-config, and yat2m</span>
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">mdb_copy, mdb_dump, mdb_load, and
+              mdb_stat</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libgpg-error.so</span>
+              <span class="segbody">liblmdb.so</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">/usr/share/common-lisp/source/gpg-error,
-              /usr/share/libgpg-error, and
-              /usr/share/doc/libgpg-error-1.61</span>
+              <span class="segbody">None</span>
             </div>
           </div>
         </div>
@@ -149,61 +161,72 @@ install -v -m644 -D README /usr/share/doc/libgpg-error-1.61/README</kbd></pre>
               <tr>
                 <td>
                   <p>
-                    <a id="gpg-error" name="gpg-error"></a><span class=
+                    <a id="mdb_copy" name="mdb_copy"></a><span class=
                     "term"><span class=
-                    "command"><strong>gpg-error</strong></span></span>
+                    "command"><strong>mdb_copy</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    is used to determine <span class=
-                    "application">libgpg-error</span> error codes
+                    copies an LMDB environment from one database to another,
+                    including the option to compact the database
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p>
-                    <a id="gpgrt-config" name="gpgrt-config"></a><span class=
+                    <a id="mdb_dump" name="mdb_dump"></a><span class=
                     "term"><span class=
-                    "command"><strong>gpgrt-config</strong></span></span>
+                    "command"><strong>mdb_dump</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    is a <span class=
-                    "command"><strong>pkg-config</strong></span> style tool
-                    for querying the information about installed version of
-                    libgpg-error
+                    reads a database and writes its contents to standard
+                    output using a portable flat-text format, which can be
+                    interpreted by mdb_load
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p>
-                    <a id="yat2m" name="yat2m"></a><span class=
+                    <a id="mdb_load" name="mdb_load"></a><span class=
                     "term"><span class=
-                    "command"><strong>yat2m</strong></span></span>
+                    "command"><strong>mdb_load</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    extracts man pages from a Texinfo source
+                    imports a database from standard input or from a file
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p>
-                    <a id="libgpg-error-lib" name=
-                    "libgpg-error-lib"></a><span class="term"><code class=
-                    "filename">libgpg-error.so</code></span>
+                    <a id="mdb_stat" name="mdb_stat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mdb_stat</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains the <span class=
-                    "application">libgpg-error</span> API functions
+                    displays the status of a LMDB environment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="liblmdb" name="liblmdb"></a><span class=
+                    "term"><code class="filename">liblmdb.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides functions for accessing a LMDB database
                   </p>
                 </td>
               </tr>
@@ -215,21 +238,21 @@ install -v -m644 -D README /usr/share/doc/libgpg-error-1.61/README</kbd></pre>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="nettle.html" title="Nettle-4.0">Prev</a>
+          <a accesskey="p" href="duktape.html" title="duktape-2.7.0">Prev</a>
           <p>
-            Nettle-4.0
+            duktape-2.7.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="libassuan.html" title=
-          "libassuan-3.0.2">Next</a>
+          <a accesskey="n" href="../python/python.html" title=
+          "Python Dependencies">Next</a>
           <p>
-            libassuan-3.0.2
+            Python Dependencies
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="security.html" title=
-          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+          <a accesskey="u" href="postlfs.html" title=
+          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

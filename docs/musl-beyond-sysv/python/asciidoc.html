@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      nghttp2-1.69.0
+      Asciidoc-10.2.1
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,25 +18,24 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software
+        Chapter&nbsp;4.&nbsp;Python Dependencies
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="jansson.html" title=
-          "Jansson-2.15.0">Prev</a>
+          <a accesskey="p" href="lxml.html" title="lxml-6.1.0">Prev</a>
           <p>
-            Jansson-2.15.0
+            lxml-6.1.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="cmake.html" title="CMake-4.3.2">Next</a>
+          <a accesskey="n" href="cython.html" title="Cython-3.2.4">Next</a>
           <p>
-            CMake-4.3.2
+            Cython-3.2.4
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;4.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -45,16 +44,19 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="nghttp2" name="nghttp2"></a>nghttp2-1.69.0
+      <a id="asciidoc" name="asciidoc"></a>Asciidoc-10.2.1
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to nghttp2
+          Introduction to Asciidoc Module
         </h2>
         <p>
-          <span class="application">nghttp2</span> is an implementation of
-          HTTP/2 and its header compression algorithm, HPACK.
+          The <span class="application">Asciidoc</span> package is a text
+          document format for writing notes, documentation, articles, books,
+          ebooks, slideshows, web pages, man pages and blogs. AsciiDoc files
+          can be translated to many formats including HTML, PDF, EPUB, and
+          man page.
         </p>
         <h3>
           Package Information
@@ -64,24 +66,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/nghttp2/nghttp2/releases/download/v1.69.0/nghttp2-1.69.0.tar.xz">
-                https://github.com/nghttp2/nghttp2/releases/download/v1.69.0/nghttp2-1.69.0.tar.xz</a>
+                "https://files.pythonhosted.org/packages/source/a/asciidoc/asciidoc-10.2.1.tar.gz">
+                https://files.pythonhosted.org/packages/source/a/asciidoc/asciidoc-10.2.1.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                1fb324b6ec2c56f6bde0658f4139ffd8209fa9e77ce98fd7a5f63af8d0e508ad
+                d9f13c285981b3c7eb660d02ca0a2779981e88d48105de81bb40445e60dddb83
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 1,657 KB
+                Download size: 225 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 16.9M
+                Estimated disk space required: 1.9 MB
               </p>
             </li>
             <li class="listitem">
@@ -91,59 +93,25 @@
             </li>
           </ul>
         </div>
-        <h3>
-          nghttp2 Dependencies
-        </h3>
-        <h4>
-          Recommended
-        </h4>
-        <p class="required">
-          <a class="xref" href="libxml2.html" title=
-          "libxml2-2.15.3">libxml2-2.15.3</a>
-        </p>
-        <h4>
-          Optional
-        </h4>
-        <p class="optional">
-          The following are only used if building the full package instead of
-          only the main libraries: <a class="xref" href="c-ares.html" title=
-          "c-ares-1.34.6">c-ares-1.34.6</a>, <a class="xref" href=
-          "jansson.html" title="Jansson-2.15.0">jansson-2.15.0</a>, <a class=
-          "xref" href="libevent.html" title=
-          "libevent-2.1.12">libevent-2.1.12</a>
-        </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of nghttp2
+          Installation of Asciidoc
         </h2>
         <p>
-          Prepare <span class="application">nghttp2</span> by running:
+          Build the module:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr     \
-            --disable-static  \
-            --enable-lib-only \
-            --docdir=/usr/share/doc/nghttp2-1.69.0</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        "command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre>
         <p>
-          To test the results, issue:
+          This package does not come with a test suite.
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
         <p>
-          Now Install, as the <code class="systemitem">root</code> user:
+          Now Install the module, as the <code class="systemitem">root</code>
+          user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
-      </div>
-      <div class="commands" lang="en" xml:lang="en">
-        <h2 class="sect2">
-          Command Explanations
-        </h2>
-        <p>
-          <em class="parameter"><code>--enable-lib-only</code></em>: only
-          build libnghttp2. Omit this switch if you'd like to build the
-          example applications, Python bindings, or the C++ asio library.
-        </p>
+        <pre class="root"><kbd class=
+        "command">pip3 install --no-index --find-links dist --no-user asciidoc</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -153,16 +121,17 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <span class="segbody">a2x and asciidoc</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Libraries:</strong>
-              <span class="segbody">libnghttp2.so</span>
+              <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">/usr/include/nghttp2, /usr/share/nghttp2,
-              and /usr/share/doc/nghttp2-1.69.0</span>
+              <span class=
+              "segbody">/usr/lib/python3.14/site-packages/asciidoc and
+              /usr/lib/python3.14/site-packages/asciidoc-10.2.1.dist-info</span>
             </div>
           </div>
         </div>
@@ -179,14 +148,28 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libnghttp2" name="libnghttp2"></a><span class=
-                    "term"><code class="filename">libnghttp2.so</code></span>
+                    <a id="a2x" name="a2x"></a><span class=
+                    "term"><span class="command"><strong>a2x</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    an implementation of the Hypertext Transfer Protocol
-                    version 2 in C
+                    is a toolchain manager for AsciiDoc (converts Asciidoc
+                    text files to other file formats)
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asciidoc-prog" name=
+                    "asciidoc-prog"></a><span class="term"><span class=
+                    "command"><strong>asciidoc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts an AsciiDoc text file to HTML or DocBook
                   </p>
                 </td>
               </tr>
@@ -198,21 +181,20 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="jansson.html" title=
-          "Jansson-2.15.0">Prev</a>
+          <a accesskey="p" href="lxml.html" title="lxml-6.1.0">Prev</a>
           <p>
-            Jansson-2.15.0
+            lxml-6.1.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="cmake.html" title="CMake-4.3.2">Next</a>
+          <a accesskey="n" href="cython.html" title="Cython-3.2.4">Next</a>
           <p>
-            CMake-4.3.2
+            Cython-3.2.4
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;3.&nbsp;Post LFS Configuration and Extra Software">Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;4.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

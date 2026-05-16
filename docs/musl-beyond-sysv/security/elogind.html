@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      elogind-255.25
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;1.&nbsp;Security Packages and System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.19.4">Prev</a>
+          <p>
+            Shadow-4.19.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cyrus-sasl.html" title=
+          "Cyrus SASL-2.1.28">Next</a>
+          <p>
+            Cyrus SASL-2.1.28
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="elogind" name="elogind"></a>elogind-255.25
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to elogind
+        </h2>
+        <p>
+          <span class="application">elogind</span> is the <span class=
+          "application">systemd</span> project's "logind", extracted to be a
+          standalone daemon. It integrates with <a class="xref" href=
+          "linux-pam.html" title="Linux-PAM-1.7.2">Linux-PAM-1.7.2</a> to
+          track all the users logged in to a system, and whether they are
+          logged in graphically, on the console, or remotely. <span class=
+          "application">Elogind</span> exposes this information via the
+          standard org.freedesktop.login1 <span class=
+          "application">D-Bus</span> interface, and also through the file
+          system using systemd's standard <code class=
+          "filename">/run/systemd</code> layout.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/elogind/elogind/archive/refs/tags/v255.25.tar.gz">
+                https://github.com/elogind/elogind/archive/refs/tags/v255.25.tar.gz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                103d5b5fac8dca30535573c5067c730ed8518a40ac0616442de29f74747778f1
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 2,095 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 29.9 MB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/elogind-missing-dup-prctl.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/elogind-missing-dup-prctl.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                d3d8723d67e74bbb92681ad3935fdbee4c87fe84e755c9f235657de0d33d0347
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/elogind-strerror-unit-conversion.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/elogind-strerror-unit-conversion.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                448ea647766f8a685a218b500256216ae0892311dad2de72f00a1ea0ff0c2ad3
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/elogind-sd-journal-remove-last_stat.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/elogind-sd-journal-remove-last_stat.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                46dbe0a8e49b0908243e83ce3c8c00aa8ac6eb20585dfdeb2053ff725c00097e
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/elogind-remove-gshadow.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/elogind-remove-gshadow.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                8233c6c41a414574bc929dcd9ac335a3dd9371c8675acf9acaf654f70c71be3a
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/elogind-add-missing-musl_missing.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/elogind-add-missing-musl_missing.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                15d2933b093e417f8679a7041982390730f1100dbe3457495f767f50f1359906
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          elogind Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="linux-pam.html" title=
+          "Linux-PAM-1.7.2">Linux-PAM-1.7.2</a> (required for Xorg),
+          <a class="xref" href="../postlfs/docbook.html" title=
+          "DocBook-xml-4.5">docbook-xml-4.5</a>, <a class="xref" href=
+          "../postlfs/docbook-xsl.html" title=
+          "DocBook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>, and
+          <a class="xref" href="../postlfs/libxslt.html" title=
+          "libxslt-1.1.45">libxslt-1.1.45</a> (all three to build the man
+          pages)
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../python/lxml.html" title=
+          "lxml-6.1.0">lxml-6.1.0</a>
+        </p>
+      </div>
+      <div class="kernel" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="elogind-kernel" name="elogind-kernel"></a>Kernel
+          Configuration
+        </h2>
+        <p>
+          Enable the following options in the kernel configuration and
+          recompile the kernel if necessary:
+        </p>
+        <pre class="screen"><span class="blue">F</span>ile systems ---&gt;
+  [*] <span class=
+"blue">I</span>notify support for userspace                               [INOTIFY_USER]
+  <span class="blue">P</span>seudo filesystems ---&gt;
+    [*] <span class=
+"blue">T</span>mpfs virtual memory file system support (former shm fs)         [TMPFS]
+    [*]   <span class=
+"blue">T</span>mpfs POSIX Access Control Lists                     [TMPFS_POSIX_ACL]</pre>
+        <p>
+          In addition, some tests need the userspace cryptographic kernel
+          API, which is enabled with:
+        </p>
+        <pre class="screen">-*- <span class=
+        "blue">C</span>ryptographic API ---&gt;                                              [CRYPTO]
+  <span class="blue">C</span>rypto core or helper ---&gt;
+    &lt;*/M&gt; <span class=
+"blue">U</span>serspace cryptographic algorithm configuration          [CRYPTO_USER]
+  <span class="blue">U</span>serspace interface ---&gt;
+    &lt;*/M&gt; H<span class=
+"blue">a</span>sh algorithms                                 [CRYPTO_USER_API_HASH]</pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of elogind
+        </h2>
+        <p>
+          Prepare <span class="application">elogind</span> by running:
+        </p>
+        <p>
+          Apply several patches to allow building elogind
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../elogind-missing-dup-prctl.patch
+patch -Np1 -i ../elogind-strerror-unit-conversion.patch
+patch -Np1 -i ../elogind-sd-journal-remove-last_stat.patch
+patch -Np1 -i ../elogind-remove-gshadow.patch
+patch -Np1 -i ../elogind-add-missing-musl_missing.patch</kbd></pre>
+        <p>
+          Prepare <span class="application">elogind</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">meson setup build                  \
+      --prefix=/usr                \
+      --buildtype=release          \
+      -D man=auto                  \
+      -D utmp=false                \
+      -D tests=false               \
+      -D polkit=enabled            \
+      -D cgroup-controller=elogind \
+      -D dev-kvm-mode=0660         \
+      -D pamconfdir=/etc/pam.d     \
+      -D dbuspolicydir=/etc/dbus-1/system.d \
+      -D docdir=/usr/share/doc/elogind-255.25</kbd></pre>
+        <p>
+          Build <span class="application">elogind</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build</kbd></pre>
+        <p>
+          A few tests are skipped if not run with <code class=
+          "systemitem">root</code> privileges. Three tests, <code class=
+          "filename">test-login</code>, <code class=
+          "filename">dbus-docs-fresh</code>, and <code class=
+          "filename">check-version-history</code>, are known to fail. To test
+          the results, issue:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build test</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">ninja -C build install
+
+ln -sfv  libelogind.pc /usr/lib/pkgconfig/libsystemd.pc
+ln -sfvn elogind /usr/include/systemd</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-D
+          docdir=/usr/share/doc/elogind-255.25</code></em>: This is needed to
+          install documentation in a versioned directory.
+        </p>
+        <p>
+          <em class="parameter"><code>-D
+          cgroup-controller=elogind</code></em>: This switch is necessary to
+          build this package when the kernel is not built with <code class=
+          "option">CONFIG_CGROUPS</code> enabled. Note that <span class=
+          "application">elogind</span> strictly needs a kernel with
+          <code class="option">CONFIG_CGROUPS</code> enabled at runtime, but
+          this switch will allow building the package first.
+        </p>
+        <p>
+          <em class="parameter"><code>-D
+          dbuspolicydir=/etc/dbus-1/system.d</code></em>: This switch sets
+          the location of the <span class="application">D-Bus</span> policy
+          directory.
+        </p>
+        <p>
+          <em class="parameter"><code>-D dev-kvm-mode=0660</code></em>: The
+          LFS udev rule sets the mode of <code class=
+          "filename">/dev/kvm</code> to 0660. This option ensures the elogind
+          udev rules consistent with the LFS configuration.
+        </p>
+        <p>
+          <em class="parameter"><code>-D man=auto</code></em>: The default
+          value of this switch is <span class=
+          "emphasis"><em>false</em></span>. Setting it to <span class=
+          "emphasis"><em>auto</em></span> allows building and installing the
+          man pages if the recommended dependencies are installed.
+        </p>
+        <p>
+          <code class="option">-D html=auto</code>: The default value of this
+          switch is <span class="emphasis"><em>false</em></span>. Setting it
+          to <span class="emphasis"><em>auto</em></span> allows building and
+          installing the html documentation if the recommended dependencies
+          are installed.
+        </p>
+        <p>
+          <code class="option">-D default-kill-user-processes=false</code>:
+          Determines whether the processes of a user should be killed when
+          the user logs out. The default is <span class=
+          "emphasis"><em>true</em></span>, but this defeats the traditional
+          use of <span class="command"><strong>screen</strong></span> or
+          <span class="command"><strong>tmux</strong></span>. This can also
+          be changed in the configuration file (see below).
+        </p>
+        <p>
+          <span class="command"><strong>ln -s ...</strong></span>: These
+          commands install symlinks so that software packages can find the
+          systemd-compatible library and headers.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring elogind
+        </h2>
+        <div class="sect3">
+          <h3 class="sect3">
+            <a id="elogind-config" name="elogind-config"></a>Config File
+          </h3>
+          <p>
+            <code class="filename">/etc/elogind/logind.conf</code>
+          </p>
+        </div>
+        <div class="sect3">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            The installed file <code class=
+            "filename">/etc/elogind/logind.conf</code> contains all the
+            possible options with their defaults, commented out. You may wish
+            to disable automatically killing user processes when the user
+            logs out, by running, as the <code class="systemitem">root</code>
+            user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">sed -e '/\[Login\]/a KillUserProcesses=no' \
+    -i /etc/elogind/logind.conf</kbd></pre>
+          <p>
+            Each user will need to register a user session using <span class=
+            "application">Linux-PAM</span> at login. The <code class=
+            "filename">/etc/pam.d/system-session</code> file needs to be
+            modified and a new file must be created in order for <span class=
+            "command"><strong>elogind</strong></span> to work correctly. Run
+            the following commands as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt;&gt; /etc/pam.d/system-session &lt;&lt; "EOF" &amp;&amp;
+<code class="literal"># Begin elogind addition
+
+session  required    pam_loginuid.so
+session  optional    pam_elogind.so
+
+# End elogind addition</code>
+EOF
+cat &gt; /etc/pam.d/elogind-user &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/pam.d/elogind-user
+
+account  required    pam_access.so
+account  include     system-account
+
+session  required    pam_env.so
+session  required    pam_limits.so
+session  required    pam_unix.so
+session  required    pam_loginuid.so
+session  optional    pam_keyinit.so force revoke
+session  optional    pam_elogind.so
+
+auth     required    pam_deny.so
+password required    pam_deny.so
+
+# End /etc/pam.d/elogind-user</code>
+EOF</kbd></pre>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              After completion of <span class="application">elogind</span>,
+              you should check that it functions properly. First ensure that
+              <span class="application">dbus</span> is running. It may be
+              easiest to do this by rebooting the system. After logging in
+              again, run the command <span class=
+              "command"><strong>loginctl</strong></span>. The result should
+              indicate that a SESSION and a SEAT have been created.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">busctl, elogind-inhibit, and
+              loginctl</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libelogind.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/lib/elogind, /etc/elogind,
+              /usr/include/elogind, and /usr/share/doc/elogind-255.25</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="busctl" name="busctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>busctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to introspect and monitor the D-Bus bus
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="elogind-inhibit" name=
+                    "elogind-inhibit"></a><span class="term"><span class=
+                    "command"><strong>elogind-inhibit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to execute a program with a shutdown, sleep or
+                    idle inhibitor lock taken
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="loginctl" name="loginctl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>loginctl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to introspect and control the state of the
+                    elogind Login Manager
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libelogind" name="libelogind"></a><span class=
+                    "term"><code class="filename">libelogind.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the main elogind utility library
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.19.4">Prev</a>
+          <p>
+            Shadow-4.19.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cyrus-sasl.html" title=
+          "Cyrus SASL-2.1.28">Next</a>
+          <p>
+            Cyrus SASL-2.1.28
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
