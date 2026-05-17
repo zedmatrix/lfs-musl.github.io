@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      Pygments-2.19.2
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;5.&nbsp;Python Dependencies
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s12.html" title=
+          "Hatchling-1.28.0">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Hatchling-1.28.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="../longindex.html" title="Index">Next</a>
           <p>
-            nghttp2-1.69.0
+            Index
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +45,17 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="pygments" name="pygments"></a>Pygments-2.19.2
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to Pygments Module
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          <span class="application">Pygments</span> is a general syntax
+          highlighter written in <span class="application">Python</span>, for
+          more than 300 languages.
         </p>
         <h3>
           Package Information
@@ -66,52 +65,58 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://files.pythonhosted.org/packages/source/P/Pygments/pygments-2.19.2.tar.gz">
+                https://files.pythonhosted.org/packages/source/P/Pygments/pygments-2.19.2.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 4,852 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 44 MB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated build time: less than 0.5 SBU
+                Estimated build time: less than 0.1 SBU
               </p>
             </li>
           </ul>
         </div>
+        <h3>
+          Pygments Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="ch05s12.html" title=
+          "Hatchling-1.28.0">hatchling-1.28.0</a>
+        </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of Pygments
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Build the <span class="application">Python 3</span> module:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
-        <p>
-          To test the results, issue:
-        </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        "command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">pip3 install --no-index --find-links dist --no-user Pygments</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -121,15 +126,17 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <span class="segbody">pygmentize</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <span class=
+              "segbody">/usr/lib/python3.14/site-packages/pygments and
+              /usr/lib/python3.14/site-packages/Pygments-2.19.2.dist-info</span>
             </div>
           </div>
         </div>
@@ -146,14 +153,15 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
+                    <a id="pygmentize" name="pygmentize"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pygmentize</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
+                    highlights an input file and writes the result to an
+                    output file
                   </p>
                 </td>
               </tr>
@@ -165,23 +173,21 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s12.html" title=
+          "Hatchling-1.28.0">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Hatchling-1.28.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="../longindex.html" title="Index">Next</a>
           <p>
-            nghttp2-1.69.0
+            Index
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

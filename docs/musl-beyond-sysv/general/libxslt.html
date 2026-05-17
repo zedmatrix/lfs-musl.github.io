@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      xmlto-0.0.29
+      libxslt-1.1.45
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,26 +18,26 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;3.&nbsp;General Libraries
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="docbook-xsl.html" title=
-          "DocBook-xsl-nons-1.79.2">Prev</a>
+          <a accesskey="p" href="libxml2.html" title=
+          "libxml2-2.15.3">Prev</a>
           <p>
-            DocBook-xsl-nons-1.79.2
+            libxml2-2.15.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="git.html" title="Git-2.54.0">Next</a>
+          <a accesskey="n" href="libevent.html" title=
+          "libevent-2.1.12">Next</a>
           <p>
-            Git-2.54.0
+            libevent-2.1.12
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -46,18 +46,17 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="xmlto" name="xmlto"></a>xmlto-0.0.29
+      <a id="libxslt" name="libxslt"></a>libxslt-1.1.45
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to xmlto
+          Introduction to libxslt
         </h2>
         <p>
-          The <span class="application">xmlto</span> package is a front-end
-          to a XSL toolchain. It chooses an appropriate stylesheet for the
-          conversion you want and applies it using an external XSLT
-          processor. It also performs any necessary post-processing.
+          The <span class="application">libxslt</span> package contains XSLT
+          libraries used for extending <code class="filename">libxml2</code>
+          libraries to support XSLT files.
         </p>
         <h3>
           Package Information
@@ -67,23 +66,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz">https://pagure.io/xmlto/archive/0.0.29/xmlto-0.0.29.tar.gz</a>
+                "https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz">
+                https://download.gnome.org/sources/libxslt/1.1/libxslt-1.1.45.tar.xz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                40504db68718385a4eaa9154a28f59e51e59d006d1aa14f5bc9d6fded1d6017a
+                9acfe68419c4d06a45c550321b3212762d92f41465062ca4ea19e632ee5d216e
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 63 KB
+                Download size: 1,484 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 1.6M
+                Estimated disk space required: 25.6 MB
               </p>
             </li>
             <li class="listitem">
@@ -94,34 +94,28 @@
           </ul>
         </div>
         <h3>
-          xmlto Dependencies
+          libxslt Dependencies
         </h3>
         <h4>
           Required
         </h4>
         <p class="required">
-          <a class="xref" href="docbook.html" title=
-          "DocBook-xml-4.5">docbook-xml-4.5</a>, <a class="xref" href=
-          "docbook-xsl.html" title=
-          "DocBook-xsl-nons-1.79.2">docbook-xsl-nons-1.79.2</a>, and
-          <a class="xref" href="../general/libxslt.html" title=
-          "libxslt-1.1.45">libxslt-1.1.45</a>
+          <a class="xref" href="libxml2.html" title=
+          "libxml2-2.15.3">libxml2-2.15.3</a>
         </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of xmlto
+          Installation of libxslt
         </h2>
         <p>
-          Prepare <span class="application">xmlto</span> by running:
+          Prepare <span class="application">libxslt</span> by running:
         </p>
         <pre class="userinput"><kbd class=
-        "command">autoreconf -fiv</kbd></pre>
-        <pre class="userinput"><kbd class=
-        "command">LINKS="/usr/bin/links" ./configure --prefix=/usr</kbd></pre>
-        <p>
-          Build <span class="application">xmlto</span> by running:
-        </p>
+        "command">./configure --prefix=/usr    \
+            --disable-static \
+            --without-python \
+            --docdir=/usr/share/doc/libxslt-1.1.45</kbd></pre>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
           To test the results, issue:
@@ -137,16 +131,18 @@
           Command Explanations
         </h2>
         <p>
-          <code class="envar">LINKS="/usr/bin/links"</code>: This environment
-          variable fixes a bug causing <span class=
-          "command"><strong>xmlto</strong></span> to think that <span class=
-          "command"><strong>links</strong></span> command is the same as
-          <span class="command"><strong>elinks</strong></span>. Setting this
-          variable does not cause problems if <span class=
-          "application">"Links"</span> is not installed, unless you have
-          <a class="ulink" href="http://elinks.or.cz/">ELinks</a> installed,
-          and you wish to use it for text backend post-processing. If you do
-          wish to ELinks, you should remove this environment variable.
+          <em class="parameter"><code>--without-python</code></em>: Disable
+          the Python binding of this package. The binding only works if the
+          Python binding of <a class="xref" href="libxml2.html" title=
+          "libxml2-2.15.3">libxml2-2.15.3</a> is installed, but we've not
+          enabled the deprecated Python binding when we built <a class="xref"
+          href="libxml2.html" title="libxml2-2.15.3">libxml2-2.15.3</a>.
+        </p>
+        <p>
+          <code class="option">--with-debug</code>: Enables thorough
+          diagnostics with the <code class="option">-v, --verbose</code> of
+          <span class="command"><strong>xsltproc</strong></span>. Use it if
+          you plan to debug XSLT stylesheets.
         </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
@@ -157,15 +153,21 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">xmlif and xmlto</span>
+              <span class="segbody">xslt-config and xsltproc</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Libraries:</strong>
-              <span class="segbody">None</span>
+              <span class="segbody">libexslt.so, libxslt.so and optionally,
+              libxsltmod.so <span class="application">Python</span>
+              module</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Directory:</strong>
-              <span class="segbody">/usr/share/xmlto</span>
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/libexslt,
+              /usr/include/libxslt, /usr/lib/cmake/libxslt,
+              /usr/lib/libxslt-plugins, /usr/share/gtk-doc/lib{xslt,exslt},
+              /usr/share/doc/libxslt-1.1.45, and
+              /usr/share/doc/libxslt-python-1.1.45</span>
             </div>
           </div>
         </div>
@@ -182,28 +184,59 @@
               <tr>
                 <td>
                   <p>
-                    <a id="xmlif" name="xmlif"></a><span class=
+                    <a id="xslt-config" name="xslt-config"></a><span class=
                     "term"><span class=
-                    "command"><strong>xmlif</strong></span></span>
+                    "command"><strong>xslt-config</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    is a conditional processing instructions for XML
+                    is used to find out the pre-processor, linking and
+                    compiling flags necessary to use the <span class=
+                    "application">libxslt</span> libraries in 3rd-party
+                    programs
                   </p>
                 </td>
               </tr>
               <tr>
                 <td>
                   <p>
-                    <a id="xmlto-prog" name="xmlto-prog"></a><span class=
+                    <a id="xsltproc" name="xsltproc"></a><span class=
                     "term"><span class=
-                    "command"><strong>xmlto</strong></span></span>
+                    "command"><strong>xsltproc</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    applies an XSL stylesheet to an XML document
+                    is used to apply XSLT stylesheets to XML documents
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libexslt" name="libexslt"></a><span class=
+                    "term"><code class="filename">libexslt.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to provide extensions to XSLT functions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libxslt-lib" name="libxslt-lib"></a><span class=
+                    "term"><code class="filename">libxslt.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides extensions to the <code class=
+                    "filename">libxml2</code> libraries to parse files that
+                    use the XSLT format
                   </p>
                 </td>
               </tr>
@@ -215,22 +248,22 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="docbook-xsl.html" title=
-          "DocBook-xsl-nons-1.79.2">Prev</a>
+          <a accesskey="p" href="libxml2.html" title=
+          "libxml2-2.15.3">Prev</a>
           <p>
-            DocBook-xsl-nons-1.79.2
+            libxml2-2.15.3
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="git.html" title="Git-2.54.0">Next</a>
+          <a accesskey="n" href="libevent.html" title=
+          "libevent-2.1.12">Next</a>
           <p>
-            Git-2.54.0
+            libevent-2.1.12
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

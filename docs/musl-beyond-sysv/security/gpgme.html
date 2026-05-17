@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      gpgme-2.0.1
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;1.&nbsp;Security Packages and System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnupg.html" title="GnuPG-2.5.20">Prev</a>
+          <p>
+            GnuPG-2.5.20
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gpgmepp.html" title="gpgmepp-2.0.0">Next</a>
+          <p>
+            gpgmepp-2.0.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="gpgme" name="gpgme"></a>gpgme-2.0.1
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to gpgme
+        </h2>
+        <p>
+          The <span class="application">gpgme</span> package is a C library
+          that allows cryptography support to be added to a program. It is
+          designed to make access to public key crypto engines like
+          <span class="application">GnuPG</span> or GpgSM easier for
+          applications. <span class="application">gpgme</span> provides a
+          high-level crypto API for encryption, decryption, signing,
+          signature verification and key management.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.1.tar.bz2">https://www.gnupg.org/ftp/gcrypt/gpgme/gpgme-2.0.1.tar.bz2</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                821ab0695c842eab51752a81980c92b0410c7eadd04103f791d5d2a526784966
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 1,359 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 21.7 MB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP) url: <a class="ulink" href=
+                "https://trak4.com/musl-from-scratch/musl-packages/gpgme-lfs64.patch">
+                https://trak4.com/musl-from-scratch/musl-packages/gpgme-lfs64.patch</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                12bebd3d827910a58d4348cd107e0698ed4bb89a2a704cae950548f10b1a0b78
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          gpgme Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="libassuan.html" title=
+          "libassuan-3.0.2">libassuan-3.0.2</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="gnupg.html" title=
+          "GnuPG-2.5.20">GnuPG-2.5.20</a> (as per upstream recommendation)
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of gpgme
+        </h2>
+        <p>
+          Prepare <span class="application">gpgme</span> by running:
+        </p>
+        <p>
+          First, fix a missing definition of <em class=
+          "parameter"><code>ino_t</code></em> and <em class=
+          "parameter"><code>off_t</code></em>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../gpgme-lfs64.patch</kbd></pre>
+        <pre class="userinput"><kbd class="command">mkdir build
+cd build
+
+../configure --prefix=/usr       \
+             --disable-static</kbd></pre>
+        <p>
+          Build <span class="application">gpgme</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, you should have <a class="xref" href=
+          "gnupg.html" title="GnuPG-2.5.20">GnuPG-2.5.20</a> installed. If
+          so, run:
+        </p>
+        <pre class="userinput"><kbd class="command">make -k check</kbd></pre>
+        <p>
+          Now Install, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--disable-static</code></em>: This
+          switch prevents installation of static versions of the libraries.
+        </p>
+        <p>
+          <code class="option">--disable-gpg-test</code>: Use this switch if
+          <a class="xref" href="gnupg.html" title=
+          "GnuPG-2.5.20">GnuPG-2.5.20</a> is not installed.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">gnupg-key-manage, gpgme-json, and
+              gpgme-tool</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libgpgme.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class=
+              "segbody">/usr/share/common-lisp/source/gpgme</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gnupg-key-manage" name=
+                    "gnupg-key-manage"></a><span class="term"><span class=
+                    "command"><strong>gnupg-key-manage</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    performs a variety of operations on GPG keys, including
+                    identifying keys and deleting them
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpgme-json" name="gpgme-json"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpgme-json</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    outputs <span class="application">gpgme</span> commands
+                    in JSON format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpgme-tool" name="gpgme-tool"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpgme-tool</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an assuan server exposing <span class=
+                    "application">gpgme</span> operations, such as printing
+                    fingerprints and keyids with keyservers
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgpgme" name="libgpgme"></a><span class=
+                    "term"><code class="filename">libgpgme.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">gpgme</span> API
+                    functions
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnupg.html" title="GnuPG-2.5.20">Prev</a>
+          <p>
+            GnuPG-2.5.20
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gpgmepp.html" title="gpgmepp-2.0.0">Next</a>
+          <p>
+            gpgmepp-2.0.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      Yaml-cpp-0.9.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -22,17 +22,16 @@
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="lmdb.html" title="lmdb-0.9.35">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            lmdb-0.9.35
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="fontconfig.html" title=
+          "Fontconfig-2.17.1">Next</a>
           <p>
-            nghttp2-1.69.0
+            Fontconfig-2.17.1
           </p>
         </li>
         <li class="up">
@@ -47,16 +46,16 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="yaml-cpp" name="yaml-cpp"></a>Yaml-cpp-0.9.0
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to yaml-cpp
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          The <span class="application">yaml-cpp</span> package provides a
+          compiler for writing C extensions for the Python language.
         </p>
         <h3>
           Package Information
@@ -66,24 +65,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.9.0.tar.gz">
+                https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.9.0.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                25cb043240f828a8c51beb830569634bc7ac603978e0f69d6b63558dadefd49a
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 1,031 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 10.8 MB
               </p>
             </li>
             <li class="listitem">
@@ -96,22 +95,47 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of Yaml-cpp
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Prepare <span class="application">yaml-cpp</span> by running:
+        </p>
+        <pre class="userinput"><kbd class="command">cmake -B build \
+          -G Ninja \
+          -D CMAKE_INSTALL_PREFIX=/usr \
+          -D CMAKE_BUILD_TYPE=Release  \
+          -D YAML_BUILD_SHARED_LIBS=ON</kbd></pre>
+        <p>
+          Build <span class="application">yaml-cpp</span> by running:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        "command">ninja -C build</kbd></pre>
         <p>
-          To test the results, issue:
+          This package does not have a testsuite.
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">ninja -C build install</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            To Build a static library, issue:
+          </p>
+          <pre class="userinput"><kbd class="command">cmake -B build-static \
+      -G Ninja \
+      -D CMAKE_INSTALL_PREFIX=/usr \
+      -D CMAKE_BUILD_TYPE=Release  \
+      -D YAML_BUILD_SHARED_LIBS=OFF
+
+ninja -C build-static
+
+cp -v build-static/libyaml-cpp.a /usr/lib</kbd></pre>
+        </div>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -120,62 +144,36 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <strong class="segtitle">Installed Pkgconfig:</strong>
+              <span class="segbody">yaml-cpp.pc</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libyaml-cpp.so.0.9.0 and
+              libyaml-cpp.a</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <span class="segbody">/usr/lib, /usr/include/yaml-cpp, and
+              /usr/lib/cmake/yaml-cpp/yaml-cpp-{targets,config}.cmake</span>
             </div>
           </div>
-        </div>
-        <div class="variablelist">
-          <h3>
-            Short Descriptions
-          </h3>
-          <table border="0" class="variablelist">
-            <colgroup>
-              <col align="left" valign="top" />
-              <col />
-            </colgroup>
-            <tbody>
-              <tr>
-                <td>
-                  <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="lmdb.html" title="lmdb-0.9.35">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            lmdb-0.9.35
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="fontconfig.html" title=
+          "Fontconfig-2.17.1">Next</a>
           <p>
-            nghttp2-1.69.0
+            Fontconfig-2.17.1
           </p>
         </li>
         <li class="up">

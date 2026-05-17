@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      Hatchling-1.28.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;5.&nbsp;Python Dependencies
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s11.html" title="Pluggy-1.6.0">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Pluggy-1.6.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="ch05s13.html" title=
+          "Pygments-2.19.2">Next</a>
           <p>
-            nghttp2-1.69.0
+            Pygments-2.19.2
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,71 +45,84 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="hatchling" name="hatchling"></a>Hatchling-1.28.0
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to Hatchling Module
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          <span class="application">Hatchling</span> is an extensible,
+          standards compliant build backend for python modules.
         </p>
-        <h3>
+        <h4>
           Package Information
-        </h3>
+        </h4>
         <div class="itemizedlist">
           <ul class="compact">
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-1.28.0.tar.gz">
+                https://files.pythonhosted.org/packages/source/h/hatchling/hatchling-1.28.0.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                4d50b02aece6892b8cd0b3ce6c82cb218594d3ec5836dbde75bf41a21ab004c8
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 54 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 644.7 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated build time: less than 0.5 SBU
+                Estimated build time: less than 0.1 SBU
               </p>
             </li>
           </ul>
         </div>
+        <h3>
+          Hatchling Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="ch05s08.html" title=
+          "Editables-0.5">editables-0.5</a>, <a class="xref" href=
+          "ch05s10.html" title="Pathspec-1.0.4">pathspec-1.0.4</a>, <a class=
+          "xref" href="ch05s11.html" title="Pluggy-1.6.0">pluggy-1.6.0</a>,
+          and <a class="xref" href="ch05s07.html" title=
+          "Trove-Classifiers-2026.1.14.14">trove-classifiers-2026.1.14.14</a>
+        </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of Hatchling
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Build the module:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        "command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre>
         <p>
-          To test the results, issue:
+          This package does not come with a working test suite.
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">pip3 install --no-index --find-links dist --no-user hatchling</kbd></pre>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -121,15 +132,17 @@
           <div class="seglistitem">
             <div class="seg">
               <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <span class="segbody">hatchling</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <span class=
+              "segbody">/usr/lib/python3.14/site-packages/hatchling and
+              /usr/lib/python3.14/site-packages/hatchling-1.28.0.dist-info</span>
             </div>
           </div>
         </div>
@@ -146,14 +159,14 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
+                    <a id="hatchling-prog" name=
+                    "hatchling-prog"></a><span class="term"><span class=
+                    "command"><strong>hatchling</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
+                    is a python module builder
                   </p>
                 </td>
               </tr>
@@ -165,23 +178,21 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s11.html" title="Pluggy-1.6.0">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Pluggy-1.6.0
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="ch05s13.html" title=
+          "Pygments-2.19.2">Next</a>
           <p>
-            nghttp2-1.69.0
+            Pygments-2.19.2
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

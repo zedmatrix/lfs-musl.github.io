@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      libksba-1.8.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;3.&nbsp;General Libraries
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="libuv.html" title="libuv-1.52.1">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            libuv-1.52.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="libxml2.html" title=
+          "libxml2-2.15.3">Next</a>
           <p>
-            nghttp2-1.69.0
+            libxml2-2.15.3
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +45,21 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="libksba" name="libksba"></a>libksba-1.8.0
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to Libksba
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          The <span class="application">Libksba</span> package contains a
+          library used to make X.509 certificates as well as making the CMS
+          (Cryptographic Message Syntax) easily accessible by other
+          applications. Both specifications are building blocks of S/MIME and
+          TLS. The library does not rely on another cryptographic library but
+          provides hooks for easy integration with <span class=
+          "application">Libgcrypt</span>.
         </p>
         <h3>
           Package Information
@@ -66,24 +69,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2">
+                https://www.gnupg.org/ftp/gcrypt/libksba/libksba-1.8.0.tar.bz2</a>
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                Download SHA256 sum:
+                296b9db9095749f2aa104202d7ab7fd09ad10710e00780a709c9754b1a1d9292
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 705 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 8.7 MB
               </p>
             </li>
             <li class="listitem">
@@ -93,16 +96,27 @@
             </li>
           </ul>
         </div>
+        <h3>
+          Libksba Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../security/libgpg-error.html" title=
+          "libgpg-error-1.61">libgpg-error-1.61</a>
+        </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of Libksba
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Prepare <span class="application">Libksba</span> by running the
+          following commands:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        "command">./configure --prefix=/usr</kbd></pre>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
           To test the results, issue:
@@ -120,15 +134,15 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
+              <strong class="segtitle">Installed Program:</strong>
               <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <span class="segbody">libksba.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Directories:</strong>
+              <strong class="segtitle">Installed Directory:</strong>
               <span class="segbody">None</span>
             </div>
           </div>
@@ -146,14 +160,13 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
+                    <a id="libksba-lib" name="libksba-lib"></a><span class=
+                    "term"><code class="filename">libksba.so</code></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
+                    contains the cryptographic API functions
                   </p>
                 </td>
               </tr>
@@ -165,23 +178,21 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="libuv.html" title="libuv-1.52.1">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            libuv-1.52.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="libxml2.html" title=
+          "libxml2-2.15.3">Next</a>
           <p>
-            nghttp2-1.69.0
+            libxml2-2.15.3
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

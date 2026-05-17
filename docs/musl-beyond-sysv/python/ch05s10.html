@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      Pathspec-1.0.4
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;5.&nbsp;Python Dependencies
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s09.html" title=
+          "Setuptools_scm-9.2.2">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Setuptools_scm-9.2.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="ch05s11.html" title="Pluggy-1.6.0">Next</a>
           <p>
-            nghttp2-1.69.0
+            Pluggy-1.6.0
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +45,16 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="pathspec" name="pathspec"></a>Pathspec-1.0.4
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to Pathspec Module
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          <span class="application">Pathspec</span> is a utility library for
+          pattern matching of file paths.
         </p>
         <h3>
           Package Information
@@ -66,29 +64,29 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-1.0.4.tar.gz">
+                https://files.pythonhosted.org/packages/source/p/pathspec/pathspec-1.0.4.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                0210e2ae8a21a9137c0d470578cb0e595af87edaa6ebf12ff176f14a02e0e645
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 128 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 880.3 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated build time: less than 0.5 SBU
+                Estimated build time: less than 0.1 SBU
               </p>
             </li>
           </ul>
@@ -96,22 +94,22 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of Pathspec
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Build the module:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
-        <p>
-          To test the results, issue:
-        </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        "command">pip3 wheel -w dist --no-build-isolation --no-deps --no-cache-dir $PWD</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">pip3 install --no-index --find-links dist --no-user pathspec</kbd></pre>
+        <p>
+          To test the installation, issue <span class=
+          "command"><strong>pytest</strong></span>.
+        </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -124,64 +122,37 @@
               <span class="segbody">None</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <span class=
+              "segbody">/usr/lib/python3.14/site-packages/pathspec and
+              /usr/lib/python3.14/site-packages/pathspec-1.0.4.dist-info</span>
             </div>
           </div>
-        </div>
-        <div class="variablelist">
-          <h3>
-            Short Descriptions
-          </h3>
-          <table border="0" class="variablelist">
-            <colgroup>
-              <col align="left" valign="top" />
-              <col />
-            </colgroup>
-            <tbody>
-              <tr>
-                <td>
-                  <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="ch05s09.html" title=
+          "Setuptools_scm-9.2.2">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Setuptools_scm-9.2.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="ch05s11.html" title="Pluggy-1.6.0">Next</a>
           <p>
-            nghttp2-1.69.0
+            Pluggy-1.6.0
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="python.html" title=
+          "Chapter&nbsp;5.&nbsp;Python Dependencies">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

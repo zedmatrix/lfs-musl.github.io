@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      libevent-2.1.12
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,26 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;3.&nbsp;General Libraries
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="libxslt.html" title=
+          "libxslt-1.1.45">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            libxslt-1.1.45
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="libatomic_ops.html" title=
+          "libatomic_ops-7.10.0">Next</a>
           <p>
-            nghttp2-1.69.0
+            libatomic_ops-7.10.0
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +46,21 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="libevent" name="libevent"></a>libevent-2.1.12
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to libevent
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          <span class="application">libevent</span> is an asynchronous event
+          notification software library. The <span class=
+          "application">libevent</span> API provides a mechanism to execute a
+          callback function when a specific event occurs on a file descriptor
+          or after a timeout has been reached. Furthermore, <span class=
+          "application">libevent</span> also supports callbacks due to
+          signals or regular timeouts.
         </p>
         <h3>
           Package Information
@@ -66,24 +70,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz">
+                https://github.com/libevent/libevent/releases/download/release-2.1.12-stable/libevent-2.1.12-stable.tar.gz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                92e6de1be9ec176428fd2367677e61ceffc2ee1cb119035037a27d346b0403bb
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 1,075 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 17.2M
               </p>
             </li>
             <li class="listitem">
@@ -96,18 +100,32 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of libevent
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          First, fix an issue that prevents event_rpcgen.py from working:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i 's/python/&amp;3/' event_rpcgen.py</kbd></pre>
+        <p>
+          Prepare <span class="application">libevent</span> by running:
         </p>
         <pre class="userinput"><kbd class=
         "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        <p>
+          Build <span class="application">libevent</span> by running:
+        </p>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
-          To test the results, issue:
+          Six tests in every suite related to <code class=
+          "filename">regress_ssl.c</code> and <code class=
+          "filename">regress_http.c</code> are known to fail due to
+          incompatibilities with OpenSSL-3. Some tests that are related to
+          <code class="filename">regress_dns.c</code> are also known to fail
+          intermittently due to insufficient test timeouts. To test the
+          results, issue:
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <pre class="userinput"><kbd class="command">make verify</kbd></pre>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
@@ -120,68 +138,43 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">event_rpcgen.py</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libevent_core.so, libevent_extra.so,
+              libevent_openssl.so, libevent_pthreads.so and
+              libevent.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/include/event2 and
+              /usr/share/doc/libevent-2.1.12</span>
             </div>
           </div>
-        </div>
-        <div class="variablelist">
-          <h3>
-            Short Descriptions
-          </h3>
-          <table border="0" class="variablelist">
-            <colgroup>
-              <col align="left" valign="top" />
-              <col />
-            </colgroup>
-            <tbody>
-              <tr>
-                <td>
-                  <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
-                  </p>
-                </td>
-                <td>
-                  <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
-                  </p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
         </div>
       </div>
     </div>
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="libxslt.html" title=
+          "libxslt-1.1.45">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            libxslt-1.1.45
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="libatomic_ops.html" title=
+          "libatomic_ops-7.10.0">Next</a>
           <p>
-            nghttp2-1.69.0
+            libatomic_ops-7.10.0
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

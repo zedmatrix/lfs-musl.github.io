@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <title>
+      libxml2-2.15.3
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="blfs" id="blfs-3.0-musl">
+    <div class="navheader">
+      <h4>
+        Musl Beyond Linux From Scratch - Version 3.0-musl
+      </h4>
+      <h3>
+        Chapter&nbsp;3.&nbsp;General Libraries
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libksba.html" title="libksba-1.8.0">Prev</a>
+          <p>
+            libksba-1.8.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libxslt.html" title=
+          "libxslt-1.1.45">Next</a>
+          <p>
+            libxslt-1.1.45
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+    <h1 class="sect1">
+      <a id="libxml2" name="libxml2"></a>libxml2-2.15.3
+    </h1>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libxml2
+        </h2>
+        <p>
+          The <span class="application">libxml2</span> package contains
+          libraries and utilities used for parsing XML files.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.3.tar.xz">
+                https://download.gnome.org/sources/libxml2/2.15/libxml2-2.15.3.tar.xz</a>
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download SHA256 Sum:
+                78262a6e7ac170d6528ebfe2efccdf220191a5af6a6cd61ea4a9a9a5042c7a07
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Download size: 3,079 KB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated disk space required: 54.9 MB
+              </p>
+            </li>
+            <li class="listitem">
+              <p>
+                Estimated build time: less than 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li class="listitem">
+              <p>
+                Optional Test Suite: <a class="ulink" href=
+                "https://www.w3.org/XML/Test/xmlts20130923.tar.gz">https://www.w3.org/XML/Test/xmlts20130923.tar.gz</a>
+                - This enables <span class="command"><strong>ninja
+                test</strong></span> to do complete testing.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          libxml2 Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../postlfs/icu.html" title=
+          "icu-78.3">ICU-78.3</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libxml2
+        </h2>
+        <p>
+          First, remove an unnecessary call to <span class=
+          "command"><strong>git</strong></span> in <code class=
+          "filename">meson.build</code>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i "/'git'/,+3d" meson.build</kbd></pre>
+        <p>
+          Prepare <span class="application">libxml2</span> by running:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">meson setup build        \
+      --prefix=/usr      \
+      -D history=enabled \
+      -D icu=enabled</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">ninja -C build</kbd></pre>
+        <p>
+          If you downloaded the test suite and wish to test, issue the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar xf ../xmlts20130923.tar.gz
+
+ninja -C build test</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The tests use <a class="ulink" href=
+            "http://localhost/">http://localhost/</a> to test parsing of
+            external entities. If the machine where you run the tests serves
+            as a web site, the tests may hang, depending on the content of
+            the file served. It is therefore recommended to shut down the
+            server during the tests, as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">/etc/init.d/httpd stop</kbd></pre>
+        </div>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">ninja -C build install</kbd></pre>
+        <p>
+          The <span class="command"><strong>xml2-config</strong></span> may
+          return flags needed to link against the static library for the
+          project, including the references to the <a class="xref" href=
+          "../postlfs/icu.html" title="icu-78.3">ICU-78.3</a> libraries. That
+          would be pointless because we only install the shared library. To
+          make things worse, that may cause some packages using <span class=
+          "application">libxml2</span> to be unnecessarily linked against
+          some <a class="xref" href="../postlfs/icu.html" title=
+          "icu-78.3">ICU-78.3</a> library, then those packages will need a
+          rebuild if ICU is upgraded to a new major version. Fix this by
+          issuing, as <code class="systemitem">root</code>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">sed "s/--static/--shared/" -i /usr/bin/xml2-config</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-D history=enabled</code></em>: This
+          switch enables <span class="application">Readline</span> support
+          when running <span class=
+          "command"><strong>xmlcatalog</strong></span> or <span class=
+          "command"><strong>xmllint</strong></span> in shell mode.
+        </p>
+        <p>
+          <em class="parameter"><code>-D icu=enabled</code></em>: This switch
+          enables support for <span class="application">ICU</span>, which
+          provides additional Unicode support. This is needed for some
+          packages in BLFS, such as for QtWebEngine.
+        </p>
+        <p>
+          <code class="option">-D python=enabled</code>: This switch enables
+          the libxml2 Python bindings. Note that those bindings are
+          deprecated due to flaws in the API design and they will be removed
+          in libxml2-2.16.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">xml2-config, xmlcatalog, and
+              xmllint</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libxml2.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/libxml2,
+              /usr/lib/cmake/libxml2, and
+              /usr/share/doc/libxml2-2.15.3,</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xml2-config" name="xml2-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xml2-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    determines the compile and linker flags that should be
+                    used to compile and link programs that use <code class=
+                    "filename">libxml2</code>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmlcatalog" name="xmlcatalog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmlcatalog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to monitor and manipulate XML and SGML catalogs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmllint" name="xmllint"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmllint</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    parses XML files and outputs reports (based upon options)
+                    to detect errors in XML coding
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libxml2-lib" name="libxml2-lib"></a><span class=
+                    "term"><code class="filename">libxml2.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides functions for programs to parse files that use
+                    the XML format
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libksba.html" title="libksba-1.8.0">Prev</a>
+          <p>
+            libksba-1.8.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libxslt.html" title=
+          "libxslt-1.1.45">Next</a>
+          <p>
+            libxslt-1.1.45
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;3.&nbsp;General Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Musl Beyond Linux From Scratch - Version 3.0-musl">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

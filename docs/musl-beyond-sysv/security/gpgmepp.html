@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      gpgmepp-2.0.0
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,25 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;1.&nbsp;Security Packages and System Utilities
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="gpgme.html" title="gpgme-2.0.1">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            gpgme-2.0.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="pinentry.html" title=
+          "pinentry-1.3.2">Next</a>
           <p>
-            nghttp2-1.69.0
+            pinentry-1.3.2
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +45,17 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="gpgmepp" name="gpgmepp"></a>gpgmepp-2.0.0
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to gpgmepp
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          The <span class="application">gpgmepp</span> package provides a C++
+          wrapper to <a class="xref" href="gpgme.html" title=
+          "gpgme-2.0.1">gpgme-2.0.1</a>.
         </p>
         <h3>
           Package Information
@@ -66,24 +65,24 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://www.gnupg.org/ftp/gcrypt/gpgmepp/gpgmepp-2.0.0.tar.xz">
+                https://www.gnupg.org/ftp/gcrypt/gpgmepp/gpgmepp-2.0.0.tar.xz</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                d4796049c06708a26f3096f748ef095347e1a3c1e570561701fe952c3f565382
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 116 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 6.9 MM
               </p>
             </li>
             <li class="listitem">
@@ -93,25 +92,57 @@
             </li>
           </ul>
         </div>
+        <h3>
+          gpgmepp Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="gpgme.html" title=
+          "gpgme-2.0.1">gpgme-2.0.1</a>
+        </p>
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of gpgmepp
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Prepare <span class="application">gpgmepp</span> by running:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
-        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        "command">cmake -B build -D CMAKE_INSTALL_PREFIX=/usr</kbd></pre>
         <p>
-          To test the results, issue:
+          Build <span class="application">gpgmepp</span> by running:
         </p>
-        <pre class="userinput"><kbd class="command">make check</kbd></pre>
+        <pre class="userinput"><kbd class=
+        "command">cmake --build build</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
         <p>
           Now Install, as the <code class="systemitem">root</code> user:
         </p>
-        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <pre class="root"><kbd class=
+        "command">cmake --install build</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <code class="option">-B build</code>: This option tells
+          <span class="command"><strong>cmake</strong></span> to place the
+          build files in the <code class="filename">build</code> directory.
+        </p>
+        <p>
+          <code class="option">--build</code>: This option invokes the build
+          process in the specified build directory.
+        </p>
+        <p>
+          <code class="option">--install</code>: This option installs the
+          built files from the specified build directory into the system.
+        </p>
       </div>
       <div class="content" lang="en" xml:lang="en">
         <h2 class="sect2">
@@ -120,16 +151,17 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
+              <strong class="segtitle">Installed Program:</strong>
               <span class="segbody">None</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libgpgmepp.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Directories:</strong>
-              <span class="segbody">None</span>
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/lib/cmake/Gpgmepp and
+              /usr/include/gpgme++</span>
             </div>
           </div>
         </div>
@@ -146,14 +178,14 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
+                    <a id="libgpgmepp" name="libgpgmepp"></a><span class=
+                    "term"><code class="filename">libgpgmepp.so</code></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
+                    contains the C++ <span class="application">gpgme</span>
+                    API functions
                   </p>
                 </td>
               </tr>
@@ -165,23 +197,21 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="gpgme.html" title="gpgme-2.0.1">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            gpgme-2.0.1
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="pinentry.html" title=
+          "pinentry-1.3.2">Next</a>
           <p>
-            nghttp2-1.69.0
+            pinentry-1.3.2
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=

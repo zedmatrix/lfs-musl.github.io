@@ -4,7 +4,7 @@
   <head>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>
-      Jansson-2.15.0
+      npth-1.8
     </title>
     <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
     <meta name="generator" content="DocBook XSL Stylesheets V1.79.1" />
@@ -18,27 +18,26 @@
         Musl Beyond Linux From Scratch - Version 3.0-musl
       </h4>
       <h3>
-        Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries
+        Chapter&nbsp;1.&nbsp;Security Packages and System Utilities
       </h3>
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="bubblewrap.html" title=
+          "Bubblewrap-0.11.2">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Bubblewrap-0.11.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="openldap.html" title=
+          "OpenLDAP-2.6.13">Next</a>
           <p>
-            nghttp2-1.69.0
+            OpenLDAP-2.6.13
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
@@ -47,16 +46,21 @@
       </ul>
     </div>
     <h1 class="sect1">
-      <a id="jansson" name="jansson"></a>Jansson-2.15.0
+      <a id="npth" name="npth"></a>npth-1.8
     </h1>
     <div class="sect1" lang="en" xml:lang="en">
       <div class="package" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Introduction to Jansson
+          Introduction to NPth
         </h2>
         <p>
-          The <span class="application">Jansson</span> package contains a
-          library used to encode, decode, and manipulate JSON data.
+          The <span class="application">NPth</span> package contains a very
+          portable POSIX/ANSI-C based library for Unix platforms which
+          provides non-preemptive priority-based scheduling for multiple
+          threads of execution (multithreading) inside event-driven
+          applications. All threads run in the same address space of the
+          server application, but each thread has its own individual
+          program-counter, run-time stack, signal mask and errno variable.
         </p>
         <h3>
           Package Information
@@ -66,29 +70,28 @@
             <li class="listitem">
               <p>
                 Download (HTTP): <a class="ulink" href=
-                "https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2">
-                https://github.com/akheron/jansson/releases/download/v2.15.0/jansson-2.15.0.tar.bz2</a>
+                "https://www.gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2">https://www.gnupg.org/ftp/gcrypt/npth/npth-1.8.tar.bz2</a>
               </p>
             </li>
             <li class="listitem">
               <p>
                 Download SHA256 Sum:
-                a7eac7765000373165f9373eb748be039c10b2efc00be9af3467ec92357d8954
+                8bd24b4f23a3065d6e5b26e98aba9ce783ea4fd781069c1b35d149694e90ca3e
               </p>
             </li>
             <li class="listitem">
               <p>
-                Download size: 475 KB
+                Download size: 310 KB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated disk space required: 4M
+                Estimated disk space required: 2.4 MB
               </p>
             </li>
             <li class="listitem">
               <p>
-                Estimated build time: less than 0.5 SBU
+                Estimated build time: less than 0.1 SBU
               </p>
             </li>
           </ul>
@@ -96,13 +99,16 @@
       </div>
       <div class="installation" lang="en" xml:lang="en">
         <h2 class="sect2">
-          Installation of Jansson
+          Installation of NPth
         </h2>
         <p>
-          Prepare <span class="application">jansson</span> by running:
+          Prepare <span class="application">NPth</span> by running:
         </p>
         <pre class="userinput"><kbd class=
-        "command">./configure --prefix=/usr --disable-static</kbd></pre>
+        "command">./configure --prefix=/usr</kbd></pre>
+        <p>
+          Build <span class="application">NPth</span> by running:
+        </p>
         <pre class="userinput"><kbd class="command">make</kbd></pre>
         <p>
           To test the results, issue:
@@ -120,15 +126,15 @@
         <div class="segmentedlist">
           <div class="seglistitem">
             <div class="seg">
-              <strong class="segtitle">Installed Programs:</strong>
-              <span class="segbody">None</span>
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">npth-config</span>
             </div>
             <div class="seg">
               <strong class="segtitle">Installed Library:</strong>
-              <span class="segbody">libjansson.so</span>
+              <span class="segbody">libnpth.so</span>
             </div>
             <div class="seg">
-              <strong class="segtitle">Installed Directories:</strong>
+              <strong class="segtitle">Installed Directory:</strong>
               <span class="segbody">None</span>
             </div>
           </div>
@@ -146,14 +152,31 @@
               <tr>
                 <td>
                   <p>
-                    <a id="libjansson" name="libjansson"></a><span class=
-                    "term"><code class="filename">libjansson.so</code></span>
+                    <a id="npth-config" name="npth-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>npth-config</strong></span></span>
                   </p>
                 </td>
                 <td>
                   <p>
-                    contains an API for encoding, decoding, and manipulating
-                    JSON data
+                    is a utility used to configure and build applications
+                    based on the npth library. It can be used to query the C
+                    compiler and linker flags which are required to correctly
+                    compile and link the application against the npth library
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libnpth" name="libnpth"></a><span class=
+                    "term"><code class="filename">libnpth.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions used by the New Portable
+                    Threads Library
                   </p>
                 </td>
               </tr>
@@ -165,23 +188,22 @@
     <div class="navfooter">
       <ul>
         <li class="prev">
-          <a accesskey="p" href="iso-codes.html" title=
-          "ISO Codes-4.20.1">Prev</a>
+          <a accesskey="p" href="bubblewrap.html" title=
+          "Bubblewrap-0.11.2">Prev</a>
           <p>
-            ISO Codes-4.20.1
+            Bubblewrap-0.11.2
           </p>
         </li>
         <li class="next">
-          <a accesskey="n" href="nghttp2.html" title=
-          "nghttp2-1.69.0">Next</a>
+          <a accesskey="n" href="openldap.html" title=
+          "OpenLDAP-2.6.13">Next</a>
           <p>
-            nghttp2-1.69.0
+            OpenLDAP-2.6.13
           </p>
         </li>
         <li class="up">
-          <a accesskey="u" href="postlfs.html" title=
-          "Chapter&nbsp;4.&nbsp;Post LFS Configuration and General Libraries">
-          Up</a>
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;1.&nbsp;Security Packages and System Utilities">Up</a>
         </li>
         <li class="home">
           <a accesskey="h" href="../index.html" title=
