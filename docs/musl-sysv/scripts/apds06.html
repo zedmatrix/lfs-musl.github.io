@@ -51,14 +51,14 @@
       /etc/rc.d/init.d/gen-ifconfig
     </h1>
     <div class="wrap" lang="en" xml:lang="en">
-      <pre class="screen">#/bin/bash
+      <pre class="screen">#!/bin/bash
 ### BEGIN INIT INFO
 # Provides:            gen-ifconfig
 # Required-Start:      $local_fs $network
 # Required-Stop:       $network
 # Default-Start:       S
 # Default-Stop:
-# Short-Description:   generates dyanmic ifconfig
+# Short-Description:   generates dynamic ifconfig
 # Description:         generates dynamic ifconfig on load from iface
 ### END INIT INFO
 
@@ -66,21 +66,29 @@
 
 CONFIG_DIR="/etc/sysconfig"
 
-log_info_msg "Generating dyanmic interface config..."
-
-for iface in $(ls /sys/class/net); do
-    [ "$iface" = "lo" ] &amp;&amp; continue
-    FILE="$CONFIG_DIR/ifconfig.$iface"
-    if [ ! -f "$FILE" ]; then
-        log_success_msg "Creating $FILE"
-        cat &gt; "$FILE" &lt;&lt;EOF
+write_config() {
+    local iface="$1" service="$2" extra="$3"
+    local file="$CONFIG_DIR/ifconfig.$iface"
+    log_success_msg "Creating $file"
+    cat &gt; "$file" &lt;&lt;EOF
 ONBOOT="yes"
 IFACE="$iface"
-SERVICE="dhcpcd"
+SERVICE="$service"
 DHCP_START="-b -q -h $HOSTNAME"
 DHCP_STOP="-k"
+$extra
 EOF
-    fi
+}
+
+log_info_msg "Generating dynamic interface config..."
+
+for path in /sys/class/net/*; do
+    iface="${path##*/}"
+    case "$iface" in
+        e*) write_config "$iface" "dhcpcd" ;;
+        w*) write_config "$iface" "wpa" 'WPA_ARGS="" WPA_SERVICE="dhcpcd"' ;;
+        *) continue ;;
+    esac
 done
 
 exit 0
